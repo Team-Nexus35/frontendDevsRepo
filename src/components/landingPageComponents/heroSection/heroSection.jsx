@@ -1,9 +1,8 @@
 import styles from './heroSection.module.css'
 
-import Button from "../../components/buttons/button"
-import WhiteArrowRight from "../../assets/icons/whiteArrowRight"
-import tempLogo from '../../assets/images/tempLogo.png'
-
+import Button from '../../buttons/button'
+import WhiteArrowRight from '../../../assets/icons/whiteArrowRight'
+import tempLogo from '../../../assets/images/tempLogo.png'
 
 export default function HeroSection () 
     {

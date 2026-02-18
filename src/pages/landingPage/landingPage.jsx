@@ -1,6 +1,7 @@
 import styles from './landingPage.module.css'
-import HeroSection from "../../components/heroSection/heroSection"
-import AsideLandingPage1 from "../../components/asideLandingPage1/asideLandingPage1"
+
+import HeroSection from '../../components/landingPageComponents/heroSection/heroSection'
+import AsideLandingPage1 from '../../components/landingPageComponents/asideLandingPage1/asideLandingPage1'
 
 
 export default function LandingPage () 

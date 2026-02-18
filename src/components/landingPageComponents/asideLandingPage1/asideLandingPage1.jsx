@@ -1,13 +1,9 @@
-import DollarWithBg from '../../assets/icons/dollarWithBg'
-import PeopleWithBg from '../../assets/icons/peopleWithBg'
-import OppWithBg from '../../assets/icons/oppWithBg'
+
 import styles from './asideLandingPage1.module.css'
 
-import dollarIcon from '../../assets/icons/dollarIcon.png'
-import oppIcon from '../../assets/icons/oppIcon.png'
-import peopleIcon from '../../assets/icons/peopleIcon.png'
-
-
+import dollarIcon from '../../../assets/icons/dollarIcon.png'
+import oppIcon from '../../../assets/icons/oppIcon.png'
+import peopleIcon from '../../../assets/icons/peopleIcon.png'
 
 const SectionItems = [
     {
