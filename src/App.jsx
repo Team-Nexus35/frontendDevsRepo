@@ -6,7 +6,6 @@ import LandingPage from './pages/landingPage/landingPage'
 function App() {
 
   return <>
-    <div>Hi Queen and Fatma, add your routes </div>
      <Routes>
         <Route path="/" element={<LandingPage />} />
       </Routes>

@@ -1,0 +1,119 @@
+.logo {
+    display: flex;
+width: 8.25rem;
+height: 2.25rem;
+}
+
+.heading1 {
+    display: flex;
+    text-align: center;
+    font-family: var(--font-segoe);
+    font-size: 3.75rem;
+    font-style: normal;
+    font-weight: 400;
+    background: var(--gradient-primary);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+    width: 48.625rem;
+    flex-wrap: wrap;
+    margin: 1.5rem 0;
+}
+
+
+.text {
+    display: flex;
+    width: 53.8125rem;
+    color: var(--formal-berry-59354949-figma-site-river-bed, var(--color-azure-34, #4A5565));
+    text-align: center;
+    font-family: var(--font-segoe);
+    font-size: 1.25rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.75;
+    flex-wrap: wrap;
+    margin-bottom: 2.5625rem;
+}
+
+.btns {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.asideText {
+    display: flex;
+    flex-wrap: wrap;
+    color: var(--color-azure-46);
+    text-align: center;
+    font-family: var(--font-segoe);
+    font-size: .875rem;
+    font-style: normal;
+    font-weight:  400;
+    line-height: 1.75
+}
+
+.wrapper {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 5rem 17rem 6rem 17rem;
+    background: var(--gradient-surface);
+
+}
+
+@media (max-width: 1024px) {
+    .wrapper {
+        padding: 4rem 4rem 5rem 4rem;
+        align-items: center;
+    }
+
+    .heading1 {
+        width: 100%;
+        font-size: 2.75rem;
+        align-self: center;
+        text-align: center;
+    }
+
+    .text {
+        width: 100%;
+        font-size: 1.125rem;
+        align-self: center;
+        text-align: center;
+    }
+}
+
+@media (max-width: 640px) {
+    .wrapper {
+        padding: 4rem 1.5rem 4rem 1.5rem;
+        gap: .5rem;
+    }
+
+    .heading1 {
+        width: 100%;
+        font-size: 2rem;
+        margin: 1rem 0;
+    }
+
+    .text {
+        width: 100%;
+        font-size: 1rem;
+        margin-bottom: 2rem;
+    }
+
+    .btns {
+        flex-direction: row;
+        align-items: center;
+        width: 100%;
+        gap: .5rem;
+    }
+
+    .logo {
+        width: 6.5rem;
+        height: 1.875rem;
+    }
+}
