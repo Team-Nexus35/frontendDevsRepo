@@ -1,3 +1,55 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
 :root{
     --primary:blue;
+
+     --font-inter: 'Inter', sans-serif;
+   --font-segoe: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    --font-arial: Arial, Helvetica, sans-serif;
+   --color-blue-4:  #030213;
+   --color-white-solid: #FFF;
+   --font-size-18:  18px;
+  --font-weight-400: 400;
+  --line-height: 28px;
+  --item-spacing-8-01 :8.01px;
+  --color-black-10: rgba(0, 0, 0, 0.10);
+  --color-grey-97: #EFF6FF;
+  --color-white-solid: #FFFFFF;
+  --color-grey-98: #F9FAFB;
+  --color-azure-11: #101828;
+  --color-azure-54: #155DFC;
+  --color-violet-52: #9810FA;
+  --color-rose-45: #E60076;
+  --color-azure-46: #6A7282;
+  --color-azure-34: #4A5565;
+  --color-black-10:  rgba(0, 0, 0, 0.10);
+  --color-grey-4: #0A0A0A;
+  --color-grey-93: #DBEAFE;
+ --color-white-20: rgba(255, 255, 255, 0.20);
+ --color-azure-54: #155DFC;
+ --color-violet-52: #9810FA;
+ --color-azure-27: #364153;
+ --color-spring-green-25: #008236;
+ --color-blue-49: #1447E6;
+ --color-spring-green-33: #00A63E;
+--color-spring-green-39: #00C950;
+--color-grey-95: #F3E8FF;
+--color-azure-84: #D1D5DC;
+--font-poppins: 'Poppins', sans-serif;
+
+
+  --gradient-primary: linear-gradient(
+    90deg,
+    var(--color-azure-54) 0%,
+    var(--color-violet-52) 50%,
+    var(--color-rose-45) 100%
+  );
+
+  --gradient-surface: linear-gradient(
+    135deg,
+    var(--color-grey-97) 0%,
+    var(--color-white-solid) 50%,
+    var(--color-grey-98) 100%
+  );
 }
+
