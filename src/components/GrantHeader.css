@@ -1,0 +1,53 @@
+.gh-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 24px;
+  border-bottom: 1px solid #E2E8F0;
+  background: #ffffff;
+  font-family: var(--font-family, Arial, sans-serif);
+ 
+}
+
+
+.gh-back {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 20px;
+  font-weight: 400;
+  color: #4A5565;
+  padding: 0;
+  font-family: var(--font-family, Arial, sans-serif);
+  transition: color .2s;
+}
+
+.gh-back:hover { color: #4F46E5; }
+
+
+.gh-logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.gh-logoIcon {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #4F46E5, #7C3AED);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.gh-logoText {
+  font-size: 15px;
+  font-weight: 700;
+  color: #4F46E5;
+  letter-spacing: 0.5px;
+  font-family: var(--font-family, Arial, sans-serif);
+}
