@@ -2,8 +2,9 @@ import './GrandDetails.css';
 import EligibilitySvg from "./../assets/icons/eligibility.svg?react";
 import DocumentSvg from "./../assets/icons/document.svg?react";
 import CheckSvg from "./../assets/icons/check-circle.svg?react";
+import Footer from './footer';
 
-// ─── STATIC DATA ─────────────────────────────────────────────────────────────
+
 const BENEFITS = [
   "No repayment required",
   "Retain 100% business ownership",
@@ -174,9 +175,7 @@ export default function GrantDetails() {
           </button>
         </div>
 
-        <footer className="ap-footer">
-          © 2026 FundMatch AI. All rights reserved.
-        </footer>
+        <Footer/>      
 
       </section>
 

@@ -1,3 +1,14 @@
 :root{
     --primary:blue;
+    --secondary: ;
+    --bg-color:#FFFF;
+      --banner-color:#DBE8FE;
+
+
+    --default-padding-left:40px;
+    --default-padding-right:40px;
+    --font-family:14px;
+    --default-margin-top:8px;
+    --border-radius:14px;
+  
 }

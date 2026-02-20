@@ -1,4 +1,3 @@
-
 @keyframes shimmer {
   0%   { background-position: -400px 0; }
   100% { background-position:  400px 0; }
@@ -13,24 +12,19 @@
   font-family: var(--font-family);
   background: var(--bg-color);
   min-height: 100vh;
-
   display: flex;
   flex-direction: column;
   gap: 20px;
   position: relative;
-
   padding-right: var(--default-padding-right);
   padding-left: var(--default-padding-left);
-
-
 }
-
 
 .strengthsCard {
   font-family: var(--font-family);
   width: 100%;
   max-width: 1400px;
-   margin-top: 40px;
+  margin-top: 40px;
   background: #F0FDF4;
   backdrop-filter: blur(20px);
   border-radius: 24px;
@@ -84,4 +78,45 @@
   background-size: 400px 100%;
   animation: shimmer 1.4s infinite;
   margin-bottom: 8px;
+}
+
+
+@media (max-width: 768px) {
+  .page {
+    padding-right: 16px;
+    padding-left: 16px;
+    gap: 14px;
+  }
+
+  .strengthsCard {
+    margin-top: 24px;
+    padding: 20px 20px;
+    border-radius: 18px;
+  }
+
+  .strengthsTitle { font-size: 17px; }
+
+  .strengthItem { font-size: 13px; }
+}
+
+
+@media (max-width: 480px) {
+  .page {
+    padding-right: 12px;
+    padding-left: 12px;
+    gap: 10px;
+  }
+
+  .strengthsCard {
+    margin-top: 16px;
+    padding: 16px 14px;
+    border-radius: 14px;
+  }
+
+  .strengthsTitle { font-size: 15px; }
+
+  .strengthItem {
+    font-size: 12px;
+    margin-bottom: 10px;
+  }
 }

@@ -8,14 +8,12 @@
   to   { opacity: 1; transform: translateY(0); }
 }
 
-
 .gmc-card {
   font-family: var(--font-family);
   width: 100%;
   backdrop-filter: blur(20px);
   border-radius: 24px;
   margin-top: var(--default-margin-top);
-
   opacity: 0;
   transform: translateY(24px);
   transition: opacity .6s cubic-bezier(.4,0,.2,1), transform .6s cubic-bezier(.4,0,.2,1);
@@ -24,9 +22,7 @@
 .gmc-card.revealed {
   opacity: 1;
   transform: translateY(0);
- 
 }
-
 
 .gmc-matchBanner {
   display: flex;
@@ -80,7 +76,6 @@
   position: relative;
   z-index: 1;
 }
-
 
 .gmc-bannerContent { flex: 1; }
 
@@ -168,7 +163,6 @@
 
 .gmc-levelText { font-size: 13px; }
 
-
 .gmc-grantSection {
   display: flex;
   flex-direction: column;
@@ -176,15 +170,12 @@
   margin-top: 70px;
   border: 2px solid #d3dff1;
   border-radius: 14px;
- 
 }
-
 
 .gmc-grantTop {
   display: flex;
   gap: 20px;
   align-items: flex-start;
- 
 }
 
 .gmc-grantLogoWrap { flex-shrink: 0; }
@@ -192,36 +183,33 @@
 .gmc-grantLogo {
   width: 64px;
   height: 64px;
-
   display: flex;
   align-items: center;
   justify-content: center;
- border-radius: 14px;
-background: linear-gradient(135deg, #2B7FFF 0%, #AD46FF 100%);
+  border-radius: 14px;
+  background: linear-gradient(135deg, #2B7FFF 0%, #AD46FF 100%);
   box-shadow: 0 4px 14px rgba(91, 79, 232, 0.3);
   margin-top: 28px;
-
 }
 
 .gmc-grantInfo { flex: 1; }
 
 .gmc-grantName {
-color: #0A0A0A;
-font-family: Arial;
-font-size: 40px;
-font-style: normal;
-font-weight: 700;
-
+  color: #0A0A0A;
+  font-family: Arial;
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 700;
+  margin-top: 24px;
 }
 
 .gmc-providerName {
   color: #4A5565;
-font-family: Arial;
-font-size: 20px;
-font-weight: 400;
-
+  font-family: Arial;
+  font-size: 20px;
+  font-weight: 400;
+  margin-top: 8px;
 }
-
 
 .gmc-tags {
   display: flex;
@@ -233,34 +221,28 @@ font-weight: 400;
   font-size: 12px;
   font-weight: 400;
   color: #0A0A0A;
-font-family: Arial;
-font-size: 12px;
+  font-family: Arial;
   background: #FFFFFF;
   border-radius: 20px;
   padding: 5px 12px;
   border: 1px solid #d3dff1;
+  margin-top: 12px;
 }
 
 .gmc-tag--accent {
   background: #FFFFFF;
-  color: #6366F1;
-  border-color: #d3dff1;
-   font-size: 12px;
-  font-weight: 400;
   color: #0A0A0A;
-font-family: Arial;
-font-size: 12px;
-  
+  border-color: #d3dff1;
+  font-size: 12px;
+  font-weight: 400;
+  font-family: Arial;
 }
-
 
 .gmc-statsRow {
   display: flex;
   align-items: center;
   padding: 20px 0;
-  
- 
-
+  margin-top: 20px;
 }
 
 .gmc-stat {
@@ -268,7 +250,6 @@ font-size: 12px;
   align-items: center;
   gap: 12px;
   flex: 1;
-
 }
 
 .gmc-statIcon {
@@ -279,31 +260,19 @@ font-size: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
-   
 }
 
-.stat-dollar-icon{
- background:  #DCFCE7;
-}
-
-.stat-clock-icon{
- background: #DBEAFE;
-}
-
-.stat-trophy-icon{
- background: #F3E8FF;
-}
-
+.stat-dollar-icon { background: #DCFCE7; }
+.stat-clock-icon  { background: #DBEAFE; }
+.stat-trophy-icon { background: #F3E8FF; }
 
 .gmc-statLabel {
   color: #4A5565;
   letter-spacing: .3px;
   margin-bottom: 3px;
   font-family: Arial;
-font-weight: 400;
-font-size: 14px;
-
-
+  font-weight: 400;
+  font-size: 14px;
 }
 
 .gmc-statValue {
@@ -329,9 +298,107 @@ font-size: 14px;
   transition: filter .2s, transform .15s;
   font-family: 'DM Sans', sans-serif;
   letter-spacing: .3px;
-
 }
 
 .gmc-cta:hover  { filter: brightness(1.1); transform: translateY(-1px); }
 .gmc-cta:active { filter: brightness(.95); transform: translateY(0); }
 
+
+@media (max-width: 768px) {
+  .gmc-matchBanner {
+    flex-direction: column;
+    align-items: center;
+    padding: 28px 20px;
+    gap: 16px;
+  }
+
+  .gmc-scoreSquare {
+    margin-top: 0;
+    width: 100px;
+    height: 100px;
+  }
+
+  .gmc-scoreNum { font-size: 36px; }
+
+  .gmc-bannerContent { width: 100%; }
+
+  .gmc-bannerHeader {
+    margin-right: 0;
+    flex-wrap: wrap;
+  }
+
+  .gmc-info { margin-left: 0; }
+
+  .gmc-aiTitle { font-size: 17px; }
+
+  .gmc-aiSummary { font-size: 15px; }
+
+  .gmc-grantSection {
+    margin-top: 32px;
+    padding: 20px 16px 16px;
+  }
+
+  .gmc-grantTop {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .gmc-grantLogo {
+    margin-top: 0;
+    width: 52px;
+    height: 52px;
+  }
+
+  .gmc-grantName { font-size: 26px; }
+
+  .gmc-providerName { font-size: 16px; }
+
+  .gmc-tags { gap: 8px; }
+
+  .gmc-statsRow {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 16px 0;
+  }
+
+  .gmc-stat { width: 100%; }
+}
+
+
+@media (max-width: 480px) {
+  .gmc-matchBanner { padding: 20px 14px; }
+
+  .gmc-scoreSquare {
+    width: 88px;
+    height: 88px;
+  }
+
+  .gmc-scoreNum { font-size: 30px; }
+
+  .gmc-scoreLabel { font-size: 11px; }
+
+  .gmc-aiTitle { font-size: 15px; }
+
+  .gmc-aiSummary { font-size: 13px; }
+
+  .gmc-grantBadge { font-size: 13px; }
+
+  .gmc-grantSection {
+    margin-top: 20px;
+    padding: 16px 12px 12px;
+  }
+
+  .gmc-grantName { font-size: 20px; }
+
+  .gmc-providerName { font-size: 14px; }
+
+  .gmc-statLabel { font-size: 12px; }
+
+  .gmc-statValue { font-size: 15px; }
+
+  .gmc-cta {
+    font-size: 14px;
+    padding: 13px;
+  }
+}
