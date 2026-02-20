@@ -1,10 +1,11 @@
 import "./GrantHeader.css";
+import { useNavigate } from "react-router-dom";
 import LogoSvg from "./../assets/icons/logo.svg?react";
 import ArrowBackSvg from "./../assets/icons/ArrowBack.svg?react";
 
 export default function GrantHeader({ onBack }) {
-
-  const handleBack = onBack ?? (() => window.history.back());
+  const navigate = useNavigate();
+  const handleBack = onBack ?? (() => navigate("/"));
 
   return (
     <header className="gh-header">

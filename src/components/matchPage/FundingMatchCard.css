@@ -1,0 +1,343 @@
+/* ════════════════════════════════════════
+   FundingMatchCard
+   ════════════════════════════════════════ */
+
+.fmc {
+  background: #ffffff;
+  border-radius: 16px;
+  border: 1px solid #E2E8F0;
+  padding: 24px;
+  display: flex;
+  gap: 24px;
+  cursor: pointer;
+  transition: box-shadow 0.2s ease, transform 0.15s ease;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+  outline: none;
+}
+
+.fmc:hover {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+.fmc:focus-visible {
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.4);
+}
+
+/* ── Left column ── */
+.fmc__left {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  min-width: 100px;
+  flex-shrink: 0;
+}
+
+/* ── Circular score ── */
+.circular-score {
+  position: relative;
+  width: 88px;
+  height: 88px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.circular-score__svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.circular-score__label {
+  position: relative;
+  display: flex;
+  align-items: baseline;
+  gap: 1px;
+}
+
+.circular-score__number {
+  font-size: 22px;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.circular-score__percent {
+  font-size: 12px;
+  font-weight: 700;
+}
+
+/* ── Type badge (Grant / Loan) ── */
+.fmc__type-badge {
+  padding: 4px 14px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.fmc__type-badge--grant {
+  background: #EFF6FF;
+  color: #1D4ED8;
+  border: 1px solid #BFDBFE;
+}
+
+.fmc__type-badge--loan {
+  background: #F5F3FF;
+  color: #6D28D9;
+  border: 1px solid #DDD6FE;
+}
+
+/* ── Right column ── */
+.fmc__right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-width: 0;
+}
+
+/* ── Title row ── */
+.fmc__title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.fmc__title-block {
+  flex: 1;
+  min-width: 0;
+}
+
+.fmc__title {
+  font-size: 17px;
+  font-weight: 700;
+  color: #0F172A;
+  margin: 0;
+}
+
+.fmc__org {
+  font-size: 13px;
+  color: #64748B;
+  margin: 4px 0 0 0;
+}
+
+.fmc__badges {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+  flex-wrap: wrap;
+}
+
+/* ── Status badges ── */
+.fmc__badge {
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.fmc__badge--eligible {
+  background: #F0FDF4;
+  color: #16A34A;
+  border: 1px solid #BBF7D0;
+}
+
+.fmc__badge--excellent {
+  background: #F0FDF4;
+  color: #16A34A;
+  border: 1px solid #BBF7D0;
+}
+
+.fmc__badge--good {
+  background: #FEF9C3;
+  color: #854D0E;
+  border: 1px solid #FDE047;
+}
+
+.fmc__badge--fair {
+  background: #FFF7ED;
+  color: #9A3412;
+  border: 1px solid #FED7AA;
+}
+
+/* ── AI analysis box ── */
+.fmc__ai-box {
+  background: #EFF6FF;
+  border: 1px solid #BFDBFE;
+  border-radius: 10px;
+  padding: 14px 16px;
+}
+
+.fmc__ai-label {
+  font-size: 12px;
+  font-weight: 700;
+  color: #1D4ED8;
+  margin: 0 0 6px 0;
+}
+
+.fmc__ai-text {
+  font-size: 13px;
+  color: #374151;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* ── Funding meta (amount + time) ── */
+.fmc__meta {
+  display: flex;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+
+.fmc__meta-item {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.fmc__meta-label {
+  font-size: 12px;
+  color: #9CA3AF;
+  font-weight: 500;
+}
+
+.fmc__meta-value {
+  font-size: 14px;
+  font-weight: 700;
+  color: #1E293B;
+}
+
+/* ── Strengths & Weaknesses ── */
+.fmc__pros-cons {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.fmc__pros,
+.fmc__cons {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.fmc__pro-item,
+.fmc__con-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: #374151;
+}
+
+.fmc__check {
+  color: #16A34A;
+  font-weight: 700;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+.fmc__x {
+  color: #DC2626;
+  font-weight: 700;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+/* ── Action buttons ── */
+.fmc__actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 4px;
+  flex-wrap: wrap;
+}
+
+.fmc__btn-primary {
+  background: #2563EB;
+  color: #ffffff;
+  border: none;
+  padding: 10px 22px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+  font-family: inherit;
+}
+
+.fmc__btn-primary:hover {
+  background: #1D4ED8;
+}
+
+.fmc__btn-link {
+  background: none;
+  border: none;
+  color: #6B7280;
+  font-size: 13px;
+  cursor: pointer;
+  text-decoration: underline;
+  font-family: inherit;
+  padding: 0;
+  transition: color 0.2s;
+}
+
+.fmc__btn-link:hover {
+  color: #374151;
+}
+
+/* ════════════════════════════════════════
+   Responsive
+   ════════════════════════════════════════ */
+
+@media (max-width: 768px) {
+  .fmc {
+    flex-direction: column;
+    padding: 20px 16px;
+    gap: 16px;
+  }
+
+  .fmc__left {
+    flex-direction: row;
+    min-width: auto;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .fmc__title-row {
+    flex-direction: column;
+  }
+
+  .fmc__badges {
+    flex-shrink: unset;
+  }
+
+  .fmc__meta {
+    gap: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .fmc {
+    padding: 16px 14px;
+  }
+
+  .fmc__title {
+    font-size: 15px;
+  }
+
+  .circular-score {
+    width: 72px;
+    height: 72px;
+  }
+
+  .circular-score__number {
+    font-size: 18px;
+  }
+}
