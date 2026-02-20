@@ -1,0 +1,87 @@
+
+@keyframes shimmer {
+  0%   { background-position: -400px 0; }
+  100% { background-position:  400px 0; }
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.page {
+  font-family: var(--font-family);
+  background: var(--bg-color);
+  min-height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  position: relative;
+
+  padding-right: var(--default-padding-right);
+  padding-left: var(--default-padding-left);
+
+
+}
+
+
+.strengthsCard {
+  font-family: var(--font-family);
+  width: 100%;
+  max-width: 1400px;
+   margin-top: 40px;
+  background: #F0FDF4;
+  backdrop-filter: blur(20px);
+  border-radius: 24px;
+  border: 1px solid rgba(0,192,127,.15);
+  box-shadow: 0 4px 20px rgba(0,0,0,.06);
+  padding: 24px 32px;
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity .7s cubic-bezier(.4,0,.2,1) .15s, transform .7s cubic-bezier(.4,0,.2,1) .15s;
+}
+
+.strengthsCard.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.strengthsHeader {
+  display: flex;
+  align-items: center;
+  margin-bottom: 18px;
+}
+
+.strengthsTitle {
+  font-family: 'DM Serif Display', serif;
+  font-size: 20px;
+  font-weight: 400;
+  color: #0F172A;
+  margin: 0;
+}
+
+.strengthsList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.strengthItem {
+  display: flex;
+  align-items: flex-start;
+  font-size: 14px;
+  color: #334155;
+  margin-bottom: 13px;
+  line-height: 1.5;
+  animation: fadeUp .4s ease both;
+}
+
+.skeleton {
+  height: 16px;
+  border-radius: 8px;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 400px 100%;
+  animation: shimmer 1.4s infinite;
+  margin-bottom: 8px;
+}
