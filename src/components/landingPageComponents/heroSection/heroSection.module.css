@@ -41,6 +41,8 @@ height: 2.25rem;
     flex-direction: row;
     gap: 1rem;
     margin-bottom: 1.5rem;
+    justify-content: center;
+    align-items: center;
 }
 
 .asideText {

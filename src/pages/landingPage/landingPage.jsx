@@ -8,7 +8,6 @@ import GetMatched from '../../components/landingPageComponents/getMatched/getMat
 import Ready from '../../components/landingPageComponents/readySection/readySection'
 import Footer from '../../components/landingPageComponents/footer/footer'
 
-
 export default function LandingPage () 
     {
     return <div className={styles.wrapper}>

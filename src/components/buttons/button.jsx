@@ -14,12 +14,3 @@ export default function Button(props) {
 }
 
 
-
-// Button VariantNames
-// blueTextBtn
-// linkBlackBtn
-// heroSectionBtn
-// whiteBtn
-//blueLongBtn
-
-//Icon is optional
