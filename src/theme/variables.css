@@ -2,7 +2,6 @@
 
 :root{
     --primary:blue;
-
      --font-inter: 'Inter', sans-serif;
    --font-segoe: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     --font-arial: Arial, Helvetica, sans-serif;
@@ -51,5 +50,16 @@
     var(--color-white-solid) 50%,
     var(--color-grey-98) 100%
   );
-}
 
+    --secondary: ;
+    --bg-color:#FFFF;
+      --banner-color:#DBE8FE;
+
+
+    --default-padding-left:40px;
+    --default-padding-right:40px;
+    --font-family:14px;
+    --default-margin-top:8px;
+    --border-radius:14px;
+  
+}

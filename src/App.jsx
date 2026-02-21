@@ -3,11 +3,10 @@ import './theme/global.css'
 import './App.css'
 import { Routes, Route} from "react-router-dom";
 import LandingPage from './pages/landingPage/landingPage'
-import FormOne from './pages/questionPages/questionPage1/questionPage1';
-import FormTwo from './pages/questionPages/questionPage2/questionPage2';
-import FormThree from './pages/questionPages/questionPage3/questionPage3';
-import FormFour from './pages/questionPages/questionPage4/questionPage4';
-import FormFive from './pages/questionPages/questionPage5/questionPage5';
+import Accelerator from './pages/MatchPage/Accelerator';
+import './theme/global.css';
+
+
 function App() {
 
   return <>
@@ -18,6 +17,7 @@ function App() {
         <Route path="/formThree" element={<FormThree />} />
         <Route path="/formFour" element={<FormFour />} />
         <Route path="/formFive" element={<FormFive />} />
+        <Route path='accelerator' element={<Accelerator/>} />
       </Routes>
   </>
 }
