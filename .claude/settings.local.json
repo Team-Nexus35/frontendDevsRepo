@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git -C /c/Users/Queen/Desktop/frontendDevsRepo diff --cached)",
+      "Bash(git -C /c/Users/Queen/Desktop/frontendDevsRepo diff)",
+      "Bash(git -C /c/Users/Queen/Desktop/frontendDevsRepo log --oneline -5)"
+    ]
+  }
+}
