@@ -3,9 +3,8 @@
   align-items: center;
   justify-content: space-between;
   padding: 14px 24px;
-  border-bottom: 1px solid #E2E8F0;
-  background: #ffffff;
-  font-family: var(--font-family, Arial, sans-serif);
+  background: linear-gradient(135deg, #4361EE 0%, #7C3AED 55%, #C026D3 100%);
+  font-family: "Sora", sans-serif;
 }
 
 .gh-back {
@@ -15,15 +14,15 @@
   background: none;
   border: none;
   cursor: pointer;
-  font-size: 20px;
-  font-weight: 400;
-  color: #4A5565;
+  font-size: 16px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.9);
   padding: 0;
-  font-family: var(--font-family, Arial, sans-serif);
+  font-family: "Sora", sans-serif;
   transition: color .2s;
 }
 
-.gh-back:hover { color: #4F46E5; }
+.gh-back:hover { color: #ffffff; }
 
 .gh-logo {
   display: flex;
@@ -35,7 +34,7 @@
   width: 36px;
   height: 36px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #4F46E5, #7C3AED);
+  background: rgba(255, 255, 255, 0.2);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -44,9 +43,9 @@
 .gh-logoText {
   font-size: 15px;
   font-weight: 700;
-  color: #4F46E5;
+  color: #ffffff;
   letter-spacing: 0.5px;
-  font-family: var(--font-family, Arial, sans-serif);
+  font-family: "Sora", sans-serif;
 }
 
 @media (max-width: 768px) {
@@ -55,7 +54,7 @@
   }
 
   .gh-back {
-    font-size: 16px;
+    font-size: 14px;
   }
 
   .gh-logoIcon {

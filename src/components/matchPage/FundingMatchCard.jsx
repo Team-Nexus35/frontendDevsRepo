@@ -1,52 +1,14 @@
 import './FundingMatchCard.css';
 
-/* ── Circular SVG score indicator ── */
+/* ── Circular score badge ── */
 function CircularScore({ score }) {
-  const radius = 40;
-  const circumference = 2 * Math.PI * radius; // ~251.33
-  const filledLength = (score / 100) * circumference;
-  const offset = circumference - filledLength;
-
-  const getColor = (s) => {
-    if (s >= 85) return '#16A34A'; // green
-    if (s >= 70) return '#D97706'; // amber
-    if (s >= 50) return '#EA580C'; // orange
-    return '#DC2626';              // red
-  };
-
-  const color = getColor(score);
-
   return (
     <div className="circular-score">
-      <svg className="circular-score__svg" viewBox="0 0 100 100">
-        {/* Background track */}
-        <circle
-          cx="50"
-          cy="50"
-          r={radius}
-          fill="none"
-          stroke="#E5E7EB"
-          strokeWidth="9"
-        />
-        {/* Colored progress arc */}
-        <circle
-          cx="50"
-          cy="50"
-          r={radius}
-          fill="none"
-          stroke={color}
-          strokeWidth="9"
-          strokeDasharray={circumference}
-          strokeDashoffset={offset}
-          strokeLinecap="round"
-          transform="rotate(-90 50 50)"
-        />
-      </svg>
-      {/* Percentage text in the center */}
-      <div className="circular-score__label" style={{ color }}>
+      <div className="circular-score__label">
         <span className="circular-score__number">{score}</span>
         <span className="circular-score__percent">%</span>
       </div>
+      <span className="circular-score__match">MATCH</span>
     </div>
   );
 }
@@ -114,7 +76,7 @@ export default function FundingMatchCard({ match, onClick }) {
           <p className="fmc__ai-text">{match.aiAnalysis}</p>
         </div>
 
-        {/* Funding amount + processing time */}
+        {/* Funding amount + processing time + rate */}
         <div className="fmc__meta">
           <div className="fmc__meta-item">
             <span className="fmc__meta-label">Funding Amount</span>
@@ -126,6 +88,12 @@ export default function FundingMatchCard({ match, onClick }) {
             <span className="fmc__meta-label">Processing Time</span>
             <span className="fmc__meta-value">{match.processingTime}</span>
           </div>
+          {match.rate && (
+            <div className="fmc__meta-item">
+              <span className="fmc__meta-label">Interest Rate</span>
+              <span className="fmc__meta-value fmc__meta-value--rate">{match.rate}</span>
+            </div>
+          )}
         </div>
 
         {/* Strengths and weaknesses */}
@@ -147,6 +115,21 @@ export default function FundingMatchCard({ match, onClick }) {
             ))}
           </div>
         </div>
+
+        {/* Areas to Improve */}
+        {match.areasToImprove && match.areasToImprove.length > 0 && (
+          <div className="fmc__improve">
+            <p className="fmc__improve-label">Areas to Improve</p>
+            <div className="fmc__improve-list">
+              {match.areasToImprove.map((item, i) => (
+                <div key={i} className="fmc__improve-item">
+                  <span className="fmc__improve-icon">&#9650;</span>
+                  <span>{item}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
 
         {/* Action buttons */}
         <div className="fmc__actions">

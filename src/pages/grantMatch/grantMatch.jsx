@@ -13,36 +13,36 @@ import FundingMatchCard from '../../components/matchPage/FundingMatchCard';
 
 function TotalMatchesIcon() {
   return (
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2563EB" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <rect x="2" y="7" width="4" height="14" rx="1" />
-      <rect x="9" y="4" width="4" height="17" rx="1" />
-      <rect x="16" y="10" width="4" height="11" rx="1" />
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M13.739 12.445L14.497 16.708C14.505 16.758 14.498 16.810 14.476 16.856C14.455 16.902 14.419 16.940 14.375 16.966C14.331 16.991 14.281 17.003 14.230 16.999C14.179 16.995 14.131 16.975 14.091 16.943L12.301 15.599C12.215 15.535 12.110 15.500 12.002 15.500C11.894 15.500 11.789 15.535 11.703 15.599L9.910 16.943C9.871 16.975 9.822 16.994 9.772 16.998C9.721 17.002 9.671 16.991 9.626 16.966C9.582 16.940 9.546 16.902 9.525 16.856C9.504 16.810 9.497 16.758 9.505 16.708L10.262 12.445" stroke="#155DFC" strokeWidth="1.66667" strokeLinecap="round" strokeLinejoin="round"/>
+      <path d="M12 13C13.657 13 15 11.657 15 10C15 8.343 13.657 7 12 7C10.343 7 9 8.343 9 10C9 11.657 10.343 13 12 13Z" stroke="#155DFC" strokeWidth="1.66667" strokeLinecap="round" strokeLinejoin="round"/>
     </svg>
   );
 }
 
 function ExcellentIcon() {
   return (
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="#16A34A" stroke="#16A34A" strokeWidth="1">
-      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M22 7L13.5 15.5L8.5 10.5L2 17" stroke="#00A63E" strokeWidth="1.66667" strokeLinecap="round" strokeLinejoin="round"/>
+      <path d="M16 7H22V13" stroke="#00A63E" strokeWidth="1.66667" strokeLinecap="round" strokeLinejoin="round"/>
     </svg>
   );
 }
 
 function EligibleIcon() {
   return (
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#4F46E5" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
-      <polyline points="22 4 12 14.01 9 11.01" />
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M12 22C17.523 22 22 17.523 22 12C22 6.477 17.523 2 12 2C6.477 2 2 6.477 2 12C2 17.523 6.477 22 12 22Z" stroke="#9810FA" strokeWidth="1.66667" strokeLinecap="round" strokeLinejoin="round"/>
+      <path d="M9 12L11 14L15 10" stroke="#9810FA" strokeWidth="1.66667" strokeLinecap="round" strokeLinejoin="round"/>
     </svg>
   );
 }
 
 function GrantsIcon() {
   return (
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#D97706" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <line x1="12" y1="1" x2="12" y2="23" />
-      <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M12 2V22" stroke="#E60076" strokeWidth="1.66667" strokeLinecap="round" strokeLinejoin="round"/>
+      <path d="M17 5H9.5C8.572 5 7.682 5.369 7.025 6.025C6.369 6.682 6 7.572 6 8.5C6 9.428 6.369 10.319 7.025 10.975C7.682 11.631 8.572 12 9.5 12H14.5C15.428 12 16.319 12.369 16.975 13.025C17.631 13.682 18 14.572 18 15.5C18 16.428 17.631 17.319 16.975 17.975C16.319 18.631 15.428 19 14.5 19H6" stroke="#E60076" strokeWidth="1.66667" strokeLinecap="round" strokeLinejoin="round"/>
     </svg>
   );
 }
@@ -52,8 +52,8 @@ function GrantsIcon() {
    ════════════════════════════════════════ */
 
 const BUSINESS = {
-  name: 'Nexus Autos',
-  industry: 'Transportation & Logistics',
+  name: 'IMARAFUND',
+  industry: 'Transportation & Logistics ',
   stage: 'Early Growth (2-5 years)',
   location: 'Nigeria, Abuja',
 };
@@ -67,18 +67,19 @@ const MATCHES = [
     id: 1,
     score: 95,
     type: 'Grant',
-    title: 'CBN MSME Development Fund',
-    organization: 'Central Bank of Nigeria',
+    title: 'Communities Innovation Fund',
+    organization: 'SMEs Grant for Communites',
     matchQuality: 'Excellent',
     isEligible: true,
     aiAnalysis:
-      'Your business profile strongly aligns with this fund. Transportation & Logistics is a priority sector, your Abuja location is within the target region, and your early-growth stage meets all requirements.',
-    fundingMin: 500000,
-    fundingMax: 2000000,
-    currency: '₦',
+      'Outstanding match! Your Transportation & Logistics  business is perfectly aligned with this hybrid. You meet all  key requirements and this opportunity could significantly support your growth.',
+    fundingMin: 150000,
+    fundingMax: 100000,
+    currency: '$',
     processingTime: '4-6 weeks',
     strengths: [
-      'Business stage matches perfectly',
+      'Your indutry aligns perfectly with this opportunity',
+      'Business stage matches target criteria',
       'Located in the target region',
       'Industry is a priority sector',
     ],
@@ -87,18 +88,20 @@ const MATCHES = [
   {
     id: 2,
     score: 80,
-    type: 'Grant',
-    title: 'BOI Youth Entrepreneurship Fund',
-    organization: 'Bank of Industry',
+    type: 'Loan',
+    title: 'SME Growth Loan Program',
+    organization: 'Community Development Bank',
     matchQuality: 'Excellent',
     isEligible: true,
     aiAnalysis:
-      "Strong alignment with BOI's focus on growth-stage businesses. Your logistics operations qualify for this fund targeting transport infrastructure development.",
-    fundingMin: 1000000,
-    fundingMax: 5000000,
-    currency: '₦',
-    processingTime: '6-8 weeks',
-    strengths: ['Revenue stage qualifies', 'Priority sector for BOI'],
+      "Strong match. Your business profile aligns well with this loan, though you may want to strengthen a few areas before applying.",
+    fundingMin: 25000,
+    fundingMax: 500000,
+    currency: '$',
+    rate: '4.5%-7.5% APR',
+    processingTime: '2-4 weeks',
+    strengths: ['Your industry aligns with this opportunity', 'Low interest rate',
+      'Revenue stage qualifies', 'Priority sector for BOI'],
     weaknesses: [
       'Requires 2 years of audited accounts',
       'Competitive application process',
@@ -108,16 +111,16 @@ const MATCHES = [
     id: 3,
     score: 75,
     type: 'Loan',
-    title: 'SMEDAN SME Financing Scheme',
-    organization: 'SMEDAN',
+    title: 'Rural Business Development Grant',
+    organization: 'Rural Economic Development Authority',
     matchQuality: 'Good',
     isEligible: true,
     aiAnalysis:
-      'Good match for your profile. SMEDAN supports logistics companies in FCT with flexible repayment terms suited to early-growth businesses like yours.',
-    fundingMin: 250000,
-    fundingMax: 1000000,
-    currency: '₦',
-    processingTime: '3-4 weeks',
+      'Strong match. Your business profile aligns well with this grant, though you may want to strengthen a few areas before applying.',
+    fundingMin: 50000,
+    fundingMax: 5000000,
+    currency: '$',
+    processingTime: '6-8 weeks',
     strengths: ['Fast processing time', 'Flexible repayment terms'],
     weaknesses: ['Loan requires collateral', 'Limited to FCT businesses'],
   },
@@ -125,19 +128,25 @@ const MATCHES = [
     id: 4,
     score: 65,
     type: 'Grant',
-    title: 'NITDA Digital Economy Fund',
-    organization: 'NITDA',
+    title: 'Small Business Innovation Grant',
+    organization: 'Federal Small Business Administration',
     matchQuality: 'Good',
     isEligible: false,
     aiAnalysis:
-      'Partial match — this fund targets tech-enabled businesses. Adding a digital component (e.g. fleet management software) to your operations could improve your eligibility significantly.',
-    fundingMin: 500000,
-    fundingMax: 3000000,
-    currency: '₦',
-    processingTime: '8-12 weeks',
-    strengths: ['Large funding range', 'No repayment required'],
+      'Moderate match. While you meet some requirements for this grant, there are several areas that need attention to improve your chances.',
+    fundingMin: 10000,
+    fundingMax: 150000,
+    currency: '$',
+    processingTime: '6-8 weeks',
+    strengths: [
+      'Your business stage matches the target criteria',
+      'Your revenue is within the target range',
+       'Large funding range',
+       'No repayment required'],
     weaknesses: [
       'Requires a technology component',
+      'Your industry may not be the primary focus',
+      ' Need 1 more year(s) in business',
       'Long processing time',
       'Very competitive',
     ],
@@ -146,21 +155,29 @@ const MATCHES = [
     id: 5,
     score: 40,
     type: 'Loan',
-    title: 'BoA Agricultural Value Chain Fund',
-    organization: 'Bank of Agriculture',
-    matchQuality: 'Fair',
+    title: 'SME Growth Loan Program',
+    organization: 'Community Development Bank',
+    matchQuality: 'poor',
     isEligible: false,
     aiAnalysis:
-      'Low alignment — this fund primarily targets agricultural businesses. Your transport services could qualify only as agricultural logistics support, which is a small portion of the fund.',
-    fundingMin: 200000,
-    fundingMax: 800000,
-    currency: '₦',
-    processingTime: '6-10 weeks',
-    strengths: ['Low interest rate'],
+      'Limited match. This loan may not be the best fit for your current business profile. Consider other opportunities or work on meeting key requirements.',
+    fundingMin: 250000,
+    fundingMax: 500000,
+    currency: '$',
+    rate: '4.5%-7.5% APR',
+    processingTime: '2-4 weeks',
+    strengths: [
+      'Your industry aligns with this opportunity',
+      'Low interest rate',
+    ],
     weaknesses: [
       'Agriculture-focused sector',
       'Limited to farm transportation',
       'Strict eligibility criteria',
+    ],
+    areasToImprove: [
+      'This opportunity targets different business stages',
+      ' Need 2 more year(s) in business',
     ],
   },
 ];
@@ -208,16 +225,17 @@ export default function GrantMatchPage() {
 
       <main className="gmp__main">
 
-        {/* ── Page title & subtitle ── */}
-        <div>
+        {/* ── Hero / gradient title banner ── */}
+        <div className="gmp__hero">
+          <span className="gmp__hero-label">AI-Matched Opportunities</span>
           <h1 className="gmp__heading">Your Personalized Funding Matches</h1>
           <p className="gmp__subheading">
-            Based on your <strong>{BUSINESS.name}</strong> business profile &nbsp;|&nbsp;
-            {BUSINESS.industry} &nbsp;|&nbsp; {BUSINESS.location}
+            Based on your <strong>{BUSINESS.industry}</strong> business profile, we found{' '}
+            <strong>{MATCHES.length} funding opportunities</strong> ranked by compatibility.
           </p>
         </div>
 
-        {/* ── Stats cards row ── */}
+        {/* ── Stats cards grid (2×2) ── */}
         <div className="gmp__stats">
           <StatCard
             value={totalMatches}
@@ -278,6 +296,10 @@ export default function GrantMatchPage() {
         </div>
 
       </main>
+
+      <footer className="gmp__footer">
+        <p>© 2026 FundMatch AI. All rights reserved.</p>
+      </footer>
     </div>
   );
 }
