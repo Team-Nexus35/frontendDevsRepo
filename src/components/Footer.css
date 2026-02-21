@@ -1,0 +1,28 @@
+.ap-footer {
+  background: #0A0A0A;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 13px;
+  text-align: center;
+  padding: 16px;
+  margin-top: 8px;
+  border-radius: 0;
+  width: 100%;
+  box-sizing: border-box;
+  margin-left: calc(-1 * var(--default-padding-left));
+  margin-right: calc(-1 * var(--default-padding-right));
+  width: calc(100% + var(--default-padding-left) + var(--default-padding-right));
+}
+
+@media (max-width: 768px) {
+  .ap-footer {
+    font-size: 12px;
+    padding: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .ap-footer {
+    font-size: 11px;
+    padding: 12px;
+  }
+}

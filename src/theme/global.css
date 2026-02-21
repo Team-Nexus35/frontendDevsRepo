@@ -1,0 +1,14 @@
+@import './variables.css';
+
+
+*{
+    box-sizing: border-box;
+}
+
+body{
+    font-family: "Sora", sans-serif;
+    font-optical-sizing: auto;
+}
+html, body {
+  overflow-x: hidden;
+}

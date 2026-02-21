@@ -1,0 +1,44 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    padding: 1.5rem;
+    padding: 2rem;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    flex: 1 0 0;
+    border-radius: 14px;
+    border: 1px solid var(--color-black-10);
+    background: var(--color-white-solid);
+    width: 280px;
+    height: 20.75rem;
+    box-sizing: border-box;
+}
+
+.headingStyle {
+    display: flex;
+    color: var(--formal-berry-59354949-figma-site-cod-gray, var(--color-grey-4, #0A0A0A));
+    font-family: var(--font-segoe);
+    font-size: 1.25rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.5;
+    flex-wrap: wrap;
+}
+
+.pTextStyle {
+    color: (--color-azure-34);
+    font-family: var(--font-segoe);
+    font-size: .9875rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.5
+}
+
+.iconStyle {
+    display: flex;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 10px;
+}

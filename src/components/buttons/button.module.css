@@ -1,0 +1,121 @@
+
+.icon {
+    display: flex;
+    width: 1rem;
+    height: 1rem;
+}
+
+.btn[data-variant='whiteBtn'] {
+  display: flex;
+  flex-direction: row;
+    height: 2.25rem;
+    padding: .5rem 1rem;
+    justify-content: center;
+    align-items: center;
+    gap: .5rem;
+    border-radius: 8px;
+    border: 0.667px solid rgba(0, 0, 0, 0.10);
+    background: #FFF;
+    color: #0A0A0A;
+    text-align: center;
+    font-family: var(--font-arial);
+    font-size: .875rem;
+    font-style: normal;
+    font-weight: 400;
+}
+
+.btn[data-variant='heroSectionBtn'] {
+    display: flex;
+    flex-direction: row;
+    padding: 1.5rem 1rem;
+    background: none;
+    gap: .5rem;
+    border-radius: .5rem;
+    background-color: var(--color-blue-4);
+    color: var(--color-white-solid);
+    font-family: var(--font-segoe);
+    font-size: 1.125rem;
+    font-weight: 400;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn[data-variant='heroSectionWhiteBtn'] {
+    display: flex;
+    padding: 24px 32px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+    border: 1px solid var(--color-black-10);
+    background: var(--color-white-solid);
+    color: #0A0A0A;
+    text-align: center;
+    font-family: var(--font-segoe);
+    font-size: 1.125rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 28px;
+}
+
+.btn[data-variant='linkBlackBtn'] {
+    display: flex;
+    flex-direction: row;
+    height: 2.25rem;
+    padding: .5625rem .75rem;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    border-radius: 8px;
+    background: var(--color-blue-4);
+    color: var(--color-white-solid);
+    text-align: center;
+    font-family: var(--font-arial);
+    font-size: .875rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px;
+}
+
+.btn[data-variant='blueTextBtn'] {
+    display: flex;
+    width: 154.5px;
+    height: 40px;
+    padding: 0 24px;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+    border-radius: 8px;
+    background: var(----color-white-solid);
+    border: none;
+    box-sizing: border-box;
+    color: #155DFC;
+    text-align: center;
+    font-family: Arial;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px;
+}
+
+.btn[data-variant='blueLongBtn'] {
+    display: flex;
+    width: 1175px;
+    height: 40px;
+    padding: 0 24px;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+    border-radius: 8px;
+    background: #2563EB;
+    border: none;
+    box-sizing: border-box;
+    color: var(--color-white-solid);
+    text-align: center;
+    font-family: var(--font-arial);
+    font-size: .875rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px;
+}
