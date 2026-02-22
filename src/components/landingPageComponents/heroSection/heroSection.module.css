@@ -65,7 +65,35 @@ height: 2.25rem;
     justify-content: center;
     padding: 5rem 17rem 6rem 17rem;
     background: var(--gradient-surface);
+    position: relative;  
+    overflow: hidden; 
 
+}
+
+.circleLeft {
+    width: 8rem;
+    height: 8rem;
+    position: absolute;
+    left: 6.5rem;
+    top: 5rem;
+    border-radius: 9999rem;
+    opacity: 0.15;
+    background: #51A2FF;
+    filter: blur(1.5rem);
+    pointer-events: none;
+}
+
+.circleRight {
+    width: 8rem;
+    height: 8rem;
+    position: absolute;
+    right: 4.5rem;
+    bottom: 4rem;
+    border-radius: 9999rem;
+    background: #C27AFF;
+    filter: blur(1.5rem);
+    pointer-events: none;
+    opacity: 0.2;
 }
 
 @media (max-width: 1024px) {
@@ -86,6 +114,20 @@ height: 2.25rem;
         font-size: 1.125rem;
         align-self: center;
         text-align: center;
+    }
+
+    .circleLeft {
+        left: 3.5rem;
+        top: 3.5rem;
+        width: 6rem;
+        height: 6rem;
+    }
+
+    .circleRight {
+        right: 1.5rem;
+        bottom: 2.5rem;
+        width: 6rem;
+        height: 6rem;
     }
 }
 
@@ -118,4 +160,21 @@ height: 2.25rem;
         width: 6.5rem;
         height: 1.875rem;
     }
+
+    .circleLeft {
+        width: 4rem;
+        height: 4rem;
+        left: 1.5rem;
+        top: 2rem;
+    }
+
+    .circleRight {
+        width: 4rem;
+        height: 4rem;
+        right: 1rem;
+        bottom: 3rem;
+    }
 }
+
+
+

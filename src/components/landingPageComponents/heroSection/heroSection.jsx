@@ -3,11 +3,17 @@ import NewButton from '../../../components/newButton/newButton'
 import Button from '../../buttons/button'
 import WhiteArrowRight from '../../../assets/icons/whiteArrowRight'
 import tempLogo from '../../../assets/images/tempLogo.png'
+import { useNavigate } from 'react-router-dom'
 
 
-export default function HeroSection () 
-    {
+export default function HeroSection () {
+    
+        const navigate = useNavigate()
+
     return <div className={styles.wrapper}>
+
+            <div className={styles.circleLeft} />
+            <div className={styles.circleRight} />
             <img className={styles.logo} src={tempLogo} />
             <h1 className={styles.heading1}>Find Perfect Funding for Your Business</h1>
             <p className={styles.text} >Stop wasting time searching. Our AI matches your SME with the most relevant grants and loans in seconds. Get personalized recommendations based on your unique business profile.</p>
@@ -18,6 +24,7 @@ export default function HeroSection ()
                 variant='filledBlack'
                 Icon= {WhiteArrowRight}
                 style={{ padding: '1.5rem 1rem' }}
+                btnFunction={() => navigate('/formOne')}
                  />
 
                  <NewButton 

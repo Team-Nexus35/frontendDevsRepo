@@ -67,8 +67,8 @@ export function Form ({
       </div>
 
       <div className={styles.footer}>
-        <NewButton text={previousText} variant='filledWhite' Icon1={BlackArrowLeft} />
-        <NewButton text={nextText} variant='filledBlack' Icon={WhiteArrowRight} />      
+        <NewButton text={previousText} variant='filledWhite' Icon1={BlackArrowLeft} btnFunction={onPrevious} />
+        <NewButton text={nextText} variant='filledBlack' Icon={WhiteArrowRight} btnFunction={onNext} />      
       </div>
 
       <p className={styles.securityNote}>
