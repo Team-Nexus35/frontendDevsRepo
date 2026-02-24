@@ -5,7 +5,7 @@ export default function Button(props) {
     const { variant, btnFunction, text, Icon } = props
 
   return (
-    <button className={styles.btn} data-variant={variant} >
+    <button className={styles.btn} data-variant={variant} onClick={btnFunction}>
         <p>{text}</p>
         {Icon && <Icon className={styles.icon} />}
 

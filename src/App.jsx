@@ -1,3 +1,4 @@
+
 import Button from './components/buttons/button'
 import './theme/global.css'
 import './App.css'
@@ -12,9 +13,9 @@ import FormFive from './pages/questionPages/questionPage5/questionPage5';
 import { FormProvider } from './components/form/formContext';
 import RegisterPage from './pages/register/register';
 import LoginPage from './pages/login/login';
+
 import GrantMatchPage from './pages/grantMatch/grantMatch';
 
-import './theme/global.css';
 
 
 function App() {

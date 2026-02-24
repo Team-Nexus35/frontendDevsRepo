@@ -24,7 +24,7 @@ export default function HeroSection () {
                 variant='filledBlue'
                 Icon= {WhiteArrowRight}
                 style={{ padding: '1.5rem 1rem' }}
-                btnFunction={() => navigate('/register')}
+                btnFunction={() => navigate('/grant-matches')}
                  />
 
                  <NewButton 
