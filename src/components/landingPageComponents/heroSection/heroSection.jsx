@@ -21,10 +21,10 @@ export default function HeroSection () {
             <span className={styles.btns}>
                 <NewButton 
                 text='Get Started Free'
-                variant='filledBlack'
+                variant='filledBlue'
                 Icon= {WhiteArrowRight}
                 style={{ padding: '1.5rem 1rem' }}
-                btnFunction={() => navigate('/formOne')}
+                btnFunction={() => navigate('/register')}
                  />
 
                  <NewButton 

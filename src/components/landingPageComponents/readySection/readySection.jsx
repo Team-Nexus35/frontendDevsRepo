@@ -16,7 +16,7 @@ export default function Ready () {
                 variant='filledWhite'
                 Icon= {BlackArrowRight}
                 style={{ padding: '1.5rem' }}
-                btnFunction={() => navigate('/formOne')}
+                btnFunction={() => navigate('/register')}
                  />
         </div>
     </section>

@@ -2,11 +2,11 @@ import styles from './form.module.css'
 import NewButton from '../newButton/newButton'
 import tempLogo from '../../assets/images/tempLogo.png' 
 import WhiteArrowRight from '../../assets/icons/whiteArrowRight'
-import BlackArrowLeft from '../../assets/icons/blackArrowLeft'
+import BlueArrowLeft from '../../assets/icons/blueArrowLeft'
 
 export function Form ({
   currentStep,
-  totalSteps='5',
+  totalSteps='3',
   percentComplete,
   title,
   description,
@@ -67,8 +67,8 @@ export function Form ({
       </div>
 
       <div className={styles.footer}>
-        <NewButton text={previousText} variant='filledWhite' Icon1={BlackArrowLeft} btnFunction={onPrevious} />
-        <NewButton text={nextText} variant='filledBlack' Icon={WhiteArrowRight} btnFunction={onNext} />      
+        <NewButton text={previousText} variant='outline' Icon1={BlueArrowLeft} btnFunction={onPrevious} />
+        <NewButton text={nextText} variant='filledBlue' Icon={WhiteArrowRight} btnFunction={onNext} />      
       </div>
 
       <p className={styles.securityNote}>
@@ -88,6 +88,7 @@ export function TextFormField({
     onChange,
     required = false,
     note,
+    error
   }) {
 
     return (
@@ -111,6 +112,8 @@ export function TextFormField({
           className={styles.input}
         />
 
+        {error &&<p className={styles.errorMsg}>{error}</p>}
+
         {note && <p className={styles.note}>{note}</p>}
       </div>
     );
@@ -125,6 +128,7 @@ export function SelectFormField({
   required = false,
   placeholder,    
   note,
+  error
 }) {
   return (
     <div className={styles.fieldWrapper}>
@@ -152,6 +156,8 @@ export function SelectFormField({
           </option>
         ))}
       </select>
+      {error && <p className={styles.errorMsg}>{error}</p>}
+
       {note && <p className={styles.note}>{note}</p>}
     </div>
   );

@@ -1,70 +1,38 @@
-
 import { createContext, useContext, useReducer } from 'react'
 
 const initialState = {
+  company_name: '',
+  sector: '',
+  nationality: '',
+  business_stage: '',
+  business_age_months: '',
+  business_registered: false,   
 
-  businessName: '',
-  industry: '',
-  businessStage: '',
+  founder_age: '',
+  founder_gender: '',
+  employees: '',
 
-  legalStructure: '',
-  yearEstablished: '',
-  registrationNumber: '',
+  funding_need_usd: '',        
+  annual_revenue_usd: '',
 
-  country: '',
-  stateRegion: '',
-  city: '',
-
-  annualRevenue: '',
-  currentProfitability: '',
-  numberOfEmployees: '',
-
-
-  fundingPurpose: {
-    workingCapital: false,
-    equipmentPurchase: false,
-    inventory: false,
-    businessExpansion: false,
-    marketingSales: false,
-    hiringTraining: false,
-    technologySoftware: false,
-    realEstateFacilities: false,
-    researchDevelopment: false,
-    debtRefinancing: false,
-  },
-
-  fundingAmountNeeded: '',
-
-  applicationReadiness: {
-    businessPlan: false,
-    financialStatements: false,
-    bankAccount: false,
-    collateral: false,
-  },
-
+  innovation_level: '',
+  has_prototype: false,
+  targets_underserved: false,
 }
 
 function formReducer(state, action) {
 
   switch (action.type) {
+
     case 'UPDATE_FIELD':
       return { ...state, [action.field]: action.value }
 
-    case 'UPDATE_CHECKBOX':
-      return {
-        ...state,
-        [action.group]: {
-          ...state[action.group],
-          [action.field]: action.value,
-        },
-      }
-
     case 'RESET_FORM':
       return initialState
+
     default:
       return state
   }
-
 }
 
 const FormContext = createContext()
@@ -74,7 +42,6 @@ export function FormProvider({ children }) {
   const [formData, dispatch] = useReducer(formReducer, initialState)
 
   return (
-    
     <FormContext.Provider value={{ formData, dispatch }}>
       {children}
     </FormContext.Provider>

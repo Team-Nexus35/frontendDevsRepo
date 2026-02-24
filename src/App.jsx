@@ -10,6 +10,8 @@ import FormThree from './pages/questionPages/questionPage3/questionPage3';
 import FormFour from './pages/questionPages/questionPage4/questionPage4';
 import FormFive from './pages/questionPages/questionPage5/questionPage5';
 import { FormProvider } from './components/form/formContext';
+import RegisterPage from './pages/register/register';
+import LoginPage from './pages/login/login';
 
 import './theme/global.css';
 
@@ -20,12 +22,12 @@ function App() {
   <FormProvider>
      <Routes>
         <Route path="/" element={<LandingPage />} />
-        <Route path="/formOne" element={<FormOne />} />
-        <Route path="/formTwo" element={<FormTwo />} />
-        <Route path="/formThree" element={<FormThree />} />
-        <Route path="/formFour" element={<FormFour />} />
-        <Route path="/formFive" element={<FormFive />} />
+        <Route path="/getStarted1" element={<FormOne />} />
+        <Route path="/getStarted2" element={<FormTwo />} />
+        <Route path="/getStarted3" element={<FormThree />} />
         <Route path='accelerator' element={<Accelerator/>} />
+        <Route path='register' element={<RegisterPage />} />
+        <Route path='login' element={<LoginPage />} />
       </Routes>
   </FormProvider>
   </>

@@ -1,3 +1,5 @@
+
+
 import styles from './newButton.module.css'
 
 export default function Button({ 
@@ -10,7 +12,8 @@ export default function Button({
   className = '', 
   style,
   iconClassName = '',
-  Icon1
+  Icon1,
+  type = 'button',
 }) {
   return (
     <button
@@ -18,6 +21,7 @@ export default function Button({
       style={style}
       onClick={btnFunction}
       disabled={disabled}
+      type={type}
     >
       {Icon1 && <Icon1 className={`${styles.icon} ${iconClassName}`} />}
       <span className={styles.text}>{text}</span>

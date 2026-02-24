@@ -424,7 +424,7 @@ line-height: 20px;
 
 .progressBarFill {
   height: 100%;
-  background-color: rgb(40, 38, 38);
+  background-color: var(--color-azure-54);
   border-radius: 223696rem;
   transition: width 0.4s ease;
 }
@@ -509,4 +509,13 @@ line-height: 20px;
     font-weight: 400;
     line-height: 1.25rem;
     user-select: none;
+}
+
+.errorMsg {
+  display: flex;
+  justify-content: flex-start;
+  text-align: left;
+  font-family: var(--font-segoe);
+  font-size: 1rem;
+  color: red;
 }
