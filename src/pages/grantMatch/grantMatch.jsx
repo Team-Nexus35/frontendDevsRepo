@@ -80,8 +80,8 @@ const MATCHES = [
     strengths: [
       'Your indutry aligns perfectly with this opportunity',
       'Business stage matches target criteria',
-      'Located in the target region',
-      'Industry is a priority sector',
+      
+      
     ],
     weaknesses: ['High competition expected'],
   },
@@ -121,8 +121,9 @@ const MATCHES = [
     fundingMax: 5000000,
     currency: '$',
     processingTime: '6-8 weeks',
-    strengths: ['Fast processing time', 'Flexible repayment terms'],
-    weaknesses: ['Loan requires collateral', 'Limited to FCT businesses'],
+    strengths: [' Your business stage matches the target criteria',
+       ' Your 0 years of operation meets requirements'],
+    weaknesses: ['• Your industry may not be the primary focus', ''],
   },
   {
     id: 4,
@@ -141,14 +142,12 @@ const MATCHES = [
     strengths: [
       'Your business stage matches the target criteria',
       'Your revenue is within the target range',
-       'Large funding range',
-       'No repayment required'],
+    
+       ],
     weaknesses: [
-      'Requires a technology component',
+      
       'Your industry may not be the primary focus',
       ' Need 1 more year(s) in business',
-      'Long processing time',
-      'Very competitive',
     ],
   },
   {
@@ -168,13 +167,8 @@ const MATCHES = [
     processingTime: '2-4 weeks',
     strengths: [
       'Your industry aligns with this opportunity',
-      'Low interest rate',
     ],
-    weaknesses: [
-      'Agriculture-focused sector',
-      'Limited to farm transportation',
-      'Strict eligibility criteria',
-    ],
+    weaknesses: [],
     areasToImprove: [
       'This opportunity targets different business stages',
       ' Need 2 more year(s) in business',
@@ -275,8 +269,8 @@ export default function GrantMatchPage() {
         />
 
         {/* ── Results header ── */}
-        <div className="gmp__results-header">
           <h2 className="gmp__results-count">{filteredMatches.length} Opportunities Found</h2>
+        <div className="gmp__results-header">
           <p className="gmp__results-sub">Ranked by AI compatibility score</p>
         </div>
 

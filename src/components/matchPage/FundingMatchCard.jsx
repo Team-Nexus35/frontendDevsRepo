@@ -72,7 +72,7 @@ export default function FundingMatchCard({ match, onClick }) {
 
         {/* AI analysis box */}
         <div className="fmc__ai-box">
-          <p className="fmc__ai-label">Why this matches you:</p>
+          <p className="fmc__ai-label">AI Analysis</p>
           <p className="fmc__ai-text">{match.aiAnalysis}</p>
         </div>
 

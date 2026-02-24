@@ -23,7 +23,7 @@
 
 /* ── Hero gradient banner ── */
 .gmp__hero {
-  background: linear-gradient(135deg, #4361EE 0%, #7C3AED 40%, #C026D3 100%);
+  background: linear-gradient(135deg, #155DFC 0%, #9810FA 40%, #E60076 100%);
   border-radius: 16px;
   padding: 36px 32px;
 }
@@ -48,6 +48,7 @@
   margin: 0 0 10px 0;
   font-family: "Sora", sans-serif;
   
+  
 }
 
 .gmp__subheading {
@@ -61,6 +62,7 @@
 .gmp__subheading strong {
   color: #ffffff;
   font-weight: 700;
+  
 }
 
 /* ── Stats grid (2×2) ── */
@@ -68,6 +70,12 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 16px;
+  color: #4A5565;
+  font-family: Arial;
+  font-size: 30px;
+  font-weight: 400;
+  
+  
   
 }
 
@@ -77,6 +85,7 @@
   align-items: center;
   justify-content: space-between;
   gap: 8px;
+  
    
 }
 
@@ -88,6 +97,7 @@
   line-height: 36px;
   word-wrap: break-word;
   margin: 0;
+  
   ;
 }
 
@@ -95,6 +105,7 @@
   font-size: 13px;
   color: #a494b8;
   margin: 0;
+
   
 }
 
@@ -104,6 +115,7 @@
   flex-direction: column;
   gap: 20px;
   
+  
 }
 
 .gmp__no-results {
@@ -111,6 +123,7 @@
   color: #64748B;
   font-size: 15px;
   padding: 48px 0;
+  
   
   
 }
