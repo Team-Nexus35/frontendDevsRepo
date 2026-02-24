@@ -12,6 +12,7 @@ import FormFive from './pages/questionPages/questionPage5/questionPage5';
 import { FormProvider } from './components/form/formContext';
 import RegisterPage from './pages/register/register';
 import LoginPage from './pages/login/login';
+import GrantMatchPage from './pages/grantMatch/grantMatch';
 
 import './theme/global.css';
 
@@ -28,9 +29,12 @@ function App() {
         <Route path='accelerator' element={<Accelerator/>} />
         <Route path='register' element={<RegisterPage />} />
         <Route path='login' element={<LoginPage />} />
+        <Route path="/grant-matches" element={<GrantMatchPage />} />
       </Routes>
   </FormProvider>
   </>
 }
 
 export default App
+
+//   <Button text='Get started free' Icon={WhiteArrowRight} variant='heroSectionBtn' btnFunction={() => navigate('/grant-matches')} />
