@@ -1,0 +1,71 @@
+
+
+ .childrenWrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 2rem;
+    padding-bottom: 1rem;
+}
+
+.checkboxGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem 2rem;
+    width: 100%;
+}
+
+.almostDoneCard {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 1rem 1.25rem;
+    border-radius: 0.75rem;
+    background: #EFF6FF;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.almostDoneHeader {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.almostDoneIcon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.25rem;
+    height: 1.25rem;
+    border-radius: 50%;
+    background: #2563EB;
+    color: #ffffff;
+    font-size: 0.75rem;
+    font-weight: 700;
+    flex-shrink: 0;
+}
+
+.almostDoneTitle {
+    color: #0A0A0A;
+    font-family: var(--font-arial);
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 1.5rem;
+}
+
+.almostDoneText {
+    color: #4A5565;
+    font-family: var(--font-arial);
+    font-size: 0.875rem;
+    font-weight: 400;
+    line-height: 1.375rem;
+    margin: 0;
+}
+
+@media (max-width: 30rem) {
+    .checkboxGrid {
+        grid-template-columns: 1fr;
+    }
+}

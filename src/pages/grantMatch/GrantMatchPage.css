@@ -1,0 +1,177 @@
+/* ════════════════════════════════════════
+   Grant Match Page
+   ════════════════════════════════════════ */
+
+.gmp {
+  min-height: 100vh;
+  background: #ffff;
+  font-family: "Sora", sans-serif;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Main content area ── */
+.gmp__main {
+  flex: 1;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 40px 24px 60px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+/* ── Hero gradient banner ── */
+.gmp__hero {
+  background: linear-gradient(135deg, #4361EE 0%, #7C3AED 40%, #C026D3 100%);
+  border-radius: 16px;
+  padding: 36px 32px;
+}
+
+.gmp__hero-label {
+  display: block;
+  font-size: 12px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.75);
+  letter-spacing: 0.06em;
+  margin-bottom: 10px;
+  font-family: "Sora", sans-serif;
+  
+  
+}
+
+/* ── Page title section ── */
+.gmp__heading {
+  font-size: 28px;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0 0 10px 0;
+  font-family: "Sora", sans-serif;
+  
+}
+
+.gmp__subheading {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.85);
+  margin: 0;
+  line-height: 1.6;
+  font-family: "Sora", sans-serif;
+}
+
+.gmp__subheading strong {
+  color: #ffffff;
+  font-weight: 700;
+}
+
+/* ── Stats grid (2×2) ── */
+.gmp__stats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  
+}
+
+/* ── Results header ── */
+.gmp__results-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+   
+}
+
+.gmp__results-count {
+  font-size: 30px;
+  font-weight: 700;
+  color:  #0A0A0A;
+  font-family: Arial;
+  line-height: 36px;
+  word-wrap: break-word;
+  margin: 0;
+  ;
+}
+
+.gmp__results-sub {
+  font-size: 13px;
+  color: #a494b8;
+  margin: 0;
+  
+}
+
+/* ── Cards list ── */
+.gmp__cards-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  
+}
+
+.gmp__no-results {
+  text-align: center;
+  color: #64748B;
+  font-size: 15px;
+  padding: 48px 0;
+  
+  
+}
+
+/* ── Footer banner ── */
+.gmp__footer {
+  background: #0F172A;
+  text-align: center;
+  padding: 16px 24px;
+  ;
+}
+
+.gmp__footer p {
+  margin: 0;
+  font-size: 13px;
+  color: #94A3B8;
+  font-family: "Sora", sans-serif;
+  
+}
+
+/* ════════════════════════════════════════
+   Responsive
+   ════════════════════════════════════════ */
+
+@media (max-width: 768px) {
+  .gmp__main {
+    padding: 24px 16px 48px;
+    gap: 22px;
+  }
+
+  .gmp__hero {
+    padding: 28px 22px;
+    border-radius: 12px;
+  }
+
+  .gmp__heading {
+    font-size: 22px;
+  }
+
+  .gmp__results-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+}
+
+@media (max-width: 480px) {
+  .gmp__main {
+    padding: 20px 14px 40px;
+    gap: 18px;
+  }
+
+  .gmp__hero {
+    padding: 22px 18px;
+  }
+
+  .gmp__heading {
+    font-size: 19px;
+  }
+
+  .gmp__stats {
+    gap: 10px;
+  }
+}

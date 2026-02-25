@@ -1,0 +1,100 @@
+.filter-bar {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* ── Tag pills ── */
+.filter-bar__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.filter-bar__tag {
+  background: #EFF6FF;
+  color: #2563EB;
+  border: 1px solid #BFDBFE;
+  border-radius: 20px;
+  padding: 6px 14px;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+/* ── Search + dropdowns row ── */
+.filter-bar__controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+/* Search field */
+.filter-bar__search-wrapper {
+  flex: 1;
+  min-width: 200px;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.filter-bar__search-icon {
+  position: absolute;
+  left: 14px;
+  width: 16px;
+  height: 16px;
+  color: #9CA3AF;
+  pointer-events: none;
+}
+
+.filter-bar__search-input {
+  width: 100%;
+  padding: 10px 14px 10px 42px;
+  border: 1px solid #E2E8F0;
+  border-radius: 8px;
+  font-size: 14px;
+  color: #374151;
+  background: #ffffff;
+  outline: none;
+  font-family: inherit;
+}
+
+.filter-bar__search-input:focus {
+  border-color: #3B82F6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+/* Dropdowns */
+.filter-bar__select {
+  padding: 10px 16px;
+  border: 1px solid #E2E8F0;
+  border-radius: 8px;
+  font-size: 14px;
+  color: #374151;
+  background: #ffffff;
+  cursor: pointer;
+  outline: none;
+  font-family: inherit;
+  min-width: 120px;
+}
+
+.filter-bar__select:focus {
+  border-color: #3B82F6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .filter-bar__controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .filter-bar__search-wrapper {
+    min-width: 100%;
+  }
+
+  .filter-bar__select {
+    width: 100%;
+  }
+}

@@ -1,0 +1,7 @@
+.childrenWrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 2rem;
+    margin-bottom: 1rem;
+}
