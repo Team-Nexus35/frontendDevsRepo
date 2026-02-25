@@ -27,9 +27,9 @@ function App() {
         <Route path="/getStarted1" element={<FormOne />} />
         <Route path="/getStarted2" element={<FormTwo />} />
         <Route path="/getStarted3" element={<FormThree />} />
-        <Route path='accelerator' element={<Accelerator/>} />
-        <Route path='register' element={<RegisterPage />} />
-        <Route path='login' element={<LoginPage />} />
+        <Route path='/accelerator' element={<Accelerator/>} />
+        <Route path='/register' element={<RegisterPage />} />
+        <Route path='/login' element={<LoginPage />} />
         <Route path="/grant-matches" element={<GrantMatchPage />} />
       </Routes>
   </FormProvider>

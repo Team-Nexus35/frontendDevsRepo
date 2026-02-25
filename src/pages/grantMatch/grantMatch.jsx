@@ -80,8 +80,6 @@ const MATCHES = [
     strengths: [
       'Your indutry aligns perfectly with this opportunity',
       'Business stage matches target criteria',
-      
-      
     ],
     weaknesses: ['High competition expected'],
   },
@@ -113,7 +111,7 @@ const MATCHES = [
     type: 'Loan',
     title: 'Rural Business Development Grant',
     organization: 'Rural Economic Development Authority',
-    matchQuality: 'Good',
+    matchQuality: 'Excellent',
     isEligible: true,
     aiAnalysis:
       'Strong match. Your business profile aligns well with this grant, though you may want to strengthen a few areas before applying.',
@@ -123,7 +121,7 @@ const MATCHES = [
     processingTime: '6-8 weeks',
     strengths: [' Your business stage matches the target criteria',
        ' Your 0 years of operation meets requirements'],
-    weaknesses: ['• Your industry may not be the primary focus', ''],
+    weaknesses: [' Your industry may not be the primary focus', ],
   },
   {
     id: 4,
@@ -180,6 +178,8 @@ const MATCHES = [
    Page component
    ════════════════════════════════════════ */
 
+const BUSINESS_ID = 3;
+
 export default function GrantMatchPage() {
   const navigate = useNavigate();
 
@@ -187,29 +187,75 @@ export default function GrantMatchPage() {
   const [typeFilter, setTypeFilter] = useState('');
   const [matchFilter, setMatchFilter] = useState('');
 
+  const [matchStatus, setMatchStatus] = useState('idle'); // idle | running | done | error
+  const [matchingError, setMatchingError] = useState(null);
+  const [apiMatches, setApiMatches] = useState(null);
+
+  const runMatching = async () => {
+    setMatchStatus('running');
+    setMatchingError(null);
+
+    try {
+      // Step 1: trigger the matching engine
+      const runRes = await fetch(`http://localhost:5000/api/match/${BUSINESS_ID}/run`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+      });
+      if (!runRes.ok) {
+        const errData = await runRes.json().catch(() => null);
+        throw new Error(errData?.message || `Server error: ${runRes.status}`);
+      }
+
+      // Step 2: retrieve the matching results
+      const resultsRes = await fetch(`http://localhost:5000/api/match/${BUSINESS_ID}`);
+      if (!resultsRes.ok) {
+        const errData = await resultsRes.json().catch(() => null);
+        throw new Error(errData?.message || `Server error: ${resultsRes.status}`);
+      }
+
+      const data = await resultsRes.json();
+      // Accept results whether the API returns an array or an object with a matches/results key
+      const list = Array.isArray(data)
+        ? data
+        : data.matches ?? data.results ?? data.data ?? null;
+
+      setApiMatches(list);
+      setMatchStatus('done');
+    } catch (err) {
+      setMatchingError(err.message || 'Could not retrieve matches. Please try again.');
+      setMatchStatus('error');
+    } finally {
+      // Navigate to the detailed match view (third developer's Accelerator page)
+      navigate('/accelerator');
+    }
+  };
+
+  /* ── Use live API results when available, else fall back to mock data ── */
+  const activeMatches = apiMatches ?? MATCHES;
+
   /* ── Compute stats from data ── */
-  const totalMatches = MATCHES.length;
-  const excellentCount = MATCHES.filter((m) => m.matchQuality === 'Excellent').length;
-  const eligibleCount = MATCHES.filter((m) => m.isEligible).length;
-  const grantsCount = MATCHES.filter((m) => m.type === 'Grant').length;
+  const totalMatches = activeMatches.length;
+  const excellentCount = activeMatches.filter((m) => m.matchQuality === 'Excellent').length;
+  const eligibleCount = activeMatches.filter((m) => m.isEligible).length;
+  const grantsCount = activeMatches.filter((m) => m.type === 'Grant').length;
 
   /* ── Filter matches based on search + dropdowns ── */
-  const filteredMatches = MATCHES.filter((match) => {
+  const filteredMatches = activeMatches.filter((match) => {
     const searchTerm = search.toLowerCase();
     const matchesSearch =
-      match.title.toLowerCase().includes(searchTerm) ||
-      match.organization.toLowerCase().includes(searchTerm);
+      match.title?.toLowerCase().includes(searchTerm) ||
+      match.organization?.toLowerCase().includes(searchTerm);
 
-    const matchesType = typeFilter === '' || match.type.toLowerCase() === typeFilter;
+    const matchesType = typeFilter === '' || match.type?.toLowerCase() === typeFilter;
     const matchesQuality =
-      matchFilter === '' || match.matchQuality.toLowerCase() === matchFilter;
+      matchFilter === '' || match.matchQuality?.toLowerCase() === matchFilter;
 
     return matchesSearch && matchesType && matchesQuality;
   });
 
-  /* ── Navigate to detail page when a card is clicked ── */
-  const handleCardClick = (matchId) => {
-    navigate(`/match-details/${matchId}`);
+  /* ── Navigate to the accelerator detail page when a card is clicked ── */
+  const handleCardClick = () => {
+    navigate('/accelerator');
   };
 
   return (
@@ -225,8 +271,32 @@ export default function GrantMatchPage() {
           <h1 className="gmp__heading">Your Personalized Funding Matches</h1>
           <p className="gmp__subheading">
             Based on your <strong>{BUSINESS.industry}</strong> business profile, we found{' '}
-            <strong>{MATCHES.length} funding opportunities</strong> ranked by compatibility.
+            <strong>{activeMatches.length} funding opportunities</strong> ranked by compatibility.
           </p>
+
+          {/* ── Run Matching button ── */}
+          <button
+            className="gmp__run-btn"
+            onClick={runMatching}
+            disabled={matchStatus === 'running'}
+          >
+            {matchStatus === 'running' ? (
+              <>
+                <span className="gmp__run-spinner" /> Finding Matches…
+              </>
+            ) : matchStatus === 'done' ? (
+              'Refresh Matches'
+            ) : (
+              'Run Matching'
+            )}
+          </button>
+
+          {matchStatus === 'error' && matchingError && (
+            <p className="gmp__run-error">{matchingError}</p>
+          )}
+          {matchStatus === 'done' && (
+            <p className="gmp__run-success">Matches updated successfully!</p>
+          )}
         </div>
 
         {/* ── Stats cards grid (2×2) ── */}

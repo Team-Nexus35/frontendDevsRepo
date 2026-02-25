@@ -65,6 +65,61 @@
   
 }
 
+/* ── Run Matching button ── */
+.gmp__run-btn {
+  margin-top: 20px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 24px;
+  background: #ffffff;
+  color: #155DFC;
+  font-family: "Sora", sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.gmp__run-btn:hover:not(:disabled) {
+  opacity: 0.88;
+}
+
+.gmp__run-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.gmp__run-spinner {
+  width: 14px;
+  height: 14px;
+  border: 2px solid #155DFC;
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: gmp-spin 0.7s linear infinite;
+  flex-shrink: 0;
+}
+
+@keyframes gmp-spin {
+  to { transform: rotate(360deg); }
+}
+
+.gmp__run-error {
+  margin-top: 10px;
+  font-size: 13px;
+  color: #fca5a5;
+  font-family: "Sora", sans-serif;
+}
+
+.gmp__run-success {
+  margin-top: 10px;
+  font-size: 13px;
+  color: #86efac;
+  font-family: "Sora", sans-serif;
+}
+
 /* ── Stats grid (2×2) ── */
 .gmp__stats {
   display: grid;

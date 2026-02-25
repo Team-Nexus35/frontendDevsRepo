@@ -1,86 +1,21 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import GrantMatchCard from "../../components/card/MatchCard";
 import "./Accelerator.css";
 import GrantDetails from "../../components/GrandDetails";
 import GrantHeader from "../../components/GrantHeader";
 
-// const BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
+const BASE_URL = "http://localhost:5000/api";
+const BUSINESS_ID = 3;
+
 const delay = (ms) => new Promise((r) => setTimeout(r, ms));
 
-// const API = {
-//   // Fetch a single grant by ID
-//   fetchGrant: async (id = "minority-biz-accelerator") => {
-//     const res = await fetch(`${BASE_URL}/grants/${id}`);
-//     if (!res.ok) throw new Error("Failed to fetch grant");
-//     return res.json();
-//   },
-
-//   // Fetch the business profile of the current user
-//   fetchBusinessProfile: async () => {
-//     const res = await fetch(`${BASE_URL}/business-profile`);
-//     if (!res.ok) throw new Error("Failed to fetch business profile");
-//     return res.json();
-//   },
-
-//   // Fetch match analysis for a specific grant
-//   fetchMatchAnalysis: async ({ grantId }) => {
-//     const res = await fetch(`${BASE_URL}/match-analysis`, {
-//       method: "POST",
-//       headers: {
-//         "Content-Type": "application/json",
-//       },
-//       body: JSON.stringify({ grantId }),
-//     });
-
-//     if (!res.ok) throw new Error("Failed to fetch match analysis");
-//     return res.json();
-//   },
-// };
-
-// export default function Accelerator() {
-//   const [grant, setGrant] = useState(null);
-//   const [analysis, setAnalysis] = useState(null);
-//   const [loading, setLoading] = useState(true);
-//   const [aiLoading, setAiLoading] = useState(true);
-//   const [revealed, setRevealed] = useState(false);
-
-//   useEffect(() => {
-//     (async () => {
-//       try {
-//         // Fetch grant and business profile
-//         const [g, b] = await Promise.all([
-//           API.fetchGrant(),
-//           API.fetchBusinessProfile(),
-//         ]);
-
-//         setGrant(g);
-//         setLoading(false);
-//         setTimeout(() => setRevealed(true), 100);
-
-//         // Fetch AI match analysis (backend handles business profile)
-//         const ai = await API.fetchMatchAnalysis({ grantId: g.id });
-//         setAnalysis(ai);
-//         setAiLoading(false);
-//       } catch (err) {
-//         console.error("Error fetching data:", err);
-//         setLoading(false);
-//         setAiLoading(false);
-//       }
-//     })();
-//   }, []);
-
-//   const handleApply = () => {
-//     // Navigate to application page or open modal
-//     console.log("Apply clicked for grant:", grant?.id);
-//   };
-
-// Mock API
-const API = {
-  // Fetch a single grant by ID (mocked)
-  fetchGrant: async (id = "minority-biz-accelerator") => {
-    await delay(400); // simulate network
+/* ── Fallback mock data (used when the real API is unavailable) ── */
+const MOCK_API = {
+  fetchGrant: async () => {
+    await delay(400);
     return {
-      id,
+      id: "minority-biz-accelerator",
       name: "Minority Business Accelerator Fund",
       provider: "Equity Growth Partners",
       tags: ["Technology & Software", "E-commerce & Retail", "Manufacturing"],
@@ -92,21 +27,7 @@ const API = {
       logoColor: "#5B4FE8",
     };
   },
-
-  // Fetch the business profile (mocked)
-  fetchBusinessProfile: async () => {
-    await delay(300);
-    return {
-      name: "Your E-commerce & Retail Business",
-      industry: "E-commerce & Retail",
-      stage: "Early Stage",
-      yearsOperating: 0,
-      isMinority: true,
-    };
-  },
-
-  // Fetch AI match analysis (mocked)
-  fetchMatchAnalysis: async ({ grant, business }) => {
+  fetchAnalysis: async () => {
     await delay(500);
     return {
       score: 95,
@@ -122,7 +43,34 @@ const API = {
   },
 };
 
+/* ── Map a match result from GET /api/match/:id into the card shape ── */
+function mapMatchToGrant(match) {
+  return {
+    id: match.id ?? match.grant_id ?? "api-result",
+    name: match.title ?? match.name ?? "Funding Opportunity",
+    provider: match.organization ?? match.provider ?? "",
+    tags: match.tags ?? [],
+    extraTagCount: 0,
+    fundingMin: match.fundingMin ?? match.funding_min ?? 0,
+    fundingMax: match.fundingMax ?? match.funding_max ?? 0,
+    processingTime: match.processingTime ?? match.processing_time ?? "—",
+    successRate: match.score ?? match.match_score ?? null,
+    logoColor: "#155DFC",
+  };
+}
+
+function mapMatchToAnalysis(match) {
+  return {
+    score: match.score ?? match.match_score ?? null,
+    level: match.matchQuality ?? match.match_quality ?? match.level ?? "Good",
+    summary: match.aiAnalysis ?? match.ai_analysis ?? match.summary ?? "",
+    strengths: match.strengths ?? [],
+  };
+}
+
 export default function Accelerator() {
+  const navigate = useNavigate();
+
   const [grant, setGrant] = useState(null);
   const [analysis, setAnalysis] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -132,19 +80,43 @@ export default function Accelerator() {
   useEffect(() => {
     (async () => {
       try {
-         const b = await API.fetchBusinessProfile();
-        const g = await API.fetchGrant();
+        /* Step 1 — POST http://localhost:5000/api/match/3/run  (trigger matching) */
+        const runRes = await fetch(`${BASE_URL}/match/${BUSINESS_ID}/run`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+        });
+        if (!runRes.ok) throw new Error(`Run failed: ${runRes.status}`);
 
+        /* Step 2 — GET http://localhost:5000/api/match/3  (retrieve results) */
+        const resultsRes = await fetch(`${BASE_URL}/match/${BUSINESS_ID}`);
+        if (!resultsRes.ok) throw new Error(`Results failed: ${resultsRes.status}`);
+
+        const data = await resultsRes.json();
+
+        /* The API may return an array or an object with a matches/results key */
+        const list = Array.isArray(data)
+          ? data
+          : data.matches ?? data.results ?? data.data ?? [];
+
+        const best = list[0];
+        if (best) {
+          setGrant(mapMatchToGrant(best));
+          setLoading(false);
+          setTimeout(() => setRevealed(true), 100);
+          setAnalysis(mapMatchToAnalysis(best));
+          setAiLoading(false);
+          return;
+        }
+        throw new Error("No matches returned");
+      } catch (err) {
+        /* API unavailable — fall back to mock data */
+        console.warn("Live API unavailable, using mock data:", err.message);
+        const g = await MOCK_API.fetchGrant();
         setGrant(g);
         setLoading(false);
         setTimeout(() => setRevealed(true), 100);
-
-        const ai = await API.fetchMatchAnalysis({ grant: g, business: b });
+        const ai = await MOCK_API.fetchAnalysis();
         setAnalysis(ai);
-        setAiLoading(false);
-      } catch (err) {
-        console.error("Error fetching data:", err);
-        setLoading(false);
         setAiLoading(false);
       }
     })();
@@ -156,8 +128,9 @@ export default function Accelerator() {
 
   return (
     <div className="page" id="accelerator">
-      
-      <GrantHeader/>
+
+      {/* "Back to Dashboard" navigates to the grant matches page */}
+      <GrantHeader onBack={() => navigate("/grant-matches")} />
 
       <GrantMatchCard
         grant={grant}

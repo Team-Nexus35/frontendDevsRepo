@@ -94,6 +94,7 @@ const handleSubmit = async () => {
 
     const data = await response.json()
     console.log('submitted', payload)
+    navigate('/grant-matches')
 
   } catch (err) {
     setSubmitError(err.message || 'Something went wrong. Please try again.')
