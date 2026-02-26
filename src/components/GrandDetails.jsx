@@ -2,7 +2,7 @@ import './GrandDetails.css';
 import EligibilitySvg from "./../assets/icons/eligibility.svg?react";
 import DocumentSvg from "./../assets/icons/document.svg?react";
 import CheckSvg from "./../assets/icons/check-circle.svg?react";
-import Footer from './footer';
+import Footer from './Footer';
 
 
 const BENEFITS = [
