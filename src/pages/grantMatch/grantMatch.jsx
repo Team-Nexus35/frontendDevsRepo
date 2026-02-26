@@ -10,9 +10,7 @@ import FundingMatchCard from '../../components/matchPage/FundingMatchCard';
 const CREATE_COMPANY_URL = '/ai-api/api/v1/companies';
 const MATCH_URL = (companyId) => `/ai-api/api/v1/match/${companyId}`;
 
-/* ════════════════════════════════════════
-   Icons
-   ════════════════════════════════════════ */
+
 
 function TotalMatchesIcon() {
   return (
@@ -50,9 +48,6 @@ function GrantsIcon() {
   );
 }
 
-/* ════════════════════════════════════════
-   Page component
-   ════════════════════════════════════════ */
 
 export default function GrantMatchPage() {
   const navigate = useNavigate();

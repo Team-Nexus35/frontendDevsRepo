@@ -57,11 +57,8 @@ const steps = [
   "Due diligence",
   "Terms negotiation and funding",
 ];
-
-// ─── COMPONENT ───────────────────────────────────────────────────────────────
 export default function GrantDetails() {
 
-  // Replace "/apply" with your actual route
   const handleApply = () => {
     window.location.href = "/apply";
   };
@@ -69,7 +66,7 @@ export default function GrantDetails() {
   return (
     <div className="gd-wrapper">
 
-      {/* ── About This Opportunity ─────────────────────────────── */}
+      {/* About This Opportunity*/}
       <section className="gd-section">
         <h2 className="gd-sectionTitle">About This Opportunity</h2>
         <p className="gd-body">
