@@ -37,5 +37,3 @@ function App() {
 }
 
 export default App
-
-//   <Button text='Get started free' Icon={WhiteArrowRight} variant='heroSectionBtn' btnFunction={() => navigate('/grant-matches')} />
