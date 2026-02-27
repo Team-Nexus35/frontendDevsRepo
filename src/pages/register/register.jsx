@@ -5,7 +5,6 @@ import WhiteArrowRight from '../../assets/icons/whiteArrowRight'
 import NewButton from '../../components/newButton/newButton'
 import SeePassword from '../../assets/icons/seePassword'
 import HidePassword from '../../assets/icons/hidePassword'
-
 const BASE_URL = import.meta.env.VITE_API_URL || 'https://backend-production-aa3a.up.railway.app/api'
 
 const initialState = {
@@ -241,9 +240,9 @@ export default function RegisterPage() {
               <span className={styles.checkboxCustom} />
               <span className={styles.checkboxText}>
                 I agree to the{' '}
-                <span className={styles.termsLink}>Terms of Service</span>
+                <span onClick={(e)=> {navigate('/privacyPolicy')}} className={styles.termsLink}>Terms of Service</span>
                 {' '}and{' '}
-                <span className={styles.termsLink}>Privacy Policy</span>
+                <span className={styles.termsLink} onClick={(e)=> {navigate('/privacyPolicy')}} >Privacy Policy</span>
               </span>
             </label>
 
@@ -256,6 +255,7 @@ export default function RegisterPage() {
               type="submit"
               loading={state.loading}
             />
+
 
           </form>
 

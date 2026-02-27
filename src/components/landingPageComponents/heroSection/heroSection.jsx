@@ -28,10 +28,12 @@ export default function HeroSection () {
 
                  <NewButton 
                 text='Watch Demo'
-                variant='filledWhite' style={{ padding: '1.5rem' }} />
+                variant='filledWhite' style={{ padding: '1.5rem' }}
+                btnFunction={() => window.open('https://youtu.be/3MjpyI16w3U', '_blank')} />
             </span>
 
             <p className={styles.asideText}>✓ Free to use ✓ No credit card required ✓ 2-minute setup</p>
         
         </div>
     }
+

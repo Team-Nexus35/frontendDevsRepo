@@ -14,6 +14,7 @@ import { FormProvider } from './components/form/formContext';
 import RegisterPage from './pages/register/register';
 import LoginPage from './pages/login/login';
 import GrantMatchPage from './pages/grantMatch/grantMatch';
+import PrivacyPolicy from './pages/termsAndPolicy/policy';
 
 
 
@@ -32,6 +33,7 @@ function App() {
         <Route path='register' element={<RegisterPage />} />
         <Route path='login' element={<LoginPage />} />
         <Route path="/grant-matches" element={<GrantMatchPage />} />
+        <Route path="/privacyPolicy" element={<PrivacyPolicy />} />
       </Routes>
   </FormProvider>
   </>
