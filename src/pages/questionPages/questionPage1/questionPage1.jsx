@@ -41,35 +41,38 @@ export default function FormOne() {
   const { formData, dispatch } = useForm()
   const [errors, setErrors] = useState({})
 
-const validate = () => {
-  const newErrors = {}
+  // Check if a saved profile already exists
+  const hasSavedProfile = !!localStorage.getItem('readiness_profile')
 
-  if (!formData.company_name.trim())
-    newErrors.company_name = 'Business name is required'
+  const validate = () => {
+    const newErrors = {}
 
-  if (!formData.nationality.trim())
-    newErrors.nationality = 'Registration country is required'
-  else if (!/^[a-zA-Z\s]+$/.test(formData.nationality.trim()))
-    newErrors.nationality = 'Country name must contain letters only'
+    if (!formData.company_name.trim())
+      newErrors.company_name = 'Business name is required'
 
-  if (!formData.sector)
-    newErrors.sector = 'Please select a sector'
+    if (!formData.nationality.trim())
+      newErrors.nationality = 'Registration country is required'
+    else if (!/^[a-zA-Z\s]+$/.test(formData.nationality.trim()))
+      newErrors.nationality = 'Country name must contain letters only'
 
-  if (!formData.business_stage)
-    newErrors.business_stage = 'Please select a business stage'
+    if (!formData.sector)
+      newErrors.sector = 'Please select a sector'
 
-  if (formData.business_registered === '' || formData.business_registered === undefined)
-    newErrors.business_registered = 'Please select an option'
+    if (!formData.business_stage)
+      newErrors.business_stage = 'Please select a business stage'
 
-  if (formData.business_age_months === '' || formData.business_age_months === undefined)
-    newErrors.business_age_months = 'Business age is required'
-  else if (!/^\d+$/.test(String(formData.business_age_months)))
-    newErrors.business_age_months = 'Business age must be a whole number (e.g. 18)'
-  else if (Number(formData.business_age_months) <= 0)
-    newErrors.business_age_months = 'Business age must be greater than 0'
+    if (formData.business_registered === '' || formData.business_registered === undefined)
+      newErrors.business_registered = 'Please select an option'
 
-  return newErrors
-}
+    if (formData.business_age_months === '' || formData.business_age_months === undefined)
+      newErrors.business_age_months = 'Business age is required'
+    else if (!/^\d+$/.test(String(formData.business_age_months)))
+      newErrors.business_age_months = 'Business age must be a whole number (e.g. 18)'
+    else if (Number(formData.business_age_months) <= 0)
+      newErrors.business_age_months = 'Business age must be greater than 0'
+
+    return newErrors
+  }
 
   const handleNext = () => {
     const newErrors = validate()
@@ -92,6 +95,23 @@ const validate = () => {
       onNext={handleNext}
       showPrevious={false}
     >
+      {/* ── Banner: profile already exists ── */}
+      {hasSavedProfile && (
+        <div className={styles.savedBanner}>
+          <span className={styles.savedBannerIcon}>✓</span>
+          <div className={styles.savedBannerText}>
+            <strong>Your profile is saved.</strong> Fields are pre-filled from your last session.
+            You can update and re-submit, or{' '}
+            <button
+              className={styles.skipLink}
+              onClick={() => navigate('/grant-matches')}
+            >
+              skip straight to your matches →
+            </button>
+          </div>
+        </div>
+      )}
+
       <div className={styles.childrenWrapper}>
 
         <TextFormField

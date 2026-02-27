@@ -2,9 +2,15 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 14px 24px;
-  background: linear-gradient(135deg, #4361EE 0%, #7C3AED 55%, #C026D3 100%);
+  padding-left: 7.5rem;
+  padding-right: 7.5rem;
+  padding-bottom: 20px;
+  padding-top: 20px;
+  background: white;
   font-family: "Sora", sans-serif;
+  border-bottom: 1px solid rgb(215, 208, 208);
+
+  
 }
 
 .gh-back {
@@ -16,7 +22,7 @@
   cursor: pointer;
   font-size: 16px;
   font-weight: 500;
-  color: rgba(255, 255, 255, 0.9);
+  color: black;
   padding: 0;
   font-family: "Sora", sans-serif;
   transition: color .2s;

@@ -6,8 +6,8 @@ import NewButton from '../../components/newButton/newButton'
 import SeePassword from '../../assets/icons/seePassword'
 import HidePassword from '../../assets/icons/hidePassword'
 
-
 const LOGIN_URL = 'https://backend-production-aa3a.up.railway.app/api/auth/login'
+const READINESS_URL = 'https://backend-production-aa3a.up.railway.app/api/readiness'
 
 const initialState = {
   email: '',
@@ -57,12 +57,10 @@ export default function LoginPage() {
       dispatch({ type: 'SET_ERROR', value: 'Please enter your email and password.' })
       return
     }
-
     if (!emailRegex.test(email)) {
       dispatch({ type: 'SET_ERROR', value: 'Please enter a valid email address.' })
       return
     }
-
     if (password.length < 8) {
       dispatch({ type: 'SET_ERROR', value: 'Password must be at least 8 characters.' })
       return
@@ -71,6 +69,7 @@ export default function LoginPage() {
     dispatch({ type: 'SET_LOADING', value: true })
 
     try {
+      // ── Step 1: Login ──
       const response = await fetch(LOGIN_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -78,29 +77,75 @@ export default function LoginPage() {
       })
 
       const data = await response.json()
-
-      console.log('Login response:', data) 
+      console.log('Login response:', data)
 
       if (!response.ok) {
         throw new Error(data.message || 'Login failed. Please check your credentials.')
       }
 
-      // Backend returns { success, message, data: { token } }
       const token = data.data?.token || data.token || null
       const user = data.data?.user || data.user || {}
 
-      if (!token) {
-        throw new Error('Login failed. Please try again.')
-      }
+      if (!token) throw new Error('Login failed. Please try again.')
 
       localStorage.setItem('token', token)
       localStorage.setItem('user', JSON.stringify(user))
 
-      dispatch({ type: 'SET_SUCCESS', value: 'You have logged in successfully.' })
+      // ── Step 2: Try to fetch existing readiness profile ──
+      try {
+        const profileRes = await fetch(READINESS_URL, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+          },
+        })
 
-      setTimeout(() => {
-        navigate('/getStarted1')
-      }, 1500)
+        if (profileRes.ok) {
+          const profileData = await profileRes.json()
+          const profile = profileData.data || profileData
+
+          // Map backend fields to the shape formContext / grantMatch expects
+          const savedProfile = {
+            company_name: profile.company_name || '',
+            sector: profile.sector || '',
+            nationality: profile.nationality || '',
+            business_stage: profile.business_stage || '',
+            business_registered_in: profile.business_registered_in || '',
+            business_registered: profile.business_registered ?? false,
+            founder_age: profile.founder_age || '',
+            founder_gender: profile.founder_gender || '',
+            business_age_months: profile.business_age_months || '',
+            annual_revenue_usd: profile.annual_revenue_usd || '',
+            employees: profile.employees || '',
+            funding_need_usd: profile.funding_need_usd || '',
+            innovation_level: profile.innovation_level || '',
+            has_prototype: profile.has_prototype ?? false,
+            targets_underserved: profile.targets_underserved ?? false,
+          }
+
+          // Only skip form if the profile has the minimum required fields
+          const hasProfile =
+            savedProfile.company_name &&
+            savedProfile.sector &&
+            savedProfile.funding_need_usd
+
+          if (hasProfile) {
+            localStorage.setItem('readiness_profile', JSON.stringify(savedProfile))
+            console.log('Existing profile loaded — skipping form')
+            dispatch({ type: 'SET_SUCCESS', value: 'Welcome back! Taking you to your matches…' })
+            setTimeout(() => navigate('/grant-matches'), 1500)
+            return
+          }
+        }
+      } catch (profileErr) {
+        // Profile fetch failed — not a blocker, just proceed to form
+        console.warn('Could not fetch existing profile:', profileErr.message)
+      }
+
+      // ── Step 3: No saved profile — go to form ──
+      dispatch({ type: 'SET_SUCCESS', value: 'You have logged in successfully.' })
+      setTimeout(() => navigate('/getStarted1'), 1500)
 
     } catch (error) {
       dispatch({ type: 'SET_ERROR', value: error.message || 'Something went wrong. Please try again.' })

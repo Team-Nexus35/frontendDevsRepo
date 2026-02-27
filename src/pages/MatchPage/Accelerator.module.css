@@ -1,9 +1,3 @@
-/* ============================================================
-   Accelerator.module.css
-   Headings  → Arial, sans-serif
-   Body text → 'Segoe UI', sans-serif
-   ============================================================ */
-
 @keyframes shimmer {
   0%   { background-position: -400px 0; }
   100% { background-position:  400px 0; }
@@ -14,245 +8,138 @@
   to   { opacity: 1; transform: translateY(0); }
 }
 
-/* ── Page wrapper ───────────────────────────────────────────── */
+/* ─── PAGE ─── */
 .page {
-  font-family: 'Segoe UI', Arial, sans-serif;
-  background: #f4f6fb;
+  font-family: var(--font-family);
+  background: var(--bg-color);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-}
-
-/* ══════════════════════════════════════════════════════════════
-   STICKY TOP BAR
-   Matches the grant-matches hero gradient so it feels connected
-══════════════════════════════════════════════════════════════ */
-.topBar {
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  background: linear-gradient(120deg, #5b21b6 0%, #7c3aed 35%, #a855f7 65%, #d946ef 100%);
-  padding: 14px 32px;
-  display: flex;
-  align-items: center;
-  box-shadow: 0 4px 20px rgba(91, 33, 182, 0.2);
-}
-
-.backBtn {
-  font-family: 'Segoe UI', Arial, sans-serif;
-  font-size: 14px;
-  font-weight: 600;
-  color: #ffffff;
-  background: rgba(255, 255, 255, 0.15);
-  border: 1.5px solid rgba(255, 255, 255, 0.4);
-  border-radius: 8px;
-  padding: 8px 18px;
-  cursor: pointer;
-  transition: background 0.2s, border-color 0.2s;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.backBtn:hover {
-  background: rgba(255, 255, 255, 0.25);
-  border-color: rgba(255, 255, 255, 0.7);
+  gap: 0;
+  position: relative;
 }
 
 .content {
-  max-width: 860px;
-  width: 100%;
-  margin: 0 auto;
-  padding: 36px 24px 60px;
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 20px;
+  padding: 24px 7.5rem 40px 7.5rem;
+  width: 100%;
+  box-sizing: border-box;
 }
 
+/* ─── EMPTY STATE ─── */
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 24px;
+  gap: 12px;
+  text-align: center;
+}
+.emptyTitle { font-size: 22px; font-weight: 700; color: #0f172a; margin: 0; }
+.emptyText  { font-size: 15px; color: #64748b; margin: 0; }
+
+/* ─── TITLE SECTION ─── */
 .titleSection {
   display: flex;
   flex-direction: column;
   gap: 6px;
+  padding-bottom: 4px;
 }
 
-/* Type + country row */
 .metaPill {
   display: flex;
   align-items: center;
-  gap: 8px;
-  margin-bottom: 4px;
+  gap: 6px;
+  flex-wrap: wrap;
 }
 
 .pillType {
-  font-family: Arial, sans-serif;
   font-size: 11px;
-  font-weight: 700;
+  font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: #6d28d9;
-  background: #ede9fe;
-  border: 1px solid #ddd6fe;
+  letter-spacing: 0.08em;
+  color: #155DFC;
+  background: #EFF6FF;
+  border: 1px solid #BFDBFE;
+  border-radius: 100px;
   padding: 3px 10px;
-  border-radius: 20px;
 }
 
-.pillDot {
-  color: #9ca3af;
-  font-size: 14px;
-}
+.pillDot    { color: #94a3b8; font-size: 13px; }
+.pillCountry { font-size: 13px; color: #64748b; }
 
-.pillCountry {
-  font-family: Arial, sans-serif;
-  font-size: 11px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: #374151;
-}
-
-/* Grant name — Arial heading */
 .grantName {
-  font-family: Arial, sans-serif;
-  font-size: 28px;
+  font-size: clamp(22px, 4vw, 32px);
   font-weight: 700;
   color: #0f172a;
   margin: 0;
-  line-height: 1.25;
+  line-height: 1.2;
 }
 
-/* Provider — Segoe UI */
 .provider {
-  font-family: 'Segoe UI', sans-serif;
   font-size: 15px;
-  color: #64748b;
+  color: #475569;
   margin: 0;
 }
 
 .websiteLink {
-  font-family: 'Segoe UI', sans-serif;
   font-size: 13px;
-  color: #2563eb;
+  color: #155DFC;
   text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-  gap: 3px;
-  transition: color 0.15s;
+  word-break: break-all;
 }
+.websiteLink:hover { text-decoration: underline; }
 
-.websiteLink:hover {
-  color: #1d4ed8;
-  text-decoration: underline;
-}
-
-/* ══════════════════════════════════════════════════════════════
-   SCORE BREAKDOWN CARD
-══════════════════════════════════════════════════════════════ */
+/* ─── SCORE CARD ─── */
 .scoreCard {
-  background: #ffffff;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
   border-radius: 14px;
-  border: 1px solid #e5e7eb;
-  padding: 20px 24px;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+  padding: 18px 22px;
 }
-
 .scoreCardTitle {
-  font-family: Arial, sans-serif;
   font-size: 14px;
-  font-weight: 700;
+  font-weight: 600;
   color: #0f172a;
-  margin: 0 0 16px;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
+  margin: 0 0 14px;
 }
-
 .scoreGrid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 10px 32px;
+  gap: 10px;
 }
-
 .scoreRow {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 6px 0;
-  border-bottom: 1px solid #f1f5f9;
 }
-
-.scoreRow:last-child {
-  border-bottom: none;
-}
-
 .scoreKey {
-  font-family: 'Segoe UI', sans-serif;
   font-size: 13px;
-  color: #64748b;
+  color: #475569;
   text-transform: capitalize;
 }
-
 .scoreVal {
-  font-family: Arial, sans-serif;
   font-size: 13px;
-  font-weight: 700;
+  font-weight: 600;
 }
 
-/* ══════════════════════════════════════════════════════════════
-   AI ADVICE BOX
-══════════════════════════════════════════════════════════════ */
-.aiBox {
-  background: #eff6ff;
-  border: 1px solid #bfdbfe;
-  border-radius: 14px;
-  padding: 22px 24px;
-}
-
-.aiBoxHeader {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 12px;
-}
-
-.aiBoxIcon {
-  font-size: 18px;
-  line-height: 1;
-}
-
-.aiBoxTitle {
-  font-family: Arial, sans-serif;
-  font-size: 15px;
-  font-weight: 700;
-  color: #1e40af;
-  margin: 0;
-}
-
-.aiBoxText {
-  font-family: 'Segoe UI', sans-serif;
-  font-size: 14px;
-  color: #1e3a8a;
-  line-height: 1.75;
-  margin: 0;
-  white-space: pre-line;
-}
-
-/* ══════════════════════════════════════════════════════════════
-   STRENGTHS CARD
-══════════════════════════════════════════════════════════════ */
+/* ─── STRENGTHS CARD ─── */
 .strengthsCard {
-  background: #f0fdf4;
-  border: 1px solid #bbf7d0;
-  border-radius: 14px;
-  padding: 22px 24px;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+  width: 100%;
+  background: #F0FDF4;
+  border-radius: 20px;
+  border: 1px solid rgba(22, 163, 74, 0.15);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+  padding: 24px 28px;
   opacity: 0;
   transform: translateY(20px);
-  transition: opacity 0.6s ease 0.1s, transform 0.6s ease 0.1s;
+  transition: opacity .7s cubic-bezier(.4,0,.2,1) .1s, transform .7s cubic-bezier(.4,0,.2,1) .1s;
+  box-sizing: border-box;
 }
-
-.strengthsCard.revealed {
-  opacity: 1;
-  transform: translateY(0);
-}
+.strengthsCard.revealed { opacity: 1; transform: translateY(0); }
 
 .strengthsHeader {
   display: flex;
@@ -260,164 +147,288 @@
   gap: 10px;
   margin-bottom: 16px;
 }
-
 .strengthsTitle {
-  font-family: Arial, sans-serif;
-  font-size: 15px;
+  font-size: 17px;
   font-weight: 700;
-  color: #15803d;
+  color: #0f172a;
   margin: 0;
 }
-
-.strengthsList {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
+.strengthsList { list-style: none; margin: 0; padding: 0; }
 .strengthItem {
   display: flex;
   align-items: flex-start;
   gap: 10px;
-  font-family: 'Segoe UI', sans-serif;
   font-size: 14px;
   color: #166534;
-  line-height: 1.55;
-  animation: fadeUp 0.4s ease both;
+  margin-bottom: 12px;
+  line-height: 1.5;
+  animation: fadeUp .4s ease both;
 }
-
-.checkIcon {
-  flex-shrink: 0;
-  margin-top: 2px;
-}
-
-
-.skeletonList {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
+.checkIcon { flex-shrink: 0; margin-top: 2px; }
 
 .skeleton {
   height: 16px;
   border-radius: 8px;
-  background: linear-gradient(90deg, #dcfce7 25%, #bbf7d0 50%, #dcfce7 75%);
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
   background-size: 400px 100%;
   animation: shimmer 1.4s infinite;
+  margin-bottom: 8px;
 }
+.skeletonList { display: flex; flex-direction: column; gap: 4px; }
 
-.ctaSection {
+/* ─── ABOUT SECTION ─── */
+.aboutSection {
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 20px;
+  padding: 32px 36px;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 10px;
-  padding: 8px 0 16px;
+  gap: 0;
+  box-sizing: border-box;
 }
 
-.applyBtn {
-  font-family: Arial, sans-serif;
-  font-size: 15px;
-  font-weight: 700;
-  padding: 14px 0;
+.aboutBlock {
+  padding: 24px 0;
+}
+.aboutBlock:first-child { padding-top: 0; }
+.aboutBlock:last-child  { padding-bottom: 0; }
+
+.divider {
+  height: 1px;
+  background: #f1f5f9;
   width: 100%;
-  max-width: 420px;
-  background: #2563eb;
-  color: #ffffff;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: background 0.2s, transform 0.15s;
-  letter-spacing: 0.01em;
 }
 
-.applyBtn:hover {
-  background: #1d4ed8;
-  transform: translateY(-1px);
+.aboutTitle {
+  font-size: 20px;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0 0 12px;
 }
 
-.ctaNote {
-  font-family: 'Segoe UI', sans-serif;
-  font-size: 12px;
-  color: #9ca3af;
+.sectionTitle {
+  display: flex;
+  align-items: center;
+  font-size: 18px;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0 0 16px;
+}
+
+.aboutText {
+  font-size: 14px;
+  color: #475569;
+  line-height: 1.7;
   margin: 0;
 }
 
-/* ══════════════════════════════════════════════════════════════
-   EMPTY STATE
-══════════════════════════════════════════════════════════════ */
-.emptyState {
+/* Benefits */
+.benefitsList { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+.benefitItem {
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  color: #1e293b;
+}
+.benefitIcon { flex-shrink: 0; }
+
+/* Eligibility */
+.eligibilityGrid { display: flex; flex-direction: column; gap: 20px; }
+.eligibilityBlock { display: flex; flex-direction: column; gap: 8px; }
+.eligibilityTwoCol { display: flex; flex-direction: column; gap: 16px; }
+.eligibilityLabel { font-size: 13px; font-weight: 600; color: #0f172a; margin: 0 0 6px; }
+.eligibilityValue { font-size: 13px; color: #475569; margin: 0; line-height: 1.5; }
+
+.tagCloud { display: flex; flex-wrap: wrap; gap: 6px; }
+.eligTag {
+  font-size: 12px;
+  color: #374151;
+  background: #f3f4f6;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  padding: 3px 10px;
+}
+
+.stageRow { display: flex; flex-wrap: wrap; gap: 8px; }
+.stagePill {
+  font-size: 12px;
+  color: #155DFC;
+  background: #EFF6FF;
+  border: 1px solid #BFDBFE;
+  border-radius: 100px;
+  padding: 4px 12px;
+}
+
+/* Documents */
+.docList { list-style: none; margin: 12px 0 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+.docItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 14px;
+  color: #1e293b;
+}
+.docNum {
+  display: flex;
   align-items: center;
   justify-content: center;
-  padding: 80px 24px;
-  text-align: center;
-  flex: 1;
-}
-
-.emptyTitle {
-  font-family: Arial, sans-serif;
-  font-size: 22px;
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  background: #EEF2FF;
+  color: #4338CA;
+  font-size: 12px;
   font-weight: 700;
-  color: #0f172a;
-  margin: 0 0 10px;
+  flex-shrink: 0;
 }
 
-.emptyText {
-  font-family: 'Segoe UI', sans-serif;
+/* Process */
+.processList { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 14px; }
+.processItem {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-size: 14px;
+  color: #1e293b;
+}
+.processNum {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #EFF6FF;
+  border: 1.5px solid #BFDBFE;
+  color: #155DFC;
+  font-size: 13px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+/* ─── CTA BANNER ─── */
+.ctaBanner {
+  background: linear-gradient(135deg, #155DFC 0%, #9810FA 50%, #E60076 100%);
+  border-radius: 18px;
+  padding: 28px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.ctaBannerLeft { display: flex; flex-direction: column; gap: 6px; }
+.ctaBannerTitle {
+  font-size: 20px;
+  font-weight: 700;
+  color: #fff;
+  margin: 0;
+}
+.ctaBannerText {
+  font-size: 14px;
+  color: rgba(255,255,255,0.85);
+  margin: 0;
+  max-width: 420px;
+  line-height: 1.5;
+}
+.ctaBannerBtn {
+  background: #fff;
+  color: #155DFC;
+  border: none;
+  border-radius: 10px;
+  padding: 12px 28px;
   font-size: 15px;
-  color: #6b7280;
-  margin: 0 0 28px;
-  max-width: 360px;
-  line-height: 1.6;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: opacity 0.2s ease;
+  flex-shrink: 0;
+}
+.ctaBannerBtn:hover { opacity: 0.9; }
+
+/* ─── FOOTER ─── */
+.footer {
+  text-align: center;
+  padding: 20px 24px;
+  font-size: 13px;
+  color: #94a3b8;
+  border-top: 1px solid #f1f5f9;
+  margin-top: 20px;
 }
 
+/* ─── RESPONSIVE: TABLET ─── */
 @media (max-width: 768px) {
   .content {
-    padding: 24px 16px 48px;
-    gap: 18px;
+    padding: 16px 16px 32px;
+    gap: 16px;
   }
 
-  .topBar {
-    padding: 12px 16px;
-  }
-
-  .grantName {
-    font-size: 22px;
+  .aboutSection {
+    padding: 24px 20px;
   }
 
   .scoreGrid {
     grid-template-columns: 1fr;
-    gap: 0;
   }
 
-  .scoreRow {
-    border-bottom: 1px solid #f1f5f9;
+  .ctaBanner {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 24px 20px;
   }
+
+  .ctaBannerBtn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .strengthsCard {
+    padding: 20px 18px;
+    border-radius: 16px;
+  }
+
+  .grantName { font-size: 22px; }
+  .sectionTitle { font-size: 16px; }
+  .aboutTitle { font-size: 17px; }
 }
 
+/* ─── RESPONSIVE: MOBILE ─── */
 @media (max-width: 480px) {
   .content {
-    padding: 20px 12px 40px;
+    padding: 12px 12px 28px;
+    gap: 14px;
   }
 
-  .grantName {
-    font-size: 19px;
+  .aboutSection {
+    padding: 18px 14px;
+    border-radius: 14px;
   }
 
-  .aiBoxText {
-    font-size: 13px;
+  .aboutBlock { padding: 18px 0; }
+
+  .strengthsCard {
+    padding: 16px 14px;
+    border-radius: 12px;
   }
 
-  .strengthItem {
-    font-size: 13px;
-  }
+  .strengthsTitle { font-size: 15px; }
+  .strengthItem   { font-size: 13px; }
 
-  .applyBtn {
-    font-size: 14px;
-    padding: 13px 0;
-  }
+  .grantName { font-size: 20px; }
+  .sectionTitle { font-size: 15px; }
+  .aboutTitle { font-size: 16px; }
+  .aboutText { font-size: 13px; }
+
+  .ctaBanner { padding: 20px 16px; border-radius: 14px; }
+  .ctaBannerTitle { font-size: 17px; }
+  .ctaBannerText { font-size: 13px; }
+  .ctaBannerBtn { padding: 12px 20px; font-size: 14px; }
+
+  .processNum { width: 28px; height: 28px; font-size: 12px; }
+  .processItem { font-size: 13px; }
+  .docItem { font-size: 13px; }
+  .benefitItem { font-size: 13px; }
+  .eligTag { font-size: 11px; }
 }
