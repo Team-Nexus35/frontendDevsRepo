@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import './FundingMatchCard.css';
 
 /* ── Circular score badge ── */
@@ -22,6 +23,8 @@ function formatAmount(amount, currency) {
 
 /* ── Main card component ── */
 export default function FundingMatchCard({ match, onClick }) {
+  const [expanded, setExpanded] = useState(false);
+
   const getMatchBadgeClass = (quality) => {
     const q = quality.toLowerCase();
     if (q === 'excellent') return 'fmc__badge--excellent';
@@ -30,10 +33,21 @@ export default function FundingMatchCard({ match, onClick }) {
   };
 
   const handleSave = (e) => {
-    // Stop the card's onClick from firing when "Save for Later" is clicked
     e.stopPropagation();
     alert('Saved for later! (your team can implement this feature)');
   };
+
+  const handleSeeMore = (e) => {
+    e.stopPropagation(); 
+    setExpanded(true);
+  };
+
+  const CHAR_LIMIT = 150;
+  const isTruncatable = match.aiAnalysis && match.aiAnalysis.length > CHAR_LIMIT;
+  const displayedText =
+    !expanded && isTruncatable
+      ? match.aiAnalysis.slice(0, CHAR_LIMIT).trimEnd() + '…'
+      : match.aiAnalysis;
 
   return (
     <article
@@ -73,7 +87,19 @@ export default function FundingMatchCard({ match, onClick }) {
         {/* AI analysis box */}
         <div className="fmc__ai-box">
           <p className="fmc__ai-label">Why this matches you:</p>
-          <p className="fmc__ai-text">{match.aiAnalysis}</p>
+          <p className="fmc__ai-text">
+            {displayedText}
+            {isTruncatable && !expanded && (
+  <button className="fmc__see-more" onClick={handleSeeMore}>
+    see more
+  </button>
+              )}
+              {expanded && (
+                <button className="fmc__see-more" onClick={(e) => { e.stopPropagation(); setExpanded(false); }}>
+                  hide details
+                </button>
+              )}
+          </p>
         </div>
 
         {/* Funding amount + processing time + rate */}
@@ -133,12 +159,12 @@ export default function FundingMatchCard({ match, onClick }) {
 
         {/* Action buttons */}
         <div className="fmc__actions">
-          <button className="fmc__btn-primary" onClick={onClick}>
+          <button className="vd" onClick={onClick}>
             View Full Details
           </button>
-          <button className="fmc__btn-link" onClick={handleSave}>
+          {/* <button className="fmc__btn-link" onClick={handleSave}>
             Save for Later
-          </button>
+          </button> */}
         </div>
 
       </div>

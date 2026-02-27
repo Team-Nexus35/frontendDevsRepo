@@ -1,17 +1,19 @@
+
+
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './GrantMatchPage.css';
 
-import GrantHeader from '../../components/GrantHeader';
 import StatCard from '../../components/matchPage/StatCard';
 import FilterBar from '../../components/matchPage/FilterBar';
 import FundingMatchCard from '../../components/matchPage/FundingMatchCard';
+
+import styles from './grantMatch.module.css';
 
 const CREATE_COMPANY_URL = '/ai-api/api/v1/companies';
 const MATCH_URL = (companyId) => `/ai-api/api/v1/match/${companyId}`;
 
 
-
+/* ── Stat icons — replace SVGs with your own icon imports if needed ── */
 function TotalMatchesIcon() {
   return (
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -20,7 +22,6 @@ function TotalMatchesIcon() {
     </svg>
   );
 }
-
 function ExcellentIcon() {
   return (
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -29,7 +30,6 @@ function ExcellentIcon() {
     </svg>
   );
 }
-
 function EligibleIcon() {
   return (
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -38,7 +38,6 @@ function EligibleIcon() {
     </svg>
   );
 }
-
 function GrantsIcon() {
   return (
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -52,6 +51,7 @@ function GrantsIcon() {
 export default function GrantMatchPage() {
   const navigate = useNavigate();
 
+  /* ── State — untouched ─────────────────────────────────────── */
   const [status, setStatus] = useState('idle');
   const [matches, setMatches] = useState([]);
   const [companyName, setCompanyName] = useState('');
@@ -62,6 +62,7 @@ export default function GrantMatchPage() {
   const [typeFilter, setTypeFilter] = useState('');
   const [matchFilter, setMatchFilter] = useState('');
 
+  /* ── API logic — untouched ─────────────────────────────────── */
   const handleFindMatches = async () => {
     setStatus('loading');
     setError(null);
@@ -73,7 +74,6 @@ export default function GrantMatchPage() {
       const profile = JSON.parse(profileRaw);
       const headers = { 'Content-Type': 'application/json' };
 
-      // Step 1 — Register company in AI service
       const createRes = await fetch(CREATE_COMPANY_URL, {
         method: 'POST',
         headers,
@@ -102,7 +102,6 @@ export default function GrantMatchPage() {
       const aiCompanyId = companyData?.id;
       if (!aiCompanyId) throw new Error('AI service did not return a company ID.');
 
-      // Step 2 — Run matching
       const matchRes = await fetch(MATCH_URL(aiCompanyId), { method: 'POST', headers });
       const matchText = await matchRes.text();
       if (!matchRes.ok) throw new Error(`Matching failed: ${matchRes.status} — ${matchText}`);
@@ -147,130 +146,165 @@ export default function GrantMatchPage() {
     }
   };
 
-  // Save selected match to localStorage then go to accelerator
   const handleCardClick = (match) => {
     localStorage.setItem('selected_match', JSON.stringify(match));
     navigate('/accelerator');
   };
 
-  const totalMatches = matches.length;
+  /* ── Derived counts ────────────────────────────────────────── */
+  const totalMatches   = matches.length;
   const excellentCount = matches.filter((m) => m.matchQuality === 'Excellent').length;
-  const eligibleCount = matches.filter((m) => m.isEligible).length;
-  const grantsCount = matches.filter((m) => m.type === 'Grant').length;
+  const eligibleCount  = matches.filter((m) => m.isEligible).length;
+  const grantsCount    = matches.filter((m) => m.type === 'Grant').length;
 
   const filteredMatches = matches.filter((match) => {
     const searchTerm = search.toLowerCase();
     const matchesSearch =
       match.title.toLowerCase().includes(searchTerm) ||
       match.organization.toLowerCase().includes(searchTerm);
-    const matchesType = typeFilter === '' || match.type?.toLowerCase() === typeFilter;
+    const matchesType    = typeFilter  === '' || match.type?.toLowerCase()         === typeFilter;
     const matchesQuality = matchFilter === '' || match.matchQuality?.toLowerCase() === matchFilter;
     return matchesSearch && matchesType && matchesQuality;
   });
 
+  /* ── Pull profile pills from localStorage for the filter row ─
+     These show: business name, sector, funding need, stage      */
+  const profileRaw = localStorage.getItem('readiness_profile');
+  const profile    = profileRaw ? JSON.parse(profileRaw) : {};
+  const profileTags = [
+    companyName || profile.company_name,
+    profile.sector,
+    profile.funding_need_usd ? `$${Number(profile.funding_need_usd).toLocaleString()}` : null,
+    profile.business_stage,
+  ].filter(Boolean);
+
   if (status === 'loading') {
     return (
-      <div className="gmp" id="grant-matches">
-        <GrantHeader />
-        <main className="gmp__main">
-          <div className="gmp__hero">
-            <span className="gmp__hero-label">AI-Matched Opportunities</span>
-            <h1 className="gmp__heading">Finding your matches…</h1>
-            <p className="gmp__subheading">Our AI is analysing your profile against available opportunities.</p>
-          </div>
-          <div className="gmp__loading">
-            {[1, 2, 3].map((i) => <div key={i} className="gmp__skeleton" />)}
+      <div className={styles.page}>
+        {/* Fixed hero — same gradient, shown even while loading */}
+        <section className={styles.hero}>
+          <span className={styles.heroLabel}>AI-Matched Opportunities</span>
+          <h1 className={styles.heroHeading}>Finding your matches…</h1>
+          <p className={styles.heroSubtext}>
+            Our AI is analysing your profile against available opportunities.
+          </p>
+        </section>
+
+        <main className={styles.main}>
+          <div className={styles.skeletonList}>
+            {[1, 2, 3].map((i) => <div key={i} className={styles.skeletonCard} />)}
           </div>
         </main>
       </div>
     );
   }
 
+
   if (status === 'idle') {
     return (
-      <div className="gmp" id="grant-matches">
-        <GrantHeader />
-        <main className="gmp__main">
-          <div className="gmp__hero">
-            <span className="gmp__hero-label">AI-Matched Opportunities</span>
-            <h1 className="gmp__heading">Ready to Find Your Funding Matches?</h1>
-            <p className="gmp__subheading">
-              Our AI will analyse your business profile and match you with the best funding opportunities available.
-            </p>
-            {error && <p style={{ color: 'red', marginTop: 12, fontSize: 14 }}>{error}</p>}
-            <button className="gmp__find-btn" onClick={handleFindMatches}>Find My Matches</button>
-            <p style={{ marginTop: 12, fontSize: 13, color: '#888', cursor: 'pointer' }} onClick={() => navigate('/getStarted1')}>
+      <div className={styles.page}>
+        {/* Fixed hero as the top element — no GrantHeader */}
+        <section className={styles.hero}>
+          <span className={styles.heroLabel}>AI-Matched Opportunities</span>
+          <h1 className={styles.heroHeading}>Ready to Find Your Funding Matches?</h1>
+          <p className={styles.heroSubtext}>
+            Our AI will analyse your business profile and match you with the best
+            funding opportunities available.
+          </p>
+          {error && <p className={styles.errorMsg}>{error}</p>}
+          <div className={styles.heroCta}>
+            <button className={styles.findBtn} onClick={handleFindMatches}>
+              Find My Matches
+            </button>
+            <button className={styles.backBtn} onClick={() => navigate('/getStarted1')}>
               ← Update my profile
-            </p>
+            </button>
           </div>
-        </main>
+        </section>
       </div>
     );
   }
 
   return (
-    <div className="gmp" id="grant-matches">
-      <GrantHeader />
-      <main className="gmp__main">
+    <div className={styles.page} id="grant-matches">
 
-        <div className="gmp__hero">
-          <span className="gmp__hero-label">AI-Matched Opportunities</span>
-          <h1 className="gmp__heading">Your Personalized Funding Matches</h1>
-          <p className="gmp__subheading">
-            Based on your <strong>{companyName}</strong> profile, we found{' '}
-            <strong>{matches.length} funding opportunities</strong> ranked by compatibility.
-          </p>
-          {aiSummary && (
-            <p className="gmp__ai-rec"><strong>AI Summary:</strong> {aiSummary}</p>
-          )}
+      <section className={`${styles.hero} ${styles.heroSticky}`}>
+        <div className={styles.heroInner}>
+          <div>
+            <span className={styles.heroLabel}>AI-Matched Opportunities</span>
+            <h1 className={styles.heroHeading}>Your Personalized Funding Matches</h1>
+            <p className={styles.heroSubtext}>
+              Based on your <strong>{companyName}</strong> profile, we found{' '}
+              <strong>{matches.length} funding opportunities</strong> ranked by compatibility.
+            </p>
+          </div>
+        </div>
+      </section>
+
+
+      <main className={styles.main}>
+
+
+        <div className={styles.statsRow}>
+          <StatCard value={totalMatches}   label="Total Matches"    icon={<TotalMatchesIcon />} iconBg="#EFF6FF" />
+          <StatCard value={excellentCount} label="Excellent Matches" icon={<ExcellentIcon />}   iconBg="#F0FDF4" />
+          <StatCard value={eligibleCount}  label="Eligible"          icon={<EligibleIcon />}    iconBg="#EEF2FF" />
+          <StatCard value={grantsCount}    label="Grants Available"  icon={<GrantsIcon />}      iconBg="#FEF9C3" />
         </div>
 
-        <div className="gmp__stats">
-          <StatCard value={totalMatches} label="Total Matches" icon={<TotalMatchesIcon />} iconBg="#EFF6FF" />
-          <StatCard value={excellentCount} label="Excellent Matches" icon={<ExcellentIcon />} iconBg="#F0FDF4" />
-          <StatCard value={eligibleCount} label="Eligible" icon={<EligibleIcon />} iconBg="#EEF2FF" />
-          <StatCard value={grantsCount} label="Grants Available" icon={<GrantsIcon />} iconBg="#FEF9C3" />
+
+        <div className={styles.filterSection}>
+          <FilterBar
+            tags={profileTags}
+            search={search}
+            onSearchChange={setSearch}
+            typeFilter={typeFilter}
+            onTypeChange={setTypeFilter}
+            matchFilter={matchFilter}
+            onMatchChange={setMatchFilter}
+          />
         </div>
 
-        <FilterBar
-          tags={[companyName].filter(Boolean)}
-          search={search}
-          onSearchChange={setSearch}
-          typeFilter={typeFilter}
-          onTypeChange={setTypeFilter}
-          matchFilter={matchFilter}
-          onMatchChange={setMatchFilter}
-        />
-
-        <div className="gmp__results-header">
-          <h2 className="gmp__results-count">{filteredMatches.length} Opportunities Found</h2>
-          <p className="gmp__results-sub">Ranked by AI compatibility score</p>
+        {/* RESULTS HEADER */}
+        <div className={styles.resultsHeader}>
+          <h2 className={styles.resultsCount}>{filteredMatches.length} Opportunities Found</h2>
+          <p className={styles.resultsMeta}>Ranked by AI compatibility score</p>
         </div>
 
-        <div className="gmp__cards-list">
-          {matches.length === 0 ? (
-            <div className="gmp__empty">
-              <p className="gmp__empty-title">No matches found</p>
-              <p className="gmp__empty-text">{aiSummary || 'No suitable matches found for your profile at this time.'}</p>
-              <button className="gmp__find-btn" onClick={handleFindMatches} style={{ marginTop: 16 }}>Try Again</button>
+        {/* CARDS LIST */}
+        <div className={styles.cardsList}>
+
+          {matches.length === 0 && (
+            <div className={styles.emptyState}>
+              <p className={styles.emptyTitle}>No matches found</p>
+              <p className={styles.emptyText}>
+                {aiSummary || 'No suitable matches found for your profile at this time.'}
+              </p>
+              <button className={styles.findBtn} onClick={handleFindMatches}>
+                Try Again
+              </button>
             </div>
-          ) : filteredMatches.length > 0 ? (
-            filteredMatches.map((match) => (
-              <FundingMatchCard
-                key={match.id}
-                match={match}
-                onClick={() => handleCardClick(match)}
-              />
-            ))
-          ) : (
-            <p className="gmp__no-results">No opportunities match your filters.</p>
           )}
-        </div>
 
+          {matches.length > 0 && filteredMatches.length === 0 && (
+            <p className={styles.noResults}>No opportunities match your current filters.</p>
+          )}
+
+          {filteredMatches.map((match) => (
+            <FundingMatchCard
+              key={match.id}
+              match={match}
+              onClick={() => handleCardClick(match)}
+            />
+          ))}
+
+        </div>
       </main>
-      <footer className="gmp__footer">
+
+      <footer className={styles.footer}>
         <p>© 2026 FundMatch AI. All rights reserved.</p>
       </footer>
+
     </div>
   );
 }

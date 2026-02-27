@@ -1,0 +1,423 @@
+/* ============================================================
+   Accelerator.module.css
+   Headings  → Arial, sans-serif
+   Body text → 'Segoe UI', sans-serif
+   ============================================================ */
+
+@keyframes shimmer {
+  0%   { background-position: -400px 0; }
+  100% { background-position:  400px 0; }
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Page wrapper ───────────────────────────────────────────── */
+.page {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background: #f4f6fb;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   STICKY TOP BAR
+   Matches the grant-matches hero gradient so it feels connected
+══════════════════════════════════════════════════════════════ */
+.topBar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: linear-gradient(120deg, #5b21b6 0%, #7c3aed 35%, #a855f7 65%, #d946ef 100%);
+  padding: 14px 32px;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 4px 20px rgba(91, 33, 182, 0.2);
+}
+
+.backBtn {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.15);
+  border: 1.5px solid rgba(255, 255, 255, 0.4);
+  border-radius: 8px;
+  padding: 8px 18px;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.backBtn:hover {
+  background: rgba(255, 255, 255, 0.25);
+  border-color: rgba(255, 255, 255, 0.7);
+}
+
+.content {
+  max-width: 860px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 36px 24px 60px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.titleSection {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* Type + country row */
+.metaPill {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.pillType {
+  font-family: Arial, sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #6d28d9;
+  background: #ede9fe;
+  border: 1px solid #ddd6fe;
+  padding: 3px 10px;
+  border-radius: 20px;
+}
+
+.pillDot {
+  color: #9ca3af;
+  font-size: 14px;
+}
+
+.pillCountry {
+  font-family: Arial, sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #374151;
+}
+
+/* Grant name — Arial heading */
+.grantName {
+  font-family: Arial, sans-serif;
+  font-size: 28px;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0;
+  line-height: 1.25;
+}
+
+/* Provider — Segoe UI */
+.provider {
+  font-family: 'Segoe UI', sans-serif;
+  font-size: 15px;
+  color: #64748b;
+  margin: 0;
+}
+
+.websiteLink {
+  font-family: 'Segoe UI', sans-serif;
+  font-size: 13px;
+  color: #2563eb;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  transition: color 0.15s;
+}
+
+.websiteLink:hover {
+  color: #1d4ed8;
+  text-decoration: underline;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   SCORE BREAKDOWN CARD
+══════════════════════════════════════════════════════════════ */
+.scoreCard {
+  background: #ffffff;
+  border-radius: 14px;
+  border: 1px solid #e5e7eb;
+  padding: 20px 24px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+}
+
+.scoreCardTitle {
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0 0 16px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.scoreGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px 32px;
+}
+
+.scoreRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 0;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.scoreRow:last-child {
+  border-bottom: none;
+}
+
+.scoreKey {
+  font-family: 'Segoe UI', sans-serif;
+  font-size: 13px;
+  color: #64748b;
+  text-transform: capitalize;
+}
+
+.scoreVal {
+  font-family: Arial, sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   AI ADVICE BOX
+══════════════════════════════════════════════════════════════ */
+.aiBox {
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  border-radius: 14px;
+  padding: 22px 24px;
+}
+
+.aiBoxHeader {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.aiBoxIcon {
+  font-size: 18px;
+  line-height: 1;
+}
+
+.aiBoxTitle {
+  font-family: Arial, sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: #1e40af;
+  margin: 0;
+}
+
+.aiBoxText {
+  font-family: 'Segoe UI', sans-serif;
+  font-size: 14px;
+  color: #1e3a8a;
+  line-height: 1.75;
+  margin: 0;
+  white-space: pre-line;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   STRENGTHS CARD
+══════════════════════════════════════════════════════════════ */
+.strengthsCard {
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  border-radius: 14px;
+  padding: 22px 24px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease 0.1s, transform 0.6s ease 0.1s;
+}
+
+.strengthsCard.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.strengthsHeader {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.strengthsTitle {
+  font-family: Arial, sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: #15803d;
+  margin: 0;
+}
+
+.strengthsList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.strengthItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-family: 'Segoe UI', sans-serif;
+  font-size: 14px;
+  color: #166534;
+  line-height: 1.55;
+  animation: fadeUp 0.4s ease both;
+}
+
+.checkIcon {
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+
+.skeletonList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.skeleton {
+  height: 16px;
+  border-radius: 8px;
+  background: linear-gradient(90deg, #dcfce7 25%, #bbf7d0 50%, #dcfce7 75%);
+  background-size: 400px 100%;
+  animation: shimmer 1.4s infinite;
+}
+
+.ctaSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 0 16px;
+}
+
+.applyBtn {
+  font-family: Arial, sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  padding: 14px 0;
+  width: 100%;
+  max-width: 420px;
+  background: #2563eb;
+  color: #ffffff;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s;
+  letter-spacing: 0.01em;
+}
+
+.applyBtn:hover {
+  background: #1d4ed8;
+  transform: translateY(-1px);
+}
+
+.ctaNote {
+  font-family: 'Segoe UI', sans-serif;
+  font-size: 12px;
+  color: #9ca3af;
+  margin: 0;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   EMPTY STATE
+══════════════════════════════════════════════════════════════ */
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 24px;
+  text-align: center;
+  flex: 1;
+}
+
+.emptyTitle {
+  font-family: Arial, sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0 0 10px;
+}
+
+.emptyText {
+  font-family: 'Segoe UI', sans-serif;
+  font-size: 15px;
+  color: #6b7280;
+  margin: 0 0 28px;
+  max-width: 360px;
+  line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+  .content {
+    padding: 24px 16px 48px;
+    gap: 18px;
+  }
+
+  .topBar {
+    padding: 12px 16px;
+  }
+
+  .grantName {
+    font-size: 22px;
+  }
+
+  .scoreGrid {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .scoreRow {
+    border-bottom: 1px solid #f1f5f9;
+  }
+}
+
+@media (max-width: 480px) {
+  .content {
+    padding: 20px 12px 40px;
+  }
+
+  .grantName {
+    font-size: 19px;
+  }
+
+  .aiBoxText {
+    font-size: 13px;
+  }
+
+  .strengthItem {
+    font-size: 13px;
+  }
+
+  .applyBtn {
+    font-size: 14px;
+    padding: 13px 0;
+  }
+}

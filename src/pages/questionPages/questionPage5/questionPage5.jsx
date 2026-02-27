@@ -15,7 +15,6 @@ export default function FormFive() {
   const navigate = useNavigate()
   const { formData, dispatch } = useForm()
 
-  // UI-only step — profile was already created on getStarted3
   const handleSubmit = () => navigate('/grant-matches')
   const handlePrevious = () => navigate('/getStarted4')
 
