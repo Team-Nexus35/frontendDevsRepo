@@ -146,13 +146,26 @@
 }
 
 .gmc-aiSummary {
-  color: #364153;
-  font-family: Arial;
-  font-weight: 400;
-  font-size: 20px;
-  margin: 0;
-  padding: 0;
+ font-size: 14px;
+  color: #1e3a8a;
+  line-height: 1.7;
+  margin: 0 0 10px;
+  white-space: pre-line;
 }
+.gmc-readMoreBtn {
+  background: none;
+  border: none;
+  color: #155DFC;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 4px 0 0;
+  display: inline-block;
+}
+.gmc-readMoreBtn:hover {
+  text-decoration: underline;
+}
+
 
 .gmc-levelRow {
   display: flex;

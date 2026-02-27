@@ -1,5 +1,3 @@
-
-
 .wrapper {
   background-color: #ffffff;
   display: flex;
@@ -7,8 +5,10 @@
   padding: 2.5rem 4rem;
   box-sizing: border-box;
   max-width: 52.875rem;
+  width: 100%;
   margin-top: 3.375rem;
-  margin-left: 7.8125rem;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 

@@ -4,3 +4,47 @@
     width: 100%;
     gap: 2rem;
 }
+
+
+.savedBanner {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  border-radius: 10px;
+  padding: 14px 16px;
+  margin-bottom: 20px;
+}
+
+.savedBannerIcon {
+  font-size: 16px;
+  color: #16a34a;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.savedBannerText {
+  font-size: 13px;
+  color: #166534;
+  line-height: 1.6;
+}
+
+.savedBannerText strong {
+  font-weight: 600;
+}
+
+.skipLink {
+  background: none;
+  border: none;
+  color: #155DFC;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0;
+  text-decoration: underline;
+}
+
+.skipLink:hover {
+  color: #1d4ed8;
+}

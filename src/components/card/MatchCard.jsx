@@ -1,3 +1,4 @@
+import { useState } from "react";
 import "./MatchCard.css";
 import DollarSvg from "../../assets/icons/dollarmatch.svg?react";
 import ClockSvg from "../../assets/icons/clockmatch.svg?react";
@@ -65,6 +66,13 @@ function Stat({ icon, label, value, loading, className }) {
   );
 }
 
+// Truncates text to N words
+function truncate(text, wordLimit) {
+  if (!text) return '';
+  const words = text.split(' ');
+  if (words.length <= wordLimit) return text;
+  return words.slice(0, wordLimit).join(' ') + '…';
+}
 
 export default function GrantMatchCard({
   grant,
@@ -74,6 +82,15 @@ export default function GrantMatchCard({
   revealed,
   onApply,
 }) {
+  const [expanded, setExpanded] = useState(false);
+
+  const fullSummary = analysis?.summary ?? '';
+  const wordCount = fullSummary.split(' ').length;
+  const needsTruncation = wordCount > 40;
+  const displayedSummary = !expanded && needsTruncation
+    ? truncate(fullSummary, 40)
+    : fullSummary;
+
   return (
     <div className={`gmc-card ${revealed ? "revealed" : ""}`}>
 
@@ -103,7 +120,17 @@ export default function GrantMatchCard({
                 <div className="gmc-skeleton" style={{ width: "80%" }} />
               </>
             ) : (
-              <p className="gmc-aiSummary">{analysis.summary}</p>
+              <>
+                <p className="gmc-aiSummary">{displayedSummary}</p>
+                {needsTruncation && (
+                  <button
+                    className="gmc-readMoreBtn"
+                    onClick={() => setExpanded(e => !e)}
+                  >
+                    {expanded ? 'Show less ↑' : 'Read more ↓'}
+                  </button>
+                )}
+              </>
             )}
           </div>
 
@@ -120,14 +147,11 @@ export default function GrantMatchCard({
         </div>
       </div>
 
-     
       <div className="gmc-grantSection">
 
         <div className="gmc-grantTop">
           <div className="gmc-grantLogoWrap">
-            <div
-              className="gmc-grantLogo"
-            >
+            <div className="gmc-grantLogo">
               <GrowthSvg />
             </div>
           </div>
@@ -166,7 +190,6 @@ export default function GrantMatchCard({
           </div>
         </div>
 
-  
         <div className="gmc-statsRow">
           <Stat
             icon={<DollarIcon />}
@@ -175,7 +198,6 @@ export default function GrantMatchCard({
             value={loading ? "" : `${fmt(grant.fundingMin)} – ${fmt(grant.fundingMax)}`}
             loading={loading}
           />
-        
           <Stat
             icon={<ClockIcon />}
             className="stat-clock-icon"
@@ -183,8 +205,6 @@ export default function GrantMatchCard({
             value={grant?.processingTime}
             loading={loading}
           />
-        
-
           <Stat
             icon={<TrophyIcon />}
             className="stat-trophy-icon"
@@ -193,11 +213,6 @@ export default function GrantMatchCard({
             loading={loading}
           />
         </div>
-
-   
-        <button className="gmc-cta" onClick={onApply}>
-          Click Here
-        </button>
 
       </div>
 

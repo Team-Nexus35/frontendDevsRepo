@@ -1,80 +1,3 @@
-/* .findBtn {
-    display: flex;
-    background-color: white;
-    font-family: var(--font-arial);
-    font-size: 1rem;
-    padding: 1rem;
-    appearance: none;
-    outline: none;
-    border: none;
-    color: blue;
-    border-radius: .5rem;
-    cursor: pointer;
-    gap: .5rem;
-    margin-top: 1rem;
-}
-
-.nextBtn {
-    display: flex;
-    background: none;
-    font-family: var(--font-arial);
-    font-size: 1rem;
-    padding: 1rem;
-    appearance: none;
-    outline: none;
-    border: none;
-    color: white;
-    border-radius: .5rem;
-    border: 1.5px solid white;
-    cursor: pointer;
-    gap: .5rem;
-    margin-top: 1rem;
-}
-
-.btnDivs {
-    display: flex;
-    gap: 1rem;
-    align-items: center;
-}
-
-.subHead {
-    display: flex;
-    flex-wrap: wrap;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    color: white;
-    font-size: 1rem;
-    line-height: 1.75rem;
-
-    color: #DBEAFE;
-font-family: Arial;
-font-size: 20px;
-font-style: normal;
-font-weight: 400;
-line-height: 28px; 
-margin-top: 16px;
-}
-
-.headAside {
-    display: flex;
-
-    color: #FFF;
-font-family: Arial;
-font-size: 16px;
-font-style: normal;
-font-weight: 400;
-line-height: 20px; 
-}
-
-.headQ {
-    display: flex;
-    color: #FFF;
-font-family: Arial;
-font-size: 36px;
-font-style: normal;
-font-weight: 700;
-line-height: 40px;
-} */
-
 /* ============================================================
    grantMatch.module.css
    Fonts: 'Segoe UI', Arial, sans-serif throughout
@@ -90,12 +13,11 @@ line-height: 40px;
 }
 
 /* ══════════════════════════════════════════════════════════════
-   HERO — gradient banner, replaces the old GrantHeader bar
-   Applied to both idle/loading/done states
+   HERO — gradient banner
 ══════════════════════════════════════════════════════════════ */
 .hero {
-  background: linear-gradient(120deg, #5b21b6 0%, #7c3aed 35%, #a855f7 65%, #d946ef 100%);
-  padding: 36px 48px 40px;
+  background: linear-gradient(135deg, #155DFC 0%, #9810FA 50%, #E60076 100%);
+  padding: 36px 7.5rem 40px;
   color: #ffffff;
 }
 
@@ -108,8 +30,6 @@ line-height: 40px;
 }
 
 .heroInner {
-  max-width: 960px;
-  margin: 0 auto;
   width: 100%;
 }
 
@@ -154,6 +74,14 @@ line-height: 40px;
   gap: 14px;
   margin-top: 28px;
   flex-wrap: wrap;
+}
+
+.brandSection {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  padding: 48px 24px;
 }
 
 .findBtn {
@@ -204,11 +132,10 @@ line-height: 40px;
    MAIN CONTENT
 ══════════════════════════════════════════════════════════════ */
 .main {
-  max-width: 960px;
   width: 100%;
-  margin: 0 auto;
-  padding: 32px 24px 60px;
+  padding: 32px 7.5rem 60px;
   flex: 1;
+  box-sizing: border-box;
 }
 
 /* ══════════════════════════════════════════════════════════════
@@ -340,6 +267,10 @@ line-height: 40px;
 @media (max-width: 768px) {
   .hero {
     padding: 28px 24px 32px;
+  }
+
+  .main {
+    padding: 32px 24px 60px;
   }
 
   .heroHeading {

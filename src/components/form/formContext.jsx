@@ -63,6 +63,10 @@ function formReducer(state, action) {
         },
       }
 
+    // ── Bulk-loads a saved profile from backend/localStorage ──
+    case 'LOAD_PROFILE':
+      return { ...state, ...action.profile }
+
     case 'RESET_FORM':
       return initialState
 
@@ -74,7 +78,19 @@ function formReducer(state, action) {
 const FormContext = createContext()
 
 export function FormProvider({ children }) {
-  const [formData, dispatch] = useReducer(formReducer, initialState)
+  const [formData, dispatch] = useReducer(formReducer, initialState, () => {
+    // On first mount, rehydrate from localStorage if a saved profile exists
+    try {
+      const saved = localStorage.getItem('readiness_profile')
+      if (saved) {
+        const profile = JSON.parse(saved)
+        return { ...initialState, ...profile }
+      }
+    } catch {
+      // ignore parse errors
+    }
+    return initialState
+  })
 
   return (
     <FormContext.Provider value={{ formData, dispatch }}>
