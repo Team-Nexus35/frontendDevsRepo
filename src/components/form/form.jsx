@@ -1,6 +1,6 @@
 import styles from './form.module.css'
 import NewButton from '../newButton/newButton'
-import tempLogo from '../../assets/images/tempLogo.png' 
+import tempLogo from '../../assets/images/formLogo.png' 
 import WhiteArrowRight from '../../assets/icons/whiteArrowRight'
 import BlueArrowLeft from '../../assets/icons/blueArrowLeft'
 

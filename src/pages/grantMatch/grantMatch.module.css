@@ -1,0 +1,381 @@
+/* .findBtn {
+    display: flex;
+    background-color: white;
+    font-family: var(--font-arial);
+    font-size: 1rem;
+    padding: 1rem;
+    appearance: none;
+    outline: none;
+    border: none;
+    color: blue;
+    border-radius: .5rem;
+    cursor: pointer;
+    gap: .5rem;
+    margin-top: 1rem;
+}
+
+.nextBtn {
+    display: flex;
+    background: none;
+    font-family: var(--font-arial);
+    font-size: 1rem;
+    padding: 1rem;
+    appearance: none;
+    outline: none;
+    border: none;
+    color: white;
+    border-radius: .5rem;
+    border: 1.5px solid white;
+    cursor: pointer;
+    gap: .5rem;
+    margin-top: 1rem;
+}
+
+.btnDivs {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.subHead {
+    display: flex;
+    flex-wrap: wrap;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: white;
+    font-size: 1rem;
+    line-height: 1.75rem;
+
+    color: #DBEAFE;
+font-family: Arial;
+font-size: 20px;
+font-style: normal;
+font-weight: 400;
+line-height: 28px; 
+margin-top: 16px;
+}
+
+.headAside {
+    display: flex;
+
+    color: #FFF;
+font-family: Arial;
+font-size: 16px;
+font-style: normal;
+font-weight: 400;
+line-height: 20px; 
+}
+
+.headQ {
+    display: flex;
+    color: #FFF;
+font-family: Arial;
+font-size: 36px;
+font-style: normal;
+font-weight: 700;
+line-height: 40px;
+} */
+
+/* ============================================================
+   grantMatch.module.css
+   Fonts: 'Segoe UI', Arial, sans-serif throughout
+   ============================================================ */
+
+/* ── Page wrapper ───────────────────────────────────────────── */
+.page {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background: #f4f6fb;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   HERO — gradient banner, replaces the old GrantHeader bar
+   Applied to both idle/loading/done states
+══════════════════════════════════════════════════════════════ */
+.hero {
+  background: linear-gradient(120deg, #5b21b6 0%, #7c3aed 35%, #a855f7 65%, #d946ef 100%);
+  padding: 36px 48px 40px;
+  color: #ffffff;
+}
+
+/* Sticky version — used on the done/results state only */
+.heroSticky {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 4px 24px rgba(91, 33, 182, 0.25);
+}
+
+.heroInner {
+  max-width: 960px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.heroLabel {
+  display: block;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.75);
+  margin-bottom: 8px;
+  font-family: Arial, sans-serif;
+}
+
+.heroHeading {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  font-size: 32px;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0 0 10px;
+  line-height: 1.2;
+}
+
+.heroSubtext {
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.88);
+  margin: 0;
+  line-height: 1.6;
+  max-width: 580px;
+}
+
+.heroSubtext strong {
+  color: #ffffff;
+  font-weight: 700;
+}
+
+/* Idle state CTA buttons */
+.heroCta {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 28px;
+  flex-wrap: wrap;
+}
+
+.findBtn {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  padding: 11px 28px;
+  background: #ffffff;
+  color: #6d28d9;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+  transition: background 0.2s, transform 0.15s;
+}
+
+.findBtn:hover {
+  background: #ede9fe;
+  transform: translateY(-1px);
+}
+
+.backBtn {
+  font-family: Arial, sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 10px 20px;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.9);
+  border: 1.5px solid rgba(255, 255, 255, 0.5);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.backBtn:hover {
+  border-color: #ffffff;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.errorMsg {
+  margin-top: 12px;
+  font-size: 13px;
+  color: #fca5a5;
+  font-family: Arial, sans-serif;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   MAIN CONTENT
+══════════════════════════════════════════════════════════════ */
+.main {
+  max-width: 960px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 32px 24px 60px;
+  flex: 1;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   STAT CARDS — 4-column grid
+══════════════════════════════════════════════════════════════ */
+.statsRow {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   FILTER BAR WRAPPER
+══════════════════════════════════════════════════════════════ */
+.filterSection {
+  margin-bottom: 20px;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   RESULTS HEADER
+══════════════════════════════════════════════════════════════ */
+.resultsHeader {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+
+.resultsCount {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: #111827;
+  margin: 0;
+}
+
+.resultsMeta {
+  font-family: Arial, sans-serif;
+  font-size: 13px;
+  color: #9ca3af;
+  margin: 0;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   CARDS LIST
+══════════════════════════════════════════════════════════════ */
+.cardsList {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   EMPTY / NO RESULTS
+══════════════════════════════════════════════════════════════ */
+.emptyState {
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 56px 32px;
+  text-align: center;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.07);
+}
+
+.emptyTitle {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: #374151;
+  margin: 0 0 8px;
+}
+
+.emptyText {
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  color: #6b7280;
+  margin: 0 auto 24px;
+  max-width: 400px;
+  line-height: 1.6;
+}
+
+.noResults {
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  color: #6b7280;
+  text-align: center;
+  padding: 32px 0;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   SKELETON LOADING CARDS
+══════════════════════════════════════════════════════════════ */
+.skeletonList {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: 32px;
+}
+
+.skeletonCard {
+  height: 200px;
+  border-radius: 14px;
+  background: linear-gradient(90deg, #e5e7eb 25%, #f3f4f6 50%, #e5e7eb 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s infinite;
+}
+
+@keyframes shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   FOOTER
+══════════════════════════════════════════════════════════════ */
+.footer {
+  text-align: center;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+  color: #9ca3af;
+  border-top: 1px solid #e5e7eb;
+  background: #ffffff;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════════════════════════════ */
+@media (max-width: 768px) {
+  .hero {
+    padding: 28px 24px 32px;
+  }
+
+  .heroHeading {
+    font-size: 24px;
+  }
+
+  .statsRow {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .resultsHeader {
+    flex-direction: column;
+    gap: 4px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero {
+    padding: 24px 16px 28px;
+  }
+
+  .heroHeading {
+    font-size: 20px;
+  }
+
+  .main {
+    padding: 20px 16px 48px;
+  }
+
+  .statsRow {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .heroCta {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

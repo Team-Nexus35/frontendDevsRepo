@@ -5,6 +5,8 @@ import { Form, TextFormField, SelectFormField, ProgressBar } from '../../../comp
 import FundingNeedsIcon from '../../../assets/icons/fundingNeeds'
 import styles from './questionPage3.module.css'
 
+const READINESS_URL = 'https://backend-production-aa3a.up.railway.app/api/readiness'
+
 const innovationOptions = [
   { value: 'low', label: 'Low' },
   { value: 'medium', label: 'Medium' },
@@ -24,84 +26,113 @@ export default function FormThree() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitError, setSubmitError] = useState(null)
 
-const validate = () => {
-  const newErrors = {}
+  const validate = () => {
+    const newErrors = {}
 
-  if (formData.funding_need_usd === '' || formData.funding_need_usd === undefined)
-    newErrors.funding_need_usd = 'Funding amount is required'
-  else if (!/^\d+(\.\d+)?$/.test(String(formData.funding_need_usd)))
-    newErrors.funding_need_usd = 'Please enter a valid number (e.g. 50000)'
-  else if (Number(formData.funding_need_usd) <= 0)
-    newErrors.funding_need_usd = 'Funding amount must be greater than 0'
+    if (formData.funding_need_usd === '' || formData.funding_need_usd === undefined)
+      newErrors.funding_need_usd = 'Funding amount is required'
+    else if (!/^\d+(\.\d+)?$/.test(String(formData.funding_need_usd)))
+      newErrors.funding_need_usd = 'Please enter a valid number (e.g. 50000)'
+    else if (Number(formData.funding_need_usd) <= 0)
+      newErrors.funding_need_usd = 'Funding amount must be greater than 0'
 
-  if (formData.annual_revenue_usd === '' || formData.annual_revenue_usd === undefined)
-    newErrors.annual_revenue_usd = 'Annual revenue is required'
-  else if (!/^\d+(\.\d+)?$/.test(String(formData.annual_revenue_usd)))
-    newErrors.annual_revenue_usd = 'Please enter a valid number (e.g. 20000)'
-  else if (Number(formData.annual_revenue_usd) < 0)
-    newErrors.annual_revenue_usd = 'Revenue cannot be negative'
+    if (formData.annual_revenue_usd === '' || formData.annual_revenue_usd === undefined)
+      newErrors.annual_revenue_usd = 'Annual revenue is required'
+    else if (!/^\d+(\.\d+)?$/.test(String(formData.annual_revenue_usd)))
+      newErrors.annual_revenue_usd = 'Please enter a valid number (e.g. 20000)'
+    else if (Number(formData.annual_revenue_usd) < 0)
+      newErrors.annual_revenue_usd = 'Revenue cannot be negative'
 
-  if (!formData.innovation_level)
-    newErrors.innovation_level = 'Please select an innovation level'
+    if (!formData.innovation_level)
+      newErrors.innovation_level = 'Please select an innovation level'
 
-  if (formData.has_prototype === '' || formData.has_prototype === undefined)
-    newErrors.has_prototype = 'Please select an option'
+    if (formData.has_prototype === '' || formData.has_prototype === undefined)
+      newErrors.has_prototype = 'Please select an option'
 
-  if (formData.targets_underserved === '' || formData.targets_underserved === undefined)
-    newErrors.targets_underserved = 'Please select an option'
+    if (formData.targets_underserved === '' || formData.targets_underserved === undefined)
+      newErrors.targets_underserved = 'Please select an option'
 
-  return newErrors
-}
-
-const handleSubmit = async () => {
-  const newErrors = validate()
-  if (Object.keys(newErrors).length > 0) {
-    setErrors(newErrors)
-    return
-  }
-  setErrors({})
-  setIsSubmitting(true)
-  setSubmitError(null)
-
-  const payload = {
-    company_name: formData.company_name.trim(),
-    sector: formData.sector,
-    nationality: formData.nationality.trim(),
-    business_stage: formData.business_stage,
-    business_registered_in: formData.nationality.trim(),
-    founder_age: Number(formData.founder_age),
-    founder_gender: formData.founder_gender,
-    business_age_months: Number(formData.business_age_months),
-    annual_revenue_usd: Number(formData.annual_revenue_usd),
-    employees: Number(formData.employees),
-    funding_need_usd: Number(formData.funding_need_usd),
-    innovation_level: formData.innovation_level,
-    has_prototype: Boolean(formData.has_prototype),
-    targets_underserved: Boolean(formData.targets_underserved),
+    return newErrors
   }
 
-  try {
-    const response = await fetch('http://localhost:5000/api/readiness', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload),
-    })
-
-    if (!response.ok) {
-      const errData = await response.json().catch(() => null)
-      throw new Error(errData?.message || `Server error: ${response.status}`)
+  const handleNext = async () => {
+    if (!formData.company_name || !formData.sector || !formData.nationality || !formData.founder_age) {
+      setSubmitError('Missing information from previous steps. Please go back to page 1 and fill all fields.')
+      return
     }
 
-    const data = await response.json()
-    console.log('submitted', payload)
-    navigate('/grant-matches')
+    const newErrors = validate()
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors)
+      return
+    }
 
-  } catch (err) {
-    setSubmitError(err.message || 'Something went wrong. Please try again.')
-  } finally {
-    setIsSubmitting(false)
+    setErrors({})
+    setIsSubmitting(true)
+    setSubmitError(null)
+
+    const token = localStorage.getItem('token')
+
+    const payload = {
+      company_name: formData.company_name.trim(),
+      sector: formData.sector,
+      nationality: formData.nationality.trim(),
+      business_stage: formData.business_stage,
+      business_registered_in: formData.nationality.trim(),
+      business_registered: Boolean(formData.business_registered),
+      founder_age: Number(formData.founder_age),
+      founder_gender: formData.founder_gender,
+      business_age_months: Number(formData.business_age_months),
+      annual_revenue_usd: Number(formData.annual_revenue_usd),
+      employees: Number(formData.employees),
+      funding_need_usd: Number(formData.funding_need_usd),
+      innovation_level: formData.innovation_level,
+      has_prototype: Boolean(formData.has_prototype),
+      targets_underserved: Boolean(formData.targets_underserved),
+    }
+
+    try {
+      const response = await fetch(READINESS_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          ...(token ? { Authorization: `Bearer ${token}` } : {}),
+        },
+        body: JSON.stringify(payload),
+      })
+
+      const rawText = await response.text()
+      let data = null
+      try {
+        data = JSON.parse(rawText)
+        console.log('Readiness response:', JSON.stringify(data, null, 2))
+      } catch {
+        console.warn('Response not JSON:', rawText)
+      }
+
+      if (!response.ok) {
+        throw new Error(
+          data?.message ||
+          data?.error ||
+          (data?.errors ? JSON.stringify(data.errors) : null) ||
+          `Server error: ${response.status}`
+        )
+      }
+
+      // Store the full profile payload in localStorage
+      // so grantMatch page can register it in the AI service when user clicks "Find Matches"
+      localStorage.setItem('readiness_profile', JSON.stringify(payload))
+      console.log('Profile saved to localStorage for matching')
+
+      navigate('/getStarted4')
+
+    } catch (err) {
+      console.error('Submit error:', err)
+      setSubmitError(err.message || 'Something went wrong. Please try again.')
+    } finally {
+      setIsSubmitting(false)
+    }
   }
-}
 
   const handlePrevious = () => navigate('/getStarted2')
 
@@ -109,14 +140,14 @@ const handleSubmit = async () => {
     <div>
       <Form
         currentStep='3'
-        percentComplete='100'
+        percentComplete='60'
         title='Business Capability & Impact'
         description='Tell us about your business strength and funding needs'
         icon={FundingNeedsIcon}
-        progressBar={<ProgressBar percentComplete={100} />}
-        onNext={handleSubmit}
+        progressBar={<ProgressBar percentComplete={60} />}
+        onNext={handleNext}
         onPrevious={handlePrevious}
-        nextText={isSubmitting ? 'Submitting...' : 'Complete & Find Matches'}
+        nextText={isSubmitting ? 'Saving...' : 'Next'}
       >
         <div className={styles.childrenWrapper}>
 
@@ -185,16 +216,14 @@ const handleSubmit = async () => {
             }
           />
 
-
-
         </div>
-        {/* Surface any network/server error below the fields */}
-          {submitError && (
-            <p style={{ color: 'red', marginTop: '8px', fontSize: '14px' }}>
-              {submitError}
-            </p>
-          )}
-          
+
+        {submitError && (
+          <p style={{ color: 'red', marginTop: '8px', fontSize: '14px' }}>
+            {submitError}
+          </p>
+        )}
+
       </Form>
     </div>
   )

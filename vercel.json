@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/ai-api/:path*",
+      "destination": "https://imarafund-api-443679739700.europe-west1.run.app/:path*"
+    }
+  ]
+}

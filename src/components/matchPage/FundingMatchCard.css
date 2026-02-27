@@ -351,9 +351,25 @@
   border-color: #9CA3AF;
 }
 
-/* ════════════════════════════════════════
-   Responsive
-   ════════════════════════════════════════ */
+.fmc__see-more {
+  background: none;
+  border: none;
+  color: #2563eb;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0;
+  margin-left: 4px;
+  font-size: inherit;
+}
+
+.vd {
+  display: flex;
+  padding: 1rem;
+  border: 1.5px solid blue;
+  background-color: none;
+  color: blue;
+  border-radius: .5rem;
+}
 
 @media (max-width: 768px) {
   .fmc {

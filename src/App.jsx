@@ -13,7 +13,6 @@ import FormFive from './pages/questionPages/questionPage5/questionPage5';
 import { FormProvider } from './components/form/formContext';
 import RegisterPage from './pages/register/register';
 import LoginPage from './pages/login/login';
-
 import GrantMatchPage from './pages/grantMatch/grantMatch';
 
 
@@ -27,6 +26,8 @@ function App() {
         <Route path="/getStarted1" element={<FormOne />} />
         <Route path="/getStarted2" element={<FormTwo />} />
         <Route path="/getStarted3" element={<FormThree />} />
+        <Route path="/getStarted4" element={<FormFour />} />
+        <Route path="/getStarted5" element={<FormFive />} />
         <Route path='/accelerator' element={<Accelerator/>} />
         <Route path='/register' element={<RegisterPage />} />
         <Route path='/login' element={<LoginPage />} />
@@ -37,5 +38,3 @@ function App() {
 }
 
 export default App
-
-//   <Button text='Get started free' Icon={WhiteArrowRight} variant='heroSectionBtn' btnFunction={() => navigate('/grant-matches')} />

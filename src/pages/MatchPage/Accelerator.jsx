@@ -1,72 +1,9 @@
+
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import GrantMatchCard from "../../components/card/MatchCard";
-import "./Accelerator.css";
-import GrantDetails from "../../components/GrandDetails";
-import GrantHeader from "../../components/GrantHeader";
+import styles from "./Accelerator.module.css";
 
-const BASE_URL = "http://localhost:5000/api";
-const BUSINESS_ID = 3;
-
-const delay = (ms) => new Promise((r) => setTimeout(r, ms));
-
-/* ── Fallback mock data (used when the real API is unavailable) ── */
-const MOCK_API = {
-  fetchGrant: async () => {
-    await delay(400);
-    return {
-      id: "minority-biz-accelerator",
-      name: "Minority Business Accelerator Fund",
-      provider: "Equity Growth Partners",
-      tags: ["Technology & Software", "E-commerce & Retail", "Manufacturing"],
-      extraTagCount: 13,
-      fundingMin: 10000,
-      fundingMax: 75000,
-      processingTime: "1-2 weeks",
-      successRate: 52,
-      logoColor: "#5B4FE8",
-    };
-  },
-  fetchAnalysis: async () => {
-    await delay(500);
-    return {
-      score: 95,
-      level: "Excellent",
-      summary:
-        "Outstanding match! Your E-commerce & Retail business is perfectly aligned with this grant.",
-      strengths: [
-        "Industry aligns with grant requirements",
-        "Business stage matches target criteria",
-        "Years of operation meet eligibility",
-      ],
-    };
-  },
-};
-
-/* ── Map a match result from GET /api/match/:id into the card shape ── */
-function mapMatchToGrant(match) {
-  return {
-    id: match.id ?? match.grant_id ?? "api-result",
-    name: match.title ?? match.name ?? "Funding Opportunity",
-    provider: match.organization ?? match.provider ?? "",
-    tags: match.tags ?? [],
-    extraTagCount: 0,
-    fundingMin: match.fundingMin ?? match.funding_min ?? 0,
-    fundingMax: match.fundingMax ?? match.funding_max ?? 0,
-    processingTime: match.processingTime ?? match.processing_time ?? "—",
-    successRate: match.score ?? match.match_score ?? null,
-    logoColor: "#155DFC",
-  };
-}
-
-function mapMatchToAnalysis(match) {
-  return {
-    score: match.score ?? match.match_score ?? null,
-    level: match.matchQuality ?? match.match_quality ?? match.level ?? "Good",
-    summary: match.aiAnalysis ?? match.ai_analysis ?? match.summary ?? "",
-    strengths: match.strengths ?? [],
-  };
-}
 
 export default function Accelerator() {
   const navigate = useNavigate();
@@ -74,204 +11,221 @@ export default function Accelerator() {
   const [grant, setGrant] = useState(null);
   const [analysis, setAnalysis] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [aiLoading, setAiLoading] = useState(true);
   const [revealed, setRevealed] = useState(false);
 
   useEffect(() => {
-    (async () => {
-      try {
-        /* Step 1 — POST http://localhost:5000/api/match/3/run  (trigger matching) */
-        const runRes = await fetch(`${BASE_URL}/match/${BUSINESS_ID}/run`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-        });
-        if (!runRes.ok) throw new Error(`Run failed: ${runRes.status}`);
+    const raw = localStorage.getItem('selected_match');
+    if (!raw) { setLoading(false); return; }
 
-        /* Step 2 — GET http://localhost:5000/api/match/3  (retrieve results) */
-        const resultsRes = await fetch(`${BASE_URL}/match/${BUSINESS_ID}`);
-        if (!resultsRes.ok) throw new Error(`Results failed: ${resultsRes.status}`);
+    const match = JSON.parse(raw);
 
-        const data = await resultsRes.json();
+    setGrant({
+      id: match.id,
+      name: match.title,
+      provider: match.organization,
+      tags: match.targetSectors
+        ? match.targetSectors.split('|').map((s) => s.trim()).filter(Boolean)
+        : [],
+      extraTagCount: 0,
+      fundingMin: match.fundingMin ?? 0,
+      fundingMax: match.fundingMax ?? 0,
+      processingTime: match.processingTime || 'Contact provider',
+      successRate: match.score ?? 0,
+      website: match.website ?? '',
+      country: match.country ?? '',
+      repaymentRequired: match.repaymentRequired ?? false,
+      scoreBreakdown: match.scoreBreakdown ?? null,
+    });
 
-        /* The API may return an array or an object with a matches/results key */
-        const list = Array.isArray(data)
-          ? data
-          : data.matches ?? data.results ?? data.data ?? [];
+    setAnalysis({
+      score: match.score ?? 0,
+      level: match.matchQuality ?? 'Good',
+      summary: match.aiAnalysis ?? '',
+      strengths: extractStrengths(match),
+    });
 
-        const best = list[0];
-        if (best) {
-          setGrant(mapMatchToGrant(best));
-          setLoading(false);
-          setTimeout(() => setRevealed(true), 100);
-          setAnalysis(mapMatchToAnalysis(best));
-          setAiLoading(false);
-          return;
-        }
-        throw new Error("No matches returned");
-      } catch (err) {
-        /* API unavailable — fall back to mock data */
-        console.warn("Live API unavailable, using mock data:", err.message);
-        const g = await MOCK_API.fetchGrant();
-        setGrant(g);
-        setLoading(false);
-        setTimeout(() => setRevealed(true), 100);
-        const ai = await MOCK_API.fetchAnalysis();
-        setAnalysis(ai);
-        setAiLoading(false);
-      }
-    })();
+    setLoading(false);
+    setTimeout(() => setRevealed(true), 100);
   }, []);
 
-  const handleApply = () => {
-    console.log("Apply clicked for grant:", grant?.id);
+  const extractStrengths = (match) => {
+    const strengths = [];
+    const bd = match.scoreBreakdown;
+    if (bd) {
+      if (bd.geographic >= 30) strengths.push('Strong geographic alignment with funder location');
+      if (bd.sector >= 20)     strengths.push("Your sector matches the funder's target industries");
+      if (bd.amount_fit >= 15) strengths.push('Your funding request fits within their typical range');
+      if (bd.stage >= 8)       strengths.push('Your business stage meets their eligibility criteria');
+    }
+    if (match.isEligible) strengths.push('You meet the core eligibility requirements');
+    if (strengths.length === 0) strengths.push('Review AI advice below for detailed positioning tips');
+    return strengths;
   };
 
+  const handleApply = () => {
+    if (grant?.website) window.open(grant.website, '_blank');
+  };
+
+  const ptColor = (val) =>
+    val >= 30 ? '#16a34a' : val >= 15 ? '#d97706' : '#dc2626';
+
+  if (!loading && !grant) {
+    return (
+      <div className={styles.page}>
+        {/* Sticky back bar */}
+        <div className={styles.topBar}>
+          <button className={styles.backBtn} onClick={() => navigate('/grant-matches')}>
+            ← Back to Matches
+          </button>
+        </div>
+        <div className={styles.emptyState}>
+          <h2 className={styles.emptyTitle}>No grant selected</h2>
+          <p className={styles.emptyText}>Please go back and select a funding opportunity to view details.</p>
+          <button className={styles.applyBtn} onClick={() => navigate('/grant-matches')}>
+            ← Back to Matches
+          </button>
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <div className="page" id="accelerator">
+    <div className={styles.page} id="accelerator">
 
-      {/* "Back to Dashboard" navigates to the grant matches page */}
-      <GrantHeader onBack={() => navigate("/grant-matches")} />
+      <div className={styles.topBar}>
+        <button
+          className={styles.backBtn}
+          onClick={() => navigate(-1)}
+        >
+          ← Back to Matches
+        </button>
+      </div>
 
-      <GrantMatchCard
-        grant={grant}
-        analysis={analysis}
-        loading={loading}
-        aiLoading={aiLoading}
-        revealed={revealed}
-        onApply={handleApply}
-      />
+      <div className={styles.content}>
 
-      <div className={`strengthsCard ${revealed ? "revealed" : ""}`}>
-        <div className="strengthsHeader">
-          <svg
-            width="18"
-            height="18"
-            viewBox="0 0 18 18"
-            fill="none"
-            style={{ marginRight: 8 }}
-          >
-            <circle cx="9" cy="9" r="8" stroke="#00C07F" strokeWidth="1.8" />
-            <path
-              d="M5.5 9l2.5 2.5 4.5-4.5"
-              stroke="#00C07F"
-              strokeWidth="1.8"
-              strokeLinecap="round"
-            />
-          </svg>
-          <h2 className="strengthsTitle">Your Strengths</h2>
+        {!loading && grant && (
+          <div className={styles.titleSection}>
+            <div className={styles.metaPill}>
+              <span className={styles.pillType}>
+                {grant.repaymentRequired ? 'Loan' : 'Grant'}
+              </span>
+              {grant.country && (
+                <>
+                  <span className={styles.pillDot}>·</span>
+                  <span className={styles.pillCountry}>{grant.country}</span>
+                </>
+              )}
+            </div>
+
+            {/* Grant name — Arial heading */}
+            <h1 className={styles.grantName}>{grant.name}</h1>
+
+            {/* Provider — Segoe UI */}
+            <p className={styles.provider}>{grant.provider}</p>
+
+            {/* Website link */}
+            {grant.website && (
+              <a
+                href={grant.website}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.websiteLink}
+              >
+                {grant.website} ↗
+              </a>
+            )}
+          </div>
+        )}
+
+        {/* ── SCORE BREAKDOWN CARD ── */}
+        {!loading && grant?.scoreBreakdown && (
+          <div className={styles.scoreCard}>
+            <h3 className={styles.scoreCardTitle}>Score Breakdown</h3>
+            <div className={styles.scoreGrid}>
+              {Object.entries(grant.scoreBreakdown).map(([key, val]) => (
+                <div key={key} className={styles.scoreRow}>
+                  <span className={styles.scoreKey}>
+                    {key.replace('_', ' ')}
+                  </span>
+                  <span
+                    className={styles.scoreVal}
+                    style={{ color: ptColor(val) }}
+                  >
+                    {val} pts
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* ── GRANT MATCH CARD (existing component — untouched) ── */}
+        <GrantMatchCard
+          grant={grant}
+          analysis={analysis}
+          loading={loading}
+          aiLoading={loading}
+          revealed={revealed}
+          onApply={handleApply}
+        />
+
+        {/* ── AI ADVICE BOX ── */}
+        {!loading && analysis?.summary && (
+          <div className={styles.aiBox}>
+            <div className={styles.aiBoxHeader}>
+              <span className={styles.aiBoxIcon}>💡</span>
+              <h3 className={styles.aiBoxTitle}>AI Match Analysis</h3>
+            </div>
+            <p className={styles.aiBoxText}>{analysis.summary}</p>
+          </div>
+        )}
+
+        {/* ── STRENGTHS CARD ── */}
+        <div className={`${styles.strengthsCard} ${revealed ? styles.revealed : ''}`}>
+          <div className={styles.strengthsHeader}>
+            {/* Checkmark circle icon */}
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <circle cx="10" cy="10" r="9" stroke="#16a34a" strokeWidth="1.8" />
+              <path d="M6 10l3 3 5-5" stroke="#16a34a" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+            <h2 className={styles.strengthsTitle}>Your Strengths</h2>
+          </div>
+
+          {loading ? (
+            <div className={styles.skeletonList}>
+              {[200, 170, 210].map((w, i) => (
+                <div key={i} className={styles.skeleton} style={{ width: w }} />
+              ))}
+            </div>
+          ) : (
+            <ul className={styles.strengthsList}>
+              {analysis?.strengths?.map((s, i) => (
+                <li
+                  key={i}
+                  className={styles.strengthItem}
+                  style={{ animationDelay: `${i * 0.12}s` }}
+                >
+                  <svg width="15" height="15" viewBox="0 0 15 15" fill="none" className={styles.checkIcon}>
+                    <path d="M3 7.5l3 3 6-6" stroke="#16a34a" strokeWidth="1.8" strokeLinecap="round" />
+                  </svg>
+                  {s}
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
 
-        {aiLoading ? (
-          [200, 170, 210].map((w, i) => (
-            <div
-              key={i}
-              className="skeleton"
-              style={{ width: w, height: 16, marginBottom: 14 }}
-            />
-          ))
-        ) : (
-          <ul className="strengthsList">
-            {analysis?.strengths?.map((s, i) => (
-              <li
-                key={i}
-                className="strengthItem"
-                style={{ animationDelay: `${i * 0.12}s` }}
-              >
-                <svg
-                  width="15"
-                  height="15"
-                  viewBox="0 0 15 15"
-                  fill="none"
-                  style={{ marginRight: 10, flexShrink: 0 }}
-                >
-                  <path
-                    d="M3 7.5l3 3 6-6"
-                    stroke="#00C07F"
-                    strokeWidth="1.8"
-                    strokeLinecap="round"
-                  />
-                </svg>
-                {s}
-              </li>
-            ))}
-          </ul>
+        {/* ── APPLY CTA ── */}
+        {!loading && grant?.website && (
+          <div className={styles.ctaSection}>
+            <button className={styles.applyBtn} onClick={handleApply}>
+              Apply Now ↗
+            </button>
+            <p className={styles.ctaNote}>You'll be redirected to the funder's website</p>
+          </div>
         )}
-      </div>
-<GrantDetails/>
 
+      </div>
     </div>
   );
 }
-//   return (
-//     <div className="page" id="accelerator">
-//       <div className="blob1" />
-//       <div className="blob2" />
-
-//       <GrantMatchCard
-//         grant={grant}
-//         analysis={analysis}
-//         loading={loading}
-//         aiLoading={aiLoading}
-//         revealed={revealed}
-//         onApply={handleApply}
-//       />
-
-//       <div className={`strengthsCard ${revealed ? "revealed" : ""}`}>
-//         <div className="strengthsHeader">
-//           <svg
-//             width="18"
-//             height="18"
-//             viewBox="0 0 18 18"
-//             fill="none"
-//             style={{ marginRight: 8 }}
-//           >
-//             <circle cx="9" cy="9" r="8" stroke="#00C07F" strokeWidth="1.8" />
-//             <path
-//               d="M5.5 9l2.5 2.5 4.5-4.5"
-//               stroke="#00C07F"
-//               strokeWidth="1.8"
-//               strokeLinecap="round"
-//             />
-//           </svg>
-//           <h2 className="strengthsTitle">Your Strengths</h2>
-//         </div>
-
-//         {aiLoading ? (
-//           [200, 170, 210].map((w, i) => (
-//             <div
-//               key={i}
-//               className="skeleton"
-//               style={{ width: w, height: 16, marginBottom: 14 }}
-//             />
-//           ))
-//         ) : (
-//           <ul className="strengthsList">
-//             {analysis?.strengths?.map((s, i) => (
-//               <li
-//                 key={i}
-//                 className="strengthItem"
-//                 style={{ animationDelay: `${i * 0.12}s` }}
-//               >
-//                 <svg
-//                   width="15"
-//                   height="15"
-//                   viewBox="0 0 15 15"
-//                   fill="none"
-//                   style={{ marginRight: 10, flexShrink: 0 }}
-//                 >
-//                   <path
-//                     d="M3 7.5l3 3 6-6"
-//                     stroke="#00C07F"
-//                     strokeWidth="1.8"
-//                     strokeLinecap="round"
-//                   />
-//                 </svg>
-//                 {s}
-//               </li>
-//             ))}
-//           </ul>
-//         )}
-//       </div>
-//     </div>
-//   );
-// }

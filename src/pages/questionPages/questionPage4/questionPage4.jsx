@@ -1,4 +1,3 @@
-
 import { useNavigate } from 'react-router-dom'
 import { useForm } from '../../../components/form/formContext'
 import { Form, SelectFormField, ProgressBar } from '../../../components/form/form'
@@ -31,8 +30,9 @@ export default function FormFour() {
   const navigate = useNavigate()
   const { formData, dispatch } = useForm()
 
-  const handleNext = () => navigate('/formFive')
-  const handlePrevious = () => navigate('/formThree')
+  // UI-only step — no API call
+  const handleNext = () => navigate('/getStarted5')
+  const handlePrevious = () => navigate('/getStarted3')
 
   return (
     <div>
@@ -47,6 +47,7 @@ export default function FormFour() {
         onPrevious={handlePrevious}
       >
         <div className={styles.childrenWrapper}>
+
           <SelectFormField
             label='Annual Revenue' id='annualRevenue' required
             placeholder='Select revenue range'
@@ -54,6 +55,7 @@ export default function FormFour() {
             value={formData.annualRevenue}
             onChange={e => dispatch({ type: 'UPDATE_FIELD', field: 'annualRevenue', value: e.target.value })}
           />
+
           <SelectFormField
             label='Current Profitability' id='currentProfitability' required
             placeholder='Select profitability status'
@@ -61,6 +63,7 @@ export default function FormFour() {
             value={formData.currentProfitability}
             onChange={e => dispatch({ type: 'UPDATE_FIELD', field: 'currentProfitability', value: e.target.value })}
           />
+
           <SelectFormField
             label='Number of Employees' id='numberOfEmployees' required
             placeholder='Select employee count'
@@ -68,6 +71,7 @@ export default function FormFour() {
             value={formData.numberOfEmployees}
             onChange={e => dispatch({ type: 'UPDATE_FIELD', field: 'numberOfEmployees', value: e.target.value })}
           />
+
         </div>
       </Form>
     </div>

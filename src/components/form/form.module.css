@@ -480,8 +480,8 @@ line-height: 20px;
 }
 
 .checkboxInput:checked + .checkboxCustom {
-    background-color: #0A0A0A;
-    border-color: #0A0A0A;
+    background-color: blue;
+    border-color: blue;
 }
 
 .checkboxInput:checked + .checkboxCustom::after {
@@ -489,12 +489,12 @@ line-height: 20px;
 }
 
 .checkboxLabel:hover .checkboxCustom {
-    border-color: rgba(0, 0, 0, 0.50);
-    background-color: #F3F3F5;
+    border-color:#2563eb;
+    background-color:#2563eb;;
 }
 
 .checkboxLabel:hover .checkboxInput:checked + .checkboxCustom {
-    background-color: #2a2a2a;
+    background-color:#2563eb;
 }
 
 .checkboxInput:focus-visible + .checkboxCustom {

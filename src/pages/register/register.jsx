@@ -1,14 +1,12 @@
-
-
 import { useReducer } from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 import styles from './register.module.css'
-import tempLogo from '../../assets/images/tempLogo.png'
 import WhiteArrowRight from '../../assets/icons/whiteArrowRight'
 import NewButton from '../../components/newButton/newButton'
 import SeePassword from '../../assets/icons/seePassword'
 import HidePassword from '../../assets/icons/hidePassword'
-import { useNavigate } from 'react-router-dom'
+
+const BASE_URL = import.meta.env.VITE_API_URL || 'https://backend-production-aa3a.up.railway.app/api'
 
 const initialState = {
   name: '',
@@ -18,25 +16,23 @@ const initialState = {
   showPassword: false,
   error: '',
   loading: false,
+  success: '',
 }
 
 function reducer(state, action) {
   switch (action.type) {
     case 'SET_FIELD':
       return { ...state, [action.field]: action.value }
-
     case 'TOGGLE_TERMS':
       return { ...state, terms: !state.terms }
-
     case 'TOGGLE_PASSWORD':
       return { ...state, showPassword: !state.showPassword }
-
     case 'SET_ERROR':
-      return { ...state, error: action.value }
-
+      return { ...state, error: action.value, loading: false }
     case 'SET_LOADING':
       return { ...state, loading: action.value }
-
+    case 'SET_SUCCESS':
+      return { ...state, success: action.value, error: '' }
     default:
       return state
   }
@@ -59,81 +55,75 @@ function getStrength(pw) {
 }
 
 export default function RegisterPage() {
+  const navigate = useNavigate()
   const [state, dispatch] = useReducer(reducer, initialState)
 
-  const navigate = useNavigate()
-
-  const handleChange = (field) => (e) =>
+  const handleChange = (field) => (e) => {
     dispatch({ type: 'SET_FIELD', field, value: e.target.value })
-
-const handleSubmit = async (e) => {
-
-  e.preventDefault()
-
-  if (state.loading) return
-
-  dispatch({ type: 'SET_ERROR', value: '' })
-
-  const name = state.name.trim()
-  const email = state.email.trim()
-  const password = state.password
-
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-
-  if (!name || !email || !password || !state.terms) {
-    dispatch({
-      type: 'SET_ERROR',
-      value: 'Please fill in all required fields and accept the terms.',
-    })
-    return
+    // Clear error as user types
+    if (state.error) dispatch({ type: 'SET_ERROR', value: '' })
   }
 
-  if (!emailRegex.test(email)) {
+  const handleSubmit = async (e) => {
+    e.preventDefault()
 
-    dispatch({
+    if (state.loading) return
 
-        type: 'SET_ERROR',
-        value: 'Please enter a valid email address.',
-    })
-    
-    return
+    dispatch({ type: 'SET_ERROR', value: '' })
+
+    const name = state.name.trim()
+    const email = state.email.trim()
+    const password = state.password
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+
+    // Client-side validation
+    if (!name || !email || !password) {
+      dispatch({ type: 'SET_ERROR', value: 'Please fill in all required fields.' })
+      return
     }
 
-  dispatch({ type: 'SET_LOADING', value: true })
-
-try {
-  const response = await fetch(
-    'http://localhost:5000/api/auth/register',
-    {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        name,
-        email,
-        password,
-      }),
+    if (!state.terms) {
+      dispatch({ type: 'SET_ERROR', value: 'Please accept the Terms of Service and Privacy Policy.' })
+      return
     }
-  )
 
-  const data = await response.json()
+    if (!emailRegex.test(email)) {
+      dispatch({ type: 'SET_ERROR', value: 'Please enter a valid email address.' })
+      return
+    }
 
-  if (!response.ok) {
-    throw new Error(data.message || 'Registration failed')
+    if (password.length < 8) {
+      dispatch({ type: 'SET_ERROR', value: 'Password must be at least 8 characters.' })
+      return
+    }
+
+    dispatch({ type: 'SET_LOADING', value: true })
+
+    try {
+      const response = await fetch(`${BASE_URL}/auth/register`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, password }),
+      })
+
+      const data = await response.json()
+
+      if (!response.ok) {
+        throw new Error(data.message || 'Registration failed. Please try again.')
+      }
+
+      dispatch({ type: 'SET_SUCCESS', value: 'You have registered successfully.' })
+
+      setTimeout(() => {
+        navigate('/login')
+      }, 1500)
+
+    } catch (error) {
+      dispatch({ type: 'SET_ERROR', value: error.message || 'Something went wrong. Please try again.' })
+    } finally {
+      dispatch({ type: 'SET_LOADING', value: false })
+    }
   }
-
-  navigate('/login')
-
-} catch (error) {
-  dispatch({
-    type: 'SET_ERROR',
-    value: error.message || 'Something went wrong',
-  })
-
-} finally {
-  dispatch({ type: 'SET_LOADING', value: false })
-}
-
-}
 
   const strength = getStrength(state.password)
 
@@ -146,9 +136,17 @@ try {
           <div>
             <h1 className={styles.cardTitle}>Create your account</h1>
             <p className={styles.cardSubtitle}>
-              Get matched with grants and loans your business qualify for.
+              Get matched with grants and loans your business qualifies for.
             </p>
           </div>
+
+          {state.success && (
+            <p className={styles.successMsg}>{state.success}</p>
+          )}
+
+          {state.error && (
+            <p className={styles.errMsg}>{state.error}</p>
+          )}
 
           <form className={styles.form} onSubmit={handleSubmit} noValidate>
 
@@ -249,23 +247,14 @@ try {
               </span>
             </label>
 
-            {state.error && (
-            <p className={styles.errMsg}>
-                {state.error}
-            </p>
-            )}
-
-
             <NewButton
-                text={state.loading ? 'Creating...' : 'Create Account'}
-                variant="filledBlue"
-                Icon={!state.loading ? WhiteArrowRight : null}
-                disabled={state.loading}
-                className={styles.submitBtn}
-                type='submit'
-                loading={state.loading}
-                
-                
+              text={state.loading ? 'Creating account…' : 'Create Account'}
+              variant="filledBlue"
+              Icon={!state.loading ? WhiteArrowRight : null}
+              disabled={state.loading}
+              className={styles.submitBtn}
+              type="submit"
+              loading={state.loading}
             />
 
           </form>

@@ -1,4 +1,3 @@
-
 import { useNavigate } from 'react-router-dom'
 import { useForm } from '../../../components/form/formContext'
 import { Form, SelectFormField, CheckboxFormField, CheckboxGroup, ProgressBar } from '../../../components/form/form'
@@ -16,14 +15,8 @@ export default function FormFive() {
   const navigate = useNavigate()
   const { formData, dispatch } = useForm()
 
-  const handlePrevious = () => navigate('/formFour')
-
-  const handleSubmit = async () => {
-    // define submit function and navigate
-    console.log('Submitting:', formData)
-    // await fetch('url', formData)
-    // navigate('/results page')
-  }
+  const handleSubmit = () => navigate('/grant-matches')
+  const handlePrevious = () => navigate('/getStarted4')
 
   const updateCheckbox = (group, field, value) => {
     dispatch({ type: 'UPDATE_CHECKBOX', group, field, value })
@@ -45,7 +38,6 @@ export default function FormFive() {
         <div className={styles.childrenWrapper}>
 
           <CheckboxGroup label='Funding Purpose' required>
-
             <div className={styles.checkboxGrid}>
 
               <CheckboxFormField id='working-capital' label='Working Capital'
@@ -87,8 +79,8 @@ export default function FormFive() {
               <CheckboxFormField id='debt-refinancing' label='Debt Refinancing'
                 checked={formData.fundingPurpose.debtRefinancing}
                 onChange={e => updateCheckbox('fundingPurpose', 'debtRefinancing', e.target.checked)} />
-            </div>
 
+            </div>
           </CheckboxGroup>
 
           <SelectFormField
@@ -120,17 +112,14 @@ export default function FormFive() {
           </CheckboxGroup>
 
           <div className={styles.almostDoneCard}>
-
             <div className={styles.almostDoneHeader}>
               <span className={styles.almostDoneIcon}>✓</span>
               <span className={styles.almostDoneTitle}>Almost Done!</span>
             </div>
-
             <p className={styles.almostDoneText}>
-              Once you complete this profile, our AI will instantly analyze and rank funding opportunities based on your business profile. 
-              You'll see match scores and personalized recommendations.
+              Once you complete this profile, our AI will instantly analyze and rank funding opportunities
+              based on your business profile. You'll see match scores and personalized recommendations.
             </p>
-
           </div>
 
         </div>

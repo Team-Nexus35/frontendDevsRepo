@@ -1,6 +1,5 @@
 import styles from './heroSection.module.css'
 import NewButton from '../../../components/newButton/newButton'
-import Button from '../../buttons/button'
 import WhiteArrowRight from '../../../assets/icons/whiteArrowRight'
 import tempLogo from '../../../assets/images/tempLogo.png'
 import { useNavigate } from 'react-router-dom'
