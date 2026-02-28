@@ -5,6 +5,7 @@ import StatCard from '../../components/matchPage/StatCard';
 import FilterBar from '../../components/matchPage/FilterBar';
 import FundingMatchCard from '../../components/matchPage/FundingMatchCard';
 import ImaraFundBrand from '../../components/ImaraFundBrand';
+import LogoSvg from "../../assets/icons/logo.svg?react";
 
 import styles from './grantMatch.module.css';
 
@@ -149,16 +150,11 @@ export default function GrantMatchPage() {
 
         {/* ── Top nav bar with logo ── */}
         <div className={styles.idleNav}>
-          <button className={styles.idleLogoBtn} onClick={() => navigate('/')}>
-            <div className={styles.idleLogoIcon}>
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-                <path d="M12 2L2 7l10 5 10-5-10-5z" stroke="#ffffff" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
-                <path d="M2 17l10 5 10-5" stroke="#ffffff" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
-                <path d="M2 12l10 5 10-5" stroke="#ffffff" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
+            <div className={styles.idleLogoIcon} onClick={() => navigate('/')} >
+           <div className="gh-logo">
+                   <LogoSvg />
+                 </div>
             </div>
-            <span className={styles.idleLogoText}>FundMatch AI</span>
-          </button>
         </div>
 
         {/* ── Centered hero ── */}
@@ -172,7 +168,7 @@ export default function GrantMatchPage() {
             {error && <p className={styles.errorMsg}>{error}</p>}
             <div className={styles.heroCta}>
               <button className={styles.findBtn} onClick={handleFindMatches}>
-                🔍 Find My Matches
+                 Find My Matches
               </button>
               <button className={styles.backBtn} onClick={() => navigate('/getStarted1')}>
                 ← Update my profile
