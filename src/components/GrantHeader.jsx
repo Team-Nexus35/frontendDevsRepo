@@ -15,7 +15,11 @@ export default function GrantHeader({ onBack }) {
         Back to Dashboard
       </button>
 
-      <div className="gh-logo">
+      {/* <div className="gh-logo">
+        <LogoSvg />
+      </div> */}
+
+        <div className="gh-logo" onClick={() => navigate('/')} style={{ cursor: 'pointer' }}>
         <LogoSvg />
       </div>
 

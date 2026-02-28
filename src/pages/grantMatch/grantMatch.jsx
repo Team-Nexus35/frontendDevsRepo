@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import StatCard from '../../components/matchPage/StatCard';
@@ -37,6 +37,27 @@ export default function GrantMatchPage() {
   const [typeFilter, setTypeFilter] = useState('');
   const [matchFilter, setMatchFilter] = useState('');
 
+  // ── On mount: restore previous matches from localStorage if they exist ──
+  useEffect(() => {
+    try {
+      const savedMatches = localStorage.getItem('grant_matches');
+      const savedCompanyName = localStorage.getItem('grant_matches_company');
+      const savedAiSummary = localStorage.getItem('grant_matches_summary');
+
+      if (savedMatches) {
+        const parsed = JSON.parse(savedMatches);
+        if (parsed.length > 0) {
+          setMatches(parsed);
+          setCompanyName(savedCompanyName || '');
+          setAiSummary(savedAiSummary || '');
+          setStatus('done');
+        }
+      }
+    } catch {
+      // ignore errors, just show idle
+    }
+  }, []);
+
   const handleFindMatches = async () => {
     setStatus('loading');
     setError(null);
@@ -72,6 +93,7 @@ export default function GrantMatchPage() {
       const data = JSON.parse(matchText);
       const rawMatches = data.matches ?? [];
       const aiSum = data.ai_summary ?? data.ai_recommendation ?? '';
+      const name = data.company_name ?? profile.company_name ?? 'Your Business';
 
       const normalised = rawMatches.map((m, i) => ({
         id: i + 1, score: m.match_score ?? 0,
@@ -86,8 +108,13 @@ export default function GrantMatchPage() {
         repaymentRequired: m.repayment_required === 'True' || m.repayment_required === true,
       }));
 
+      // ── Persist matches to localStorage so back button restores them ──
+      localStorage.setItem('grant_matches', JSON.stringify(normalised));
+      localStorage.setItem('grant_matches_company', name);
+      localStorage.setItem('grant_matches_summary', aiSum);
+
       setMatches(normalised);
-      setCompanyName(data.company_name ?? profile.company_name ?? 'Your Business');
+      setCompanyName(name);
       setAiSummary(aiSum);
       setStatus('done');
     } catch (err) {
@@ -148,16 +175,14 @@ export default function GrantMatchPage() {
     return (
       <div className={styles.page}>
 
-        {/* ── Top nav bar with logo ── */}
         <div className={styles.idleNav}>
-            <div className={styles.idleLogoIcon} onClick={() => navigate('/')} >
-           <div className="gh-logo">
-                   <LogoSvg />
-                 </div>
+          <div className={styles.idleLogoIcon} onClick={() => navigate('/')}>
+            <div className="gh-logo">
+              <LogoSvg />
             </div>
+          </div>
         </div>
 
-        {/* ── Centered hero ── */}
         <section className={styles.heroIdle}>
           <div className={styles.heroIdleInner}>
             <span className={styles.heroLabel}>AI-Matched Opportunities</span>
@@ -168,7 +193,7 @@ export default function GrantMatchPage() {
             {error && <p className={styles.errorMsg}>{error}</p>}
             <div className={styles.heroCta}>
               <button className={styles.findBtn} onClick={handleFindMatches}>
-                 Find My Matches
+                Find My Matches
               </button>
               <button className={styles.backBtn} onClick={() => navigate('/getStarted1')}>
                 ← Update my profile
@@ -231,6 +256,22 @@ export default function GrantMatchPage() {
           {filteredMatches.map((match) => (
             <FundingMatchCard key={match.id} match={match} onClick={() => handleCardClick(match)} />
           ))}
+        </div>
+
+        {/* Re-search button */}
+        <div style={{ marginTop: '32px', textAlign: 'center' }}>
+          <button
+            className={styles.backBtn}
+            style={{ color: '#6b7280', borderColor: '#d1d5db' }}
+            onClick={() => {
+              localStorage.removeItem('grant_matches');
+              localStorage.removeItem('grant_matches_company');
+              localStorage.removeItem('grant_matches_summary');
+              handleFindMatches();
+            }}
+          >
+           Refresh Matches
+          </button>
         </div>
       </main>
 
