@@ -4,13 +4,12 @@ import { useNavigate } from 'react-router-dom';
 import StatCard from '../../components/matchPage/StatCard';
 import FilterBar from '../../components/matchPage/FilterBar';
 import FundingMatchCard from '../../components/matchPage/FundingMatchCard';
-import ImaraFundBrand from '../../components/ImaraFundBrand'; 
+import ImaraFundBrand from '../../components/ImaraFundBrand';
 
 import styles from './grantMatch.module.css';
 
 const CREATE_COMPANY_URL = '/ai-api/api/v1/companies';
 const MATCH_URL = (companyId) => `/ai-api/api/v1/match/${companyId}`;
-
 
 function TotalMatchesIcon() {
   return <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M13.739 12.445L14.497 16.708C14.505 16.758 14.498 16.810 14.476 16.856C14.455 16.902 14.419 16.940 14.375 16.966C14.331 16.991 14.281 17.003 14.230 16.999C14.179 16.995 14.131 16.975 14.091 16.943L12.301 15.599C12.215 15.535 12.110 15.500 12.002 15.500C11.894 15.500 11.789 15.535 11.703 15.599L9.910 16.943C9.871 16.975 9.822 16.994 9.772 16.998C9.721 17.002 9.671 16.991 9.626 16.966C9.582 16.940 9.546 16.902 9.525 16.856C9.504 16.810 9.497 16.758 9.505 16.708L10.262 12.445" stroke="#155DFC" strokeWidth="1.66667" strokeLinecap="round" strokeLinejoin="round"/><path d="M12 13C13.657 13 15 11.657 15 10C15 8.343 13.657 7 12 7C10.343 7 9 8.343 9 10C9 11.657 10.343 13 12 13Z" stroke="#155DFC" strokeWidth="1.66667" strokeLinecap="round" strokeLinejoin="round"/></svg>;
@@ -25,9 +24,6 @@ function GrantsIcon() {
   return <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 2V22" stroke="#E60076" strokeWidth="1.66667" strokeLinecap="round" strokeLinejoin="round"/><path d="M17 5H9.5C8.572 5 7.682 5.369 7.025 6.025C6.369 6.682 6 7.572 6 8.5C6 9.428 6.369 10.319 7.025 10.975C7.682 11.631 8.572 12 9.5 12H14.5C15.428 12 16.319 12.369 16.975 13.025C17.631 13.682 18 14.572 18 15.5C18 16.428 17.631 17.319 16.975 17.975C16.319 18.631 15.428 19 14.5 19H6" stroke="#E60076" strokeWidth="1.66667" strokeLinecap="round" strokeLinejoin="round"/></svg>;
 }
 
-/* ─────────────────────────────────────────
-   PAGE
-   ───────────────────────────────────────── */
 export default function GrantMatchPage() {
   const navigate = useNavigate();
 
@@ -151,21 +147,40 @@ export default function GrantMatchPage() {
     return (
       <div className={styles.page}>
 
-        {/* Hero: title + button only */}
-        <section className={styles.hero}>
-          <span className={styles.heroLabel}>AI-Matched Opportunities</span>
-          <h1 className={styles.heroHeading}>Ready to Find Your Funding Matches?</h1>
-          <p className={styles.heroSubtext}>
-            Our AI will analyse your business profile and match you with the best funding opportunities available.
-          </p>
-          {error && <p className={styles.errorMsg}>{error}</p>}
-          <div className={styles.heroCta}>
-            <button className={styles.findBtn} onClick={handleFindMatches}>Find My Matches</button>
-            <button className={styles.backBtn} onClick={() => navigate('/getStarted1')}>← Update my profile</button>
+        {/* ── Top nav bar with logo ── */}
+        <div className={styles.idleNav}>
+          <button className={styles.idleLogoBtn} onClick={() => navigate('/')}>
+            <div className={styles.idleLogoIcon}>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                <path d="M12 2L2 7l10 5 10-5-10-5z" stroke="#ffffff" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+                <path d="M2 17l10 5 10-5" stroke="#ffffff" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+                <path d="M2 12l10 5 10-5" stroke="#ffffff" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </div>
+            <span className={styles.idleLogoText}>FundMatch AI</span>
+          </button>
+        </div>
+
+        {/* ── Centered hero ── */}
+        <section className={styles.heroIdle}>
+          <div className={styles.heroIdleInner}>
+            <span className={styles.heroLabel}>AI-Matched Opportunities</span>
+            <h1 className={styles.heroHeading}>Ready to Find Your Funding Matches?</h1>
+            <p className={styles.heroSubtext}>
+              Our AI will analyse your business profile and match you with the best funding opportunities available.
+            </p>
+            {error && <p className={styles.errorMsg}>{error}</p>}
+            <div className={styles.heroCta}>
+              <button className={styles.findBtn} onClick={handleFindMatches}>
+                🔍 Find My Matches
+              </button>
+              <button className={styles.backBtn} onClick={() => navigate('/getStarted1')}>
+                ← Update my profile
+              </button>
+            </div>
           </div>
         </section>
 
-        {/* Brand: fully separate div, outside the hero */}
         <div className={styles.brandSection}>
           <ImaraFundBrand />
         </div>
