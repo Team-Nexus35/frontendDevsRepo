@@ -28,7 +28,7 @@
   transition: color .2s;
 }
 
-.gh-back:hover { color: #ffffff; }
+.gh-back:hover { color: black; }
 
 .gh-logo {
   display: flex;

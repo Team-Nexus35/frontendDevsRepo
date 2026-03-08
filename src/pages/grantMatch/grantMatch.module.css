@@ -1,9 +1,7 @@
 /* ============================================================
    grantMatch.module.css
-   Fonts: 'Segoe UI', Arial, sans-serif throughout
    ============================================================ */
 
-/* ── Page wrapper ───────────────────────────────────────────── */
 .page {
   font-family: 'Segoe UI', Arial, sans-serif;
   background: #f4f6fb;
@@ -12,8 +10,93 @@
   flex-direction: column;
 }
 
+.idleNav {
+  background: #ffffff;
+  padding: 16px 7.5rem;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+
+.idleLogoBtn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.15);
+  border: 1.5px solid rgba(255, 255, 255, 0.35);
+  border-radius: 10px;
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.idleLogoBtn:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.idleLogoIcon {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.idleLogoText {
+  font-size: 15px;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: 0.3px;
+  font-family: 'Segoe UI', Arial, sans-serif;
+}
+
 /* ══════════════════════════════════════════════════════════════
-   HERO — gradient banner
+   IDLE HERO — centered layout
+══════════════════════════════════════════════════════════════ */
+.heroIdle {
+  background: linear-gradient(135deg, #155DFC 0%, #9810FA 50%, #E60076 100%);
+  padding: 60px 7.5rem 80px;
+  color: #ffffff;
+  display: flex;
+  justify-content: center;
+}
+
+.heroIdleInner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-width: 640px;
+  width: 100%;
+}
+
+.heroIdleInner .heroLabel {
+  margin-bottom: 12px;
+}
+
+.heroIdleInner .heroHeading {
+  font-size: 38px;
+  margin-bottom: 16px;
+}
+
+.heroIdleInner .heroSubtext {
+  max-width: 520px;
+  margin-bottom: 0;
+}
+
+.heroIdleInner .heroCta {
+  justify-content: center;
+  margin-top: 36px;
+  gap: 16px;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   RESULTS HERO — left-aligned with sticky
 ══════════════════════════════════════════════════════════════ */
 .hero {
   background: linear-gradient(135deg, #155DFC 0%, #9810FA 50%, #E60076 100%);
@@ -21,7 +104,6 @@
   color: #ffffff;
 }
 
-/* Sticky version — used on the done/results state only */
 .heroSticky {
   position: sticky;
   top: 0;
@@ -67,7 +149,9 @@
   font-weight: 700;
 }
 
-/* Idle state CTA buttons */
+/* ══════════════════════════════════════════════════════════════
+   CTA BUTTONS
+══════════════════════════════════════════════════════════════ */
 .heroCta {
   display: flex;
   align-items: center;
@@ -76,49 +160,41 @@
   flex-wrap: wrap;
 }
 
-.brandSection {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex: 1;
-  padding: 48px 24px;
-}
-
 .findBtn {
   font-family: 'Segoe UI', Arial, sans-serif;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 700;
-  padding: 11px 28px;
+  padding: 16px 40px;
   background: #ffffff;
   color: #6d28d9;
   border: none;
-  border-radius: 8px;
+  border-radius: 10px;
   cursor: pointer;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
   transition: background 0.2s, transform 0.15s;
 }
 
 .findBtn:hover {
   background: #ede9fe;
-  transform: translateY(-1px);
+  transform: translateY(-2px);
 }
 
 .backBtn {
   font-family: Arial, sans-serif;
-  font-size: 13px;
-  font-weight: 500;
-  padding: 10px 20px;
+  font-size: 15px;
+  font-weight: 600;
+  padding: 15px 28px;
   background: transparent;
-  color: rgba(255, 255, 255, 0.9);
-  border: 1.5px solid rgba(255, 255, 255, 0.5);
-  border-radius: 8px;
+  color: rgba(255, 255, 255, 0.95);
+  border: 2px solid rgba(255, 255, 255, 0.6);
+  border-radius: 10px;
   cursor: pointer;
   transition: border-color 0.2s, background 0.2s;
 }
 
 .backBtn:hover {
   border-color: #ffffff;
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.12);
 }
 
 .errorMsg {
@@ -126,6 +202,17 @@
   font-size: 13px;
   color: #fca5a5;
   font-family: Arial, sans-serif;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   BRAND SECTION
+══════════════════════════════════════════════════════════════ */
+.brandSection {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  padding: 48px 24px;
 }
 
 /* ══════════════════════════════════════════════════════════════
@@ -139,7 +226,7 @@
 }
 
 /* ══════════════════════════════════════════════════════════════
-   STAT CARDS — 4-column grid
+   STAT CARDS
 ══════════════════════════════════════════════════════════════ */
 .statsRow {
   display: grid;
@@ -148,16 +235,10 @@
   margin-bottom: 24px;
 }
 
-/* ══════════════════════════════════════════════════════════════
-   FILTER BAR WRAPPER
-══════════════════════════════════════════════════════════════ */
 .filterSection {
   margin-bottom: 20px;
 }
 
-/* ══════════════════════════════════════════════════════════════
-   RESULTS HEADER
-══════════════════════════════════════════════════════════════ */
 .resultsHeader {
   display: flex;
   align-items: baseline;
@@ -180,9 +261,6 @@
   margin: 0;
 }
 
-/* ══════════════════════════════════════════════════════════════
-   CARDS LIST
-══════════════════════════════════════════════════════════════ */
 .cardsList {
   display: flex;
   flex-direction: column;
@@ -190,7 +268,7 @@
 }
 
 /* ══════════════════════════════════════════════════════════════
-   EMPTY / NO RESULTS
+   EMPTY STATE
 ══════════════════════════════════════════════════════════════ */
 .emptyState {
   background: #ffffff;
@@ -226,7 +304,7 @@
 }
 
 /* ══════════════════════════════════════════════════════════════
-   SKELETON LOADING CARDS
+   SKELETON
 ══════════════════════════════════════════════════════════════ */
 .skeletonList {
   display: flex;
@@ -262,9 +340,21 @@
 }
 
 /* ══════════════════════════════════════════════════════════════
-   RESPONSIVE
+   RESPONSIVE: TABLET
 ══════════════════════════════════════════════════════════════ */
 @media (max-width: 768px) {
+  .idleNav {
+    padding: 14px 24px;
+  }
+
+  .heroIdle {
+    padding: 48px 24px 60px;
+  }
+
+  .heroIdleInner .heroHeading {
+    font-size: 28px;
+  }
+
   .hero {
     padding: 28px 24px 32px;
   }
@@ -285,9 +375,39 @@
     flex-direction: column;
     gap: 4px;
   }
+
+  .findBtn {
+    font-size: 15px;
+    padding: 14px 32px;
+  }
+
+  .backBtn {
+    font-size: 14px;
+    padding: 13px 24px;
+  }
 }
 
+/* ══════════════════════════════════════════════════════════════
+   RESPONSIVE: MOBILE
+══════════════════════════════════════════════════════════════ */
 @media (max-width: 480px) {
+  .idleNav {
+    padding: 12px 16px;
+  }
+
+  .heroIdle {
+    padding: 40px 16px 52px;
+  }
+
+  .heroIdleInner .heroHeading {
+    font-size: 24px;
+  }
+
+  .heroIdleInner .heroCta {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
   .hero {
     padding: 24px 16px 28px;
   }
@@ -308,5 +428,18 @@
   .heroCta {
     flex-direction: column;
     align-items: flex-start;
+  }
+
+  .findBtn {
+    width: 100%;
+    font-size: 15px;
+    padding: 16px 24px;
+  }
+
+  .backBtn {
+    width: 100%;
+    font-size: 14px;
+    padding: 14px 24px;
+    text-align: center;
   }
 }
