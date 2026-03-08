@@ -87,11 +87,11 @@ export default function FormOne() {
   return (
     <Form
       currentStep='1'
-      percentComplete='40'
+      percentComplete='20'
       title='Business Identity & Registration'
       description='Tell us about your business'
       icon={BusinessBasicsIcon}
-      progressBar={<ProgressBar percentComplete={40} />}
+      progressBar={<ProgressBar percentComplete={20} />}
       onNext={handleNext}
       showPrevious={false}
     >
