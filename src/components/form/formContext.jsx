@@ -63,7 +63,6 @@ function formReducer(state, action) {
         },
       }
 
-    // ── Bulk-loads a saved profile from backend/localStorage ──
     case 'LOAD_PROFILE':
       return { ...state, ...action.profile }
 
@@ -87,7 +86,7 @@ export function FormProvider({ children }) {
         return { ...initialState, ...profile }
       }
     } catch {
-      // ignore parse errors
+      
     }
     return initialState
   })

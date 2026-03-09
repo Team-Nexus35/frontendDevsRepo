@@ -56,11 +56,11 @@ export default function FormTwo() {
     <div>
       <Form
         currentStep='2'
-        percentComplete='60'
+        percentComplete='40'
         title='Founder Demographics/Team Profile'
         description='Tell us about the business founder'
         icon={FounderDemographicsIcon}
-        progressBar={<ProgressBar percentComplete={60} />}
+        progressBar={<ProgressBar percentComplete={40} />}
         onNext={handleNext}
         onPrevious={handlePrevious}
       >

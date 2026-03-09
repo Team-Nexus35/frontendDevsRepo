@@ -6,7 +6,7 @@ import BlueArrowLeft from '../../assets/icons/blueArrowLeft'
 
 export function Form ({
   currentStep,
-  totalSteps='3',
+  totalSteps='5',
   percentComplete,
   title,
   description,
