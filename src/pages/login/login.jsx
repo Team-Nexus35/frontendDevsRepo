@@ -6,8 +6,8 @@ import NewButton from '../../components/newButton/newButton'
 import SeePassword from '../../assets/icons/seePassword'
 import HidePassword from '../../assets/icons/hidePassword'
 
-const LOGIN_URL = 'https://backend-production-aa3a.up.railway.app/api/auth/login'
-const READINESS_URL = 'https://backend-production-aa3a.up.railway.app/api/readiness'
+const LOGIN_URL = 'https://wtf-project-qnj0.onrender.com/api/auth/login'
+const READINESS_URL = 'https://wtf-project-qnj0.onrender.com/api/readiness'
 
 const initialState = {
   email: '',

@@ -6,7 +6,7 @@ import NewButton from '../../components/newButton/newButton'
 import SeePassword from '../../assets/icons/seePassword'
 import HidePassword from '../../assets/icons/hidePassword'
 
-const BASE_URL = import.meta.env.VITE_API_URL || 'https://backend-production-aa3a.up.railway.app/api'
+const BASE_URL = import.meta.env.VITE_API_URL || 'https://wtf-project-qnj0.onrender.com/api'
 
 const initialState = {
   name: '',

@@ -5,7 +5,7 @@ import { Form, TextFormField, SelectFormField, ProgressBar } from '../../../comp
 import FundingNeedsIcon from '../../../assets/icons/fundingNeeds'
 import styles from './questionPage3.module.css'
 
-const READINESS_URL = 'https://backend-production-aa3a.up.railway.app/api/readiness'
+const READINESS_URL = 'https://wtf-project-qnj0.onrender.com/api/readiness'
 
 const innovationOptions = [
   { value: 'low', label: 'Low' },
